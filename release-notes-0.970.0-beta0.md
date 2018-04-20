@@ -166,40 +166,48 @@ forever{
 - Removal of transformer syntax
 
 ## Standard Library
-- Config API
+
+### Config API
   - Improved API with support for retrieving configs of different data types
   - Support for securing sensitive data
 
-- HTTP
+### HTTP
   - Support for HTTP caching, HTTP access logs, connection throttling and HTTP version 2 (HTTP/2)
   - Support for publishing HTTP trace logs to sockets and files
   - Support for service versioning and per service chunking configuration
   - Improved APIs for HTTP header related operations and OCSP stapling for checking the revocation status of certificates
   - Introduce a new method called `setPayload()` to http request and response to take any (string, xml, json, blob, io:ByteChannel or mime:Entity[]) type of payload
 
-- MIME
+### MIME
   - Introduce a new method to get the base type from a given content type and a new method to set any(string, xml, json, blob,io:ByteChannel or mime:Entity[]) type of body to entity
   - Improve entity body operations to rely on content type and APIs for MIME specific base64 encoding / decoding
-- WebSocket
+
+### WebSocket
   - The WebSocket upgrade resource has been moved to the Http Service
   - A new function called acceptWebSocketUpgrade has been introduced to the http:Listener
   - The WebSocket resource signatures have endpoints and not WebSocketConnector as the first argument.
   - The WebSocket resource signatures now have basic data types instead of the frames in previous implementations.
-- WebSub
+
+### WebSub
   - Support for [WebSub][3] subscriber, hub and publisher to facilitate communication between publishers and subscribers of Web content based on HTTP web hooks
-- Observe
+
+### Observe
   - Support for observability through metrics and tracing APIs
-- SQL
+
+### SQL
   - Support MySQL and H2 packages to interactions with respective DBs.
   - Add mirror table support to read write directly via tables
-- Util
+
+### Util
   - Improved APIs for base64 encoding and decoding
 
 ## IDEs & Language Server
-- Language Server
+
+### Language Server
   - Support find all references, go to definition and hover provider support for match expression, tuple support, union type support, final and readonly variables, endpoint, new service syntax, and object and record statements.
   - Support documentation syntax, annotation syntax and completion support for records, objects and endpoints syntaxes
-- Composer
+
+### Composer
   - Introduction of trace log analyzer tool
   - Support match statement visualization in diagram and source generation support for match statement, transaction statement
   - Removal of transformer UI
