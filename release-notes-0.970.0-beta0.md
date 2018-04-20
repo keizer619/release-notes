@@ -62,7 +62,7 @@ float f => <int> f
 The safe navigation operator has been enhanced to allow safe navigation in the event of null or an error. This will be useful with maps that now have error as common response status.
 Nil-lifting navigation has been introduced to help eliminate null pointer exceptions.
 Error-lifting navigation has been introduced where you can lift errors when navigating through fields, using the “!” operator.
-``ballerina
+```ballerina
 type  Person {
     Info|() info;
 };
