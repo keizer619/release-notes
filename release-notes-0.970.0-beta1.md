@@ -1,5 +1,5 @@
 # Overview to Ballerina 0.970.0-beta1
-This release has improvements to the `main` fuction argument passing model where the user will not have to wrestle with `string` array to access command line parameters.
+This release has improvements to the `main` function argument passing model where the user will not have to wrestle with `string` array to access command line parameters.
 ```ballerina
 function main (string... args) {
     io:println("Hello, World!");
