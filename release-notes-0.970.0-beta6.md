@@ -1,6 +1,5 @@
 
-
-
+# Overview to Ballerina 0.970.0-beta1
 Overview to Ballerina 0.970.0-beta6
 This release include an improvements to the standard library APIs. The full list of APIs have been reviewed  and enhancements incorporated to this release to make the API usage simpler to the developer. 
 
@@ -56,15 +55,15 @@ ballerina build -c <package> [-o <output-file>.balo]
 
 This release ships many stabilization enhancements to the type system elements that were introduced in 0.970.0-beta0. All other parts of the language implementation has added many fixes. 
 
-Compatibility and Support
+# Compatibility and Support
 You will have to update the API usage in sync with the API enhancements. Please use the latest API documentation to explore the latest API. 
 
-Improvements
-Language & Runtime
-Standard library API enhancements and refactoring 
-Compiled version of a Ballerina package (balo) support
+# Improvements
+## Language & Runtime
+- Standard library API enhancements and refactoring 
+- Compiled version of a Ballerina package (balo) support
 
-Getting Started
+# Getting Started
 You can download the Ballerina distributions, try samples, and read the documentation at <https://ballerina.io>. You can also visit [Quick Tour][1] to get started. We encourage you to report issues, improvements, and suggestions at [Ballerina Github Repository][2].
 
 [1]: https://ballerina.io/learn/quick-tour/
