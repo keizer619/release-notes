@@ -1,6 +1,6 @@
 
-# Overview to Ballerina 0.970.0-beta1
-Overview to Ballerina 0.970.0-beta6
+# Overview to Ballerina 0.970.0-beta6
+
 This release include an improvements to the standard library APIs. The full list of APIs have been reviewed  and enhancements incorporated to this release to make the API usage simpler to the developer. 
 
 For example the changes to the signatures of the HTTP client functions for the standard HTTP methods, to make the Request parameter, makes the usage much simple for developer. 
