@@ -3,10 +3,14 @@
 We proudly announce General Availability of Ballerina 0.970. Download now! Ballerina 0.970 is an exciting new release of the programming language. 
 
 Some key highlights of Ballerina capabilities included into this release are:
-*Concurrent*: Worker support for defining parallel execution units with fork/join semantics, and asynchronous function invocations, which contains improved BVM scheduler functionality.
-*Transactional*: First class support for transaction semantics, including distributed transactions.
-*Textual and graphical syntaxes*: Sequence diagrams focused on showing worker and endpoint interactions. Endpoints represent network services. Each worker is sequential code, that can zoom in graphically yet represents really textual code. The design is meant to make it easier to understand complex distributed interactions
-*Integration specialization*: Brings fundamental concepts, ideas, and tools of distributed system integration into the programming language and offers a type safe, concurrent environment to implement such applications. These include distributed transactions, reliable messaging, stream processing, workflows, and container management platforms. 
+
+**Concurrent**: Worker support for defining parallel execution units with fork/join semantics, and asynchronous function invocations, which contains improved BVM scheduler functionality.
+
+**Transactional**: First class support for transaction semantics, including distributed transactions.
+
+**Textual and graphical syntaxes**: Sequence diagrams focused on showing worker and endpoint interactions. Endpoints represent network services. Each worker is sequential code, that can zoom in graphically yet represents really textual code. The design is meant to make it easier to understand complex distributed interactions
+
+**Integration specialization**: Brings fundamental concepts, ideas, and tools of distributed system integration into the programming language and offers a type safe, concurrent environment to implement such applications. These include distributed transactions, reliable messaging, stream processing, workflows, and container management platforms. 
 
 Learn more about the [Ballerina philosophy](https://ballerina.io/philosophy/).
 
@@ -138,7 +142,6 @@ A function pointer is a Ballerina type that allows you to use functions as varia
 ### Lambda
 Lambdas are a syntactic shortcut for defining inline functions. In comparison to a normal function definition, the only missing part is the name.
 
-
 # Syntax
 Ballerina’s underlying language semantics were designed by modeling how independent parties communicate via structured interactions. Subsequently, every Ballerina program can be displayed as a sequence diagram of its flow with endpoints, including synchronous and asynchronous calls. Ballerina’s syntax has both textual and graphical representation designed around sequence diagrams,therefore, the way a developer thinks when writing Ballerina code encourages strong interaction best practices. 
 
@@ -193,7 +196,6 @@ Ballerina’s graphical syntax resembles a sequence diagram. The control flow wi
 
 Graphical representation of a service with network interactions. 
 
-
 Ballerina platform comes with the Composer IDE, which allows you to edit and view Ballerina programs graphically and textually. VS Code plugin can be also used to view Ballerina programs graphically.
 
 
@@ -204,7 +206,8 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
 
 ## HTTP
 Dispatching to service based on service version by introducing service config annotation to declare versioning rules
-	```ballerina
+
+```ballerina
 @http:ServiceConfig {
     basePath:"/hello/{version}",
     versioning:{
@@ -213,20 +216,22 @@ Dispatching to service based on service version by introducing service config an
        matchMajorVersion:true
     }
 }
-	```
+```
+
 Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`
-	```ballerina
+```ballerina
 @http:ResourceConfig {
      path:"/product/{id}/{name}/{price}"
 }
 productInfo(endpoint caller, http:Request req, int id, string name, float price) {
      // some code
 }
-	```
+```
+
 HTTP caching support for client/server endpoints
 HTTP access logs support
 Connection throttling support for client endpoint
-	```ballerina
+```ballerina
 endpoint http:Client clientEP {
     url: "some url",
     connectionThrottling: {
@@ -234,7 +239,8 @@ endpoint http:Client clientEP {
         waitTime: 30000
     }
 };
-	```
+```
+
 Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`
 Improved APIs for HTTP header related operations
 Chunking support for per service
