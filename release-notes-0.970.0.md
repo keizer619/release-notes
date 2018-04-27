@@ -108,7 +108,7 @@ The `foreach` looping construct will traverse through the items of a collection 
 With the above two looping constructs, statements such as `break` and `next` can also be used, where the `break` statement would end the loop and `next` statement would go to the next iteration in the loop. 
 
 ### Iterable Operations
-Iterable operations can be used with types such as `array`, `map`, `json`, `table`, and `xml`. Currently available iterable operations are `map`, `filter`, `count`, `average` and `foreach`. The `map` is a transform operation that can transform the given source element to a target element. The “filter” operation can filter the given element for the given condition. The `count` , `average` and `foreach` are terminal type of operations that will terminate and either give a result out or will consume the elements and terminate the iteration.
+Iterable operations can be used with types such as `array`, `map`, `json`, `table`, and `xml`. Currently available iterable operations are `map`, `filter`, `count`, `average` and `foreach`. The `map` is a transform operation that can transform the given source element to a target element. The `filter` operation can filter the given element for the given condition. The `count` , `average` and `foreach` are terminal type of operations that will terminate and either give a result out or will consume the elements and terminate the iteration.
 
 
 ## Transaction
@@ -343,10 +343,10 @@ endpoint http:LoadBalanceClient lbBackendEP {
 - Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
 - Support discrete media types
 - Support composite media types 
-- multipart/form-data
-- multipart/mixed
-- multipart/alternative
-- multipart/relative
+ - multipart/form-data
+ - multipart/mixed
+ - multipart/alternative
+ - multipart/relative
 - Ability to recognize and separate parts of unrecognized subtypes of multipart entities
 - Encapsulate multiple body parts in a single message
 - Decode multipart messages
