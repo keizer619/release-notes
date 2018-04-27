@@ -113,11 +113,13 @@ Iterable operations can be used with types such as `array`, `map`, `json`, `tabl
 
 ## Transaction
 A Ballerina transaction is a series of data manipulation statements that must either fully complete or fully fail, and thereby leave the system in a consistent state.  Ballerina supports following three types of transactions over databases and message brokers.
+
 Local Transactions - The transaction performed over single database or a message broker.
+
 XA Transactions - The transaction performed over multiple databases and/or message brokers using the XA two phase commit protocol.
 Distributed Transactions - Implements transactional behavior for micro-services by using an external coordinator to execute a two-phase-commit based protocol to manage service resources.
-The transaction block is used handle Ballerina transactions. Any transaction aware operations performed within the transaction block are automatically committed or rolled back at the end of the block. Within transaction block, `abort` or `retry` statements can be used to explicitly force to abort the transaction or retry the transaction. 
 
+The transaction block is used handle Ballerina transactions. Any transaction aware operations performed within the transaction block are automatically committed or rolled back at the end of the block. Within transaction block, `abort` or `retry` statements can be used to explicitly force to abort the transaction or retry the transaction. 
 
 ## Error Handling
 Typically, errors indicate erroneous conditions in the program. The Ballerina approach is to introduce a first-class error concept that can both be returned as yet another return value (and thereby processed by the caller as it deems fit) or be thrown.
@@ -148,11 +150,13 @@ The fork/join construct in Ballerina is used in order to split (`fork`) the curr
 ### Lock
 Ballerina locks are used for concurrency management, encapsulating a block of statements will acquire the locks for each global or service level variable reference used within those block of statements.
 
-
 ## Functions
 Ballerina functions operate the same way as any other language. It is a mechanism to create a reusable unit of functionality within a program. Ballerina functions can have three types of parameters.
+
 Required parameters - Set of parameters that are mandatory to be provided, when invoking the function.
+
 Defaultable parameters - They are optional parameters with a default value. Such a function can be invoked without providing a value for those defaultable parameters. When invoking the function, the defalutable parameter needs to be passed as key-value pairs, and their position within the function call does not matter.
+
 Rest parameter - The rest parameter can take zero or more number of values of the given type. Inside the function, the rest parameter is equivalent to an array of the same type.
 
 ### Function Pointers
@@ -217,8 +221,6 @@ Graphical representation of a service with network interactions.
 
 Ballerina platform comes with the Composer IDE, which allows you to edit and view Ballerina programs graphically and textually. VS Code plugin can be also used to view Ballerina programs graphically.
 
-
-
 # Integration Specialization
 
 Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSockets, WebSub, gRPC, and JMS are some of the available service types. These services are exposed via listener endpoints, which can be secured and monitored. Client endpoints connect to different types of external endpoints and they are inherently resilient. Additionally, commonly used integration message formats, such as XML and JSON, are built-in to the type system of the language. In the context of integration specialization, the following are the released features.
@@ -242,14 +244,15 @@ Primitive type support for the Path parameter. The primitive types are `string`,
 @http:ResourceConfig {
      path:"/product/{id}/{name}/{price}"
 }
+
 productInfo(endpoint caller, http:Request req, int id, string name, float price) {
      // some code
 }
 ```
 
-HTTP caching support for client/server endpoints
-HTTP access logs support
-Connection throttling support for client endpoint
+- HTTP caching support for client/server endpoints
+- HTTP access logs support
+- Connection throttling support for client endpoint
 ```ballerina
 endpoint http:Client clientEP {
     url: "some url",
@@ -261,17 +264,18 @@ endpoint http:Client clientEP {
 ```
 
 Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`
-Improved APIs for HTTP header related operations
-Chunking support for per service
-Functionalities supported for HTTPS,
-Certificate validation with CRL, OCSP, OCSP Stapling
-Configuration for SSL/TLS ciphers and protocols 
-Hostname verification support
-Mutual Authentication support
-HTTP2
-Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
-Server Push support
-SSL/TLS support with ALPN 
+
+- Improved APIs for HTTP header related operations
+- Chunking support for per service
+- Functionalities supported for HTTPS,
+- Certificate validation with CRL, OCSP, OCSP Stapling
+- Configuration for SSL/TLS ciphers and protocols 
+- Hostname verification support
+- Mutual Authentication support
+- HTTP2
+ - Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
+ - Server Push support
+ - SSL/TLS support with ALPN 
 
 ## WebSockets  
 WebSocket client/server endpoint supports the following features.
@@ -289,17 +293,19 @@ service <http:WebSocketService> wsService bind {port:9090} {
                 but { error e => log:printError("Error", err=e) };
     }
 }
-	```
-WebSockets secure connections support (`WSS://`)
-Custom headers support for handshake response message
-Sub-protocols negotiation support
-Connection idle timeout support
-WebSocket service endpoint supports query and path parameters for upgrade request and maximum WebSocket frame size configuration.
+```
+
+- WebSockets secure connections support (`WSS://`)
+- Custom headers support for handshake response message
+- Sub-protocols negotiation support
+- Connection idle timeout support
+- WebSocket service endpoint supports query and path parameters for upgrade request and maximum WebSocket frame size configuration.
 
 ## Resiliency
 Retry support for HTTP client endpoint
 Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration:
-	```ballerina
+
+```ballerina
 endpoint http:Client cbClientEP {
    url: "http://localhost:8080",
    // Circuit breaker options
@@ -315,9 +321,11 @@ endpoint http:Client cbClientEP {
    timeoutMillis: 2000
 };
 ```
-Failover support for HTTP client endpoint
-Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration:
-	```ballerina
+
+- Failover support for HTTP client endpoint
+- Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration:
+
+```ballerina
 endpoint http:LoadBalanceClient lbBackendEP {
    // Define the set of HTTP clients that need to be load balanced.
    targets: [
@@ -332,16 +340,16 @@ endpoint http:LoadBalanceClient lbBackendEP {
 ```
 
 ## MIME 
-Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
-Support discrete media types
-Support composite media types 
-multipart/form-data
-multipart/mixed
-multipart/alternative
-multipart/relative
-Ability to recognize and separate parts of unrecognized subtypes of multipart entities
-Encapsulate multiple body parts in a single message
-Decode multipart messages
+- Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
+- Support discrete media types
+- Support composite media types 
+- multipart/form-data
+- multipart/mixed
+- multipart/alternative
+- multipart/relative
+- Ability to recognize and separate parts of unrecognized subtypes of multipart entities
+- Encapsulate multiple body parts in a single message
+- Decode multipart messages
 
 ## WebSub
 Implementation of the WebSub recommendation that facilitates push-based content delivery/notification mechanism between publishers and subscribers.
