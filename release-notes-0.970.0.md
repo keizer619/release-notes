@@ -142,7 +142,7 @@ The concurrency model is based on workers, which are the fundamental execution u
 In Ballerina, every callable unit, that is, a function, action or a resource is made up of one or more workers. A worker is a concurrent execution unit, which is independently run when a function call is made. If the user does not define an explicit worker, a default implicit worker is automatically defined, and the function contents are added to it. 
 
 ### Asynchronous Functions
-Any function or action can be invoked in an asynchronous mode by prefixing the call with the “start” keyword. The return value of this expression will always be a “future” object. The future object can be constrained to a specific type, to be equal to the result type that the function is returning. If not, for void functions, it will be unconstrained. The returned future object can be used to extract the result by blocking until the function call is done, check the current status of the asynchronous call, or cancel the running execution. 
+Any function or action can be invoked in an asynchronous mode by prefixing the call with the `start` keyword. The return value of this expression will always be a `future` object. The future object can be constrained to a specific type, to be equal to the result type that the function is returning. If not, for void functions, it will be unconstrained. The returned future object can be used to extract the result by blocking until the function call is done, check the current status of the asynchronous call, or cancel the running execution. 
 
 ### Fork/Join
 The fork/join construct in Ballerina is used in order to split (`fork`) the current function execution to multiple workers, do some processing in parallel, and `join` together the results of the workers to a single execution again. 
@@ -268,10 +268,10 @@ Introduce `setPayload()` to the HTTP request and response to take any type of pa
 - Improved APIs for HTTP header related operations
 - Chunking support for per service
 - Functionalities supported for HTTPS,
-- Certificate validation with CRL, OCSP, OCSP Stapling
-- Configuration for SSL/TLS ciphers and protocols 
-- Hostname verification support
-- Mutual Authentication support
+ - Certificate validation with CRL, OCSP, OCSP Stapling
+ - Configuration for SSL/TLS ciphers and protocols 
+ - Hostname verification support
+ - Mutual Authentication support
 - HTTP2
  - Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
  - Server Push support
