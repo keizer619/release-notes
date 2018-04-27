@@ -403,6 +403,7 @@ Utility functions are available to add a Link Header specifying hub and self URL
 gRPC is a protocol which is layered over HTTP/2 and enables client and server communication by combination of any supported languages. In gRPC a client application can directly call methods on a server application on a different machine, making it easier for you to create distributed applications and services.
 
 Ballerina also supports creating gRPC client and server as other supported language.  Ballerina based gRPC server/client supports interacting with server and client written either in Ballerina or any other supported languages. For example: you can easily create gRPC server in Ballerina and connect with client in Go. Syntax for writing simple gRPC unary server is like below,
+
 ```ballerina
 endpoint grpc:Listener listener {
     port:9090,
@@ -420,29 +421,30 @@ service SamplegRPCService bind listener {
 Ballerina follows code first approach to create gRPC service which means you write Ballerina gRPC service like above and Ballerina compiler will generate service contract file(.proto file) automatically. From the service contract, you can either generate client code in Ballerina and from any other supported languages. In Ballerina, the client code are generated using the built-in proto compiler.
 
 The main features of Ballerina gRPC are,
-Ballerina gRPC service supports all RPC types.
-Unary
-Server streaming
-Client streaming
-Bidirectional Streaming
-Ballerina gRPC service supports communicating with client written from any supported language.
-Supports passing/retrieving headers.
-Supports generating client code using the built-in proto compiler.
-Supports error handling.
-Supports secured communication with client and server.
+- Ballerina gRPC service supports all RPC types.
+- Unary
+- Server streaming
+- Client streaming
+- Bidirectional Streaming
+- Ballerina gRPC service supports communicating with client written from any supported language.
+- Supports passing/retrieving headers.
+- Supports generating client code using the built-in proto compiler.
+- Supports error handling.
+- Supports secured communication with client and server.
 
 ## Database client endpoints
 Ballerina Database client endpoints allow you to connect to SQL-based relational database systems and perform data definition, data access, and data manipulation operations on the database. The following database client endpoints are supported: 
-JDBC - For any JDBC supported database.
-MySQL - For MySQL database
-H2 - For H2 database
+- JDBC - For any JDBC supported database.
+- MySQL - For MySQL database
+- H2 - For H2 database
 
 The following features are supported in all the data clients.
-Data manipulation/definition support via `update`, `call`, `updateWithGeneratedKeys` operations.
-Batch data update support via `batchUpdate` operation.
-Data access support via `select` operation, which allows easy access of data using returned tables.
-Proxy table support, which allows read/delete on the actual DB table via a proxied table.
-All operations are transaction aware. 
+- Data manipulation/definition support via `update`, `call`, `updateWithGeneratedKeys` operations.
+- Batch data update support via `batchUpdate` operation.
+- Data access support via `select` operation, which allows easy access of data using returned tables.
+- Proxy table support, which allows read/delete on the actual DB table via a proxied table.
+- All operations are transaction aware. 
+
 ```ballerina
 endpoint jdbc:Client testDB {
 	url: "jdbc:mysql://localhost:3306/testdb",
@@ -473,6 +475,7 @@ service<jms:Consumer> jmsListener bind consumer {
    }
 }
 ```
+
 The Ballerina MB API provides the constructs to connect to the Ballerina Message Broker provided in the Ballerina platform, as shown below.
 
 ```ballerina
@@ -495,6 +498,7 @@ The Ballerina standard library provides a set of commonly used functionalities. 
 
 ## ballerina/auth 
 Provides an interface for looking up user data for authentication and authorization purposes. Also it contains a sample implementation that uses a Ballerina configuration file as user registry.
+
 ```ballerina
 // Check if the user exists (for authentication)
 auth:ConfigAuthProvider authProvider;
@@ -502,11 +506,13 @@ boolean isAuthenticated = authProvider.authenticate(<username>, <password>);
 // Retrieve the scopes of the user (for authorization)
 string[] scopes = authProvider.getScopes(<username>);
 ```
+
 ## ballerina/cache 
 Provides a configurable in-memory caching solution that supports both time-based eviction and size-based eviction.
 
 ## ballerina/config
 Provides a configuration lookup and resolve mechanism, with the option for securing configurations, and an API for reading these configurations.
+
 ```ballerina
 // Look up a string config value
 string host = config:getAsString(“http.host”);
@@ -514,11 +520,13 @@ string host = config:getAsString(“http.host”);
 // found, the default value is returned
 int port = config:getAsInt(“http.port”, default = 9090);
 ```
+
 ## ballerina/crypto 
 Provides a set of functions for some of the commonly used hashing algorithms.
 
 ## ballerina/file
 Provides a directory listener that can be used to listen to directory events.
+
 ```ballerina
 import ballerina/file;
 import ballerina/log;
@@ -544,20 +552,21 @@ service watcher bind localFolder {
 }
 ```
 
-
 ## ballerina/io 
 Provides an asynchronous I/O framework to source/sink that reads/writes as bytes, characters, and records.
 Reading and writing bytes:
-	```ballerina
+
+```ballerina
 // Retrieving a ByteChannel to the file.
 io:ByteChannel channel = io:openFile(filePath, permission);
 // Reading the bytes from the channel
 var result = channel.read(numberOfBytes)
 // Writing some bytes to the channel.
 var result = channel.write(content, startOffset);
-	```
+```
+
 Reading and writing characters:
-	```ballerina
+```ballerina
 // Reading/writing characters of different encodings e.g.: utf-8
 // First, get the ByteChannel representation of the file.
 io:ByteChannel channel = io:openFile(filePath, permission);
@@ -597,7 +606,8 @@ io:DelimitedTextRecordChannel delimitedRecordChannel = new(characterChannel, rs=
 var recordResp = delimitedRecordChannel.getNext();
 //Write string [] as records 
 delimitedRecordChannel.write(records);
-	```
+```
+
 Processing CSV records:
 ```ballerina
 io:CSVChannel srcCsvChannel = io:openCsvFile("./filepath");
@@ -610,7 +620,8 @@ string[] fields => {
 }
 // Write an string [] as CSV
 dstChannel.write(records);
-	```
+```
+
 ## ballerina/log
 Provides an API for logging.
 
@@ -635,85 +646,75 @@ Provides an API for managing task timers and task appointments.
 ## ballerina/time
 Provides a set of functions for handling, parsing and formatting date and time.
 
-
-
 # IDEs & Language Server
 
 ## Language Server
 Ballerina Language Server provides the code intelligence for Ballerina programming. Ballerina Language Server can be integrated with any Language Server Protocol (LSP) supported development tool to provide consistent code intelligence throughout. Ballerina Language Server comes with the following set of features.
 
-
-Code Diagnostics
+### Code Diagnostics
 Identifies and highlights both semantic and syntactic errors.
 
-
-Code Completion and Suggestions
+### Code Completion and Suggestions
 Code completion triggers while editing text, and a user can also explicitly trigger completions for a given context.
 
-
-Hover
+### Hover
 When hovering over an item, an overview of that item appears. For example, if the item is a function, hover support provides an overview of the function signature.
 
-
-Signature Help
+### Signature Help
 Signature Help provides a compressed set of function signature information. Signature Help triggers when you type “(“ or “,”. Currently supports only the functions, and on the trigger, user will be shown the function parameters and types, along with the parameter descriptions.
 
-
-Goto Definition
+### Goto Definition
 Goto Definition will be used in order to jump to the definition of a certain item. Goto Definition can be triggered based on the development tool’s defined trigger options.
 
-
-Find References
+### Find References
 Finds all the references of a defined item. This supports finding item references in the same file and also references in other packages in the same project.
 
-
-Code Action
+### Code Action
 Code Action prompts the user with a defined set of actions available for a given language construct and also for certain diagnostic types. Code Actions include the following:
-Add imports
-Add missing imports.
+- Add imports
+- Add missing imports.
 
-
-Add Documentation for Top Level Constructs
+### Add Documentation for Top Level Constructs
 Supports adding documentation for a single top-level item or all the top-level constructs in a file.
 
 
 
 ## VSCode Plugin
 The Ballerina VSCode plugin includes the following features:
-Syntax highlighting
-Intellisense for Ballerina language via Ballerina Language Server
-Diagramming (view Ballerina programs graphically)
-Debugging
+- Syntax highlighting
+- Intellisense for Ballerina language via Ballerina Language Server
+- Diagramming (view Ballerina programs graphically)
+- Debugging
 
 ## IntelliJ IDEA
 The Ballerina IDEA plugin includes the following features:
-Syntax highlighting
-Code completion and suggestions
-Code formatting
-Go to definitions
-Find usages
-Code diagnostics
-Ballerina program running and debugging
+- Syntax highlighting
+- Code completion and suggestions
+- Code formatting
+- Go to definitions
+- Find usages
+- Code diagnostics
+- Ballerina program running and debugging
 
 ## Composer
 Composer is an IDE included with the Ballerina platform that allows you to design and write Ballerina programs textually as well as graphically. It also comes with a set of features targeted for integration development. 
-Graphical interaction flow designing
-Textual editing support for Ballerina 
-Intelligent code completion via Ballerina Language Server
-Run and Debug support for Ballerina programs
-Design-first API development with Open API Specification
-Try-it client
-Dev time service tracing
+- Graphical interaction flow designing
+- Textual editing support for Ballerina 
+- Intelligent code completion via Ballerina Language Server
+- Run and Debug support for Ballerina programs
+- Design-first API development with Open API Specification
+- Try-it client
+- Dev time service tracing
 
 # Ballerina API Gateway
 The Ballerina API Gateway allows users to expose services in a managed manner. The built-in API endpoint in Ballerina supports securing the exposed services. The main features of the API endpoint are:
-Basic authentication
-JWT-based authentication 
-Configuration-file-based authentication provider to store usernames, passwords, scopes, and their associations
-Authorization using scopes
-Specifying authentication and authorization rules at service or resource levels
-Inheriting authentication/authorization rules from service level and overriding at the resource level
-Authentication and authorization at downstream services via JWT token propagation
+- Basic authentication
+- JWT-based authentication 
+- Configuration-file-based authentication provider to store usernames, passwords, scopes, and their associations
+- Authorization using scopes
+- Specifying authentication and authorization rules at service or resource levels
+- Inheriting authentication/authorization rules from service level and overriding at the resource level
+- Authentication and authorization at downstream services via JWT token propagation
 
 Sample service secured with basic authentication:
 ```ballerina
@@ -764,19 +765,18 @@ service<http:Service> echo bind ep {
 
 # Ballerina Message Broker
 Ballerina Message Broker (BMB) is a lightweight, easy to use message broker designed for use with microservices for their messaging requirements. The main features of BMB are:
-AMQP 0-9-1 transport with TLS support
-Active-Passive HA support
-CLI tool to manage the broker
-RDBMS-based message persistence
-Admin REST API
-Messaging metrics for monitoring MB
-Message tracing
-Local and distributed transaction support
-JMS support
-Cloud native config support
-Authentication and authorization extensions
-In-memory mode
-
+- AMQP 0-9-1 transport with TLS support
+- Active-Passive HA support
+- CLI tool to manage the broker
+- RDBMS-based message persistence
+- Admin REST API
+- Messaging metrics for monitoring MB
+- Message tracing
+- Local and distributed transaction support
+- JMS support
+- Cloud native config support
+- Authentication and authorization extensions
+- In-memory mode
 
 # Ballerina Observability
 Monitoring, tracing, and logging are three ways of observing a system. Ballerina programs have default instrumentation for metrics monitoring and distributed tracing with [OpenTracing](http://opentracing.io/) compliance. Ballerina metrics monitoring is powered by Prometheus, and it should be configured externally to scrape metrics data from the Ballerina metrics endpoint that is started with each Ballerina VM. Ballerina’s default distributed tracing is powered by Jaeger. Ballerina logs can be read and fed to any external log monitoring system like Elastic Stack to perform log monitoring and analysis.
@@ -792,9 +792,9 @@ Ballerina builder extensions run after the compilation phase. These extensions a
 When a developer starts building a project, the system starts by parsing the source code, which is followed by dependency analysis, compilation, and a phase at which deployment artifact generation can take place. 
 
 These deployment artifacts can be in the form of simple files or complex types like container images, virtual images, etc. The Ballerina builder extension supports the following deployment artifacts:
-Dockerfiles 
-Docker images 
-Kubernetes artifacts
+- Dockerfiles 
+- Docker images 
+- Kubernetes artifacts
 
 It is possible for third parties and the ecosystem to create their own annotations and builder extensions that generate different kinds of deployment artifacts. You can publish these extensions on Ballerina Central for others to use.
 
@@ -808,10 +808,8 @@ You may use the Ballerina `build` command to compile a source and provide the ge
 
 You must have either a `main()` function or services or both in order to run a program or a package. When both the `main()` function and services are present, `run` executes services first and then executes the `main()` function.
 
-
 ## Init
 The `ballerina init` command creates a Ballerina project and some sample source files to get you started. It can additionally create packages and the `ballerina.toml` file when run in interactive mode using `-i` flag. The `ballerina.toml` file is used to specify the organization name and version of the project, which is mandatory when pushing to Ballerina Central.
-
 
 ## Build
 The `ballerina build` command compiles Ballerina sources and writes the output to a file. By default, the output filename for a package is the package name suffixed with `.balx`. The default output for a source will have the `.bal` suffix replaced with `.balx`. If the output file is specified with the `-o` flag, the output will be written to the given output file name. 
@@ -839,8 +837,8 @@ The `ballerina doc` command generates API documentation for a given program or p
 
 ## Swagger 
 The `ballerina swagger` command provides the following Swagger utilities:
-The Swagger to Ballerina utility will generate Ballerina source code for a provided Swagger/OAS3 definition. Ballerina supports two types of code generation. `mock` generation will generate a mock Ballerina service. `client` generation will generate a Ballerina client stub. 
-The Ballerina to Swagger utility can be used to export an OAS3 definition of a Ballerina service. 
+- The Swagger to Ballerina utility will generate Ballerina source code for a provided Swagger/OAS3 definition. Ballerina supports two types of code generation. `mock` generation will generate a mock Ballerina service. `client` generation will generate a Ballerina client stub. 
+- The Ballerina to Swagger utility can be used to export an OAS3 definition of a Ballerina service. 
 Build time client stub generation is also possible with the `@swagger:ClientEndpoint`  and `@swagger:ClientConfig` annotations.
 
 ## gRPC
@@ -856,12 +854,11 @@ Ballerina is a compiled language. The Ballerina compiler transforms the source c
 ## Ballerina Virtual Machine (BVM)
 
 The Ballerina Virtual Machine (BVM) is a software process that executes Ballerina programs. BVM is a combination of all of the following components:
-
-Instruction set (Ballerina bytecode)
-Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute
-Storage for instructions and operands
-Function call stack
-Instruction pointer, which points to the next instruction to be executed.
+- Instruction set (Ballerina bytecode)
+- Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute
+- Storage for instructions and operands
+- Function call stack
+- Instruction pointer, which points to the next instruction to be executed.
 
 The BVM architecture and instruction set are designed based on register-based virtual machine architecture.
 
