@@ -268,14 +268,14 @@ Introduce `setPayload()` to the HTTP request and response to take any type of pa
 - Improved APIs for HTTP header related operations
 - Chunking support for per service
 - Functionalities supported for HTTPS,
- - Certificate validation with CRL, OCSP, OCSP Stapling
- - Configuration for SSL/TLS ciphers and protocols 
- - Hostname verification support
- - Mutual Authentication support
+  - Certificate validation with CRL, OCSP, OCSP Stapling
+  - Configuration for SSL/TLS ciphers and protocols 
+  - Hostname verification support
+  - Mutual Authentication support
 - HTTP2
- - Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
- - Server Push support
- - SSL/TLS support with ALPN 
+  - Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
+  - Server Push support
+  - SSL/TLS support with ALPN 
 
 ## WebSockets  
 WebSocket client/server endpoint supports the following features.
@@ -343,10 +343,10 @@ endpoint http:LoadBalanceClient lbBackendEP {
 - Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
 - Support discrete media types
 - Support composite media types 
- - multipart/form-data
- - multipart/mixed
- - multipart/alternative
- - multipart/relative
+  - multipart/form-data
+  - multipart/mixed
+  - multipart/alternative
+  - multipart/relative
 - Ability to recognize and separate parts of unrecognized subtypes of multipart entities
 - Encapsulate multiple body parts in a single message
 - Decode multipart messages
