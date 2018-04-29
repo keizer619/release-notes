@@ -1,4 +1,4 @@
-# Overview to Ballerina 0.970
+# Overview to Ballerina 0.970.0
 
 We proudly announce General Availability of Ballerina 0.970.0. Download now! Ballerina 0.970.0 is an exciting new release of the programming language. 
 
@@ -681,8 +681,6 @@ Code Action prompts the user with a defined set of actions available for a given
 ### Add Documentation for Top Level Constructs
 Supports adding documentation for a single top-level item or all the top-level constructs in a file.
 
-
-
 ## VSCode Plugin
 The Ballerina VSCode plugin includes the following features:
 - Syntax highlighting
@@ -790,7 +788,6 @@ Ballerina observability enables developers to understand the execution and perfo
 Developers can enable a Ballerina program to collect the data to observe by simply using the `--observe` flag (with default configurations) or passing specific Ballerina configurations when running the Ballerina program. The external systems, such as Prometheus and Jaeger, need to be used to analyze and graphically represent the collected data from a Ballerina program. 
 
 # Ballerina Extensions
-
 Ballerina builder extensions run after the compilation phase. These extensions analyze code to generate deployment artifacts and provide utilities to make deployment of your apps and services easier. 
 
 When a developer starts building a project, the system starts by parsing the source code, which is followed by dependency analysis, compilation, and a phase at which deployment artifact generation can take place. 
@@ -801,7 +798,6 @@ These deployment artifacts can be in the form of simple files or complex types l
 - Kubernetes artifacts
 
 It is possible for third parties and the ecosystem to create their own annotations and builder extensions that generate different kinds of deployment artifacts. You can publish these extensions on Ballerina Central for others to use.
-
 
 # Tools 
 The `ballerina` command is a tool for compiling, running, and building Ballerina programs. It also comes with a set of utilities to manage Ballerina packages and projects.
@@ -851,12 +847,10 @@ The gRPC protobuf tool is used to generate the sample client and client stub usi
 ## encrypt
 The `ballerina encrypt` command encrypts values containing sensitive information such as passwords and secrets. These encrypted values can be used by placing them in a configuration file or by passing them as runtime arguments, which can then be read through the Config API. It will automatically decrypt the encrypted configuration values on demand.
 
-
 # Runtime
 Ballerina is a compiled language. The Ballerina compiler transforms the source code to Ballerina bytecode, which is the instruction set that the Ballerina bytecode interpreter understands. It is also the intermediate representation to which a source program is transformed by the Ballerina compiler.
 
 ## Ballerina Virtual Machine (BVM)
-
 The Ballerina Virtual Machine (BVM) is a software process that executes Ballerina programs. BVM is a combination of all of the following components:
 - Instruction set (Ballerina bytecode)
 - Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute
@@ -867,7 +861,6 @@ The Ballerina Virtual Machine (BVM) is a software process that executes Ballerin
 The BVM architecture and instruction set are designed based on register-based virtual machine architecture.
 
 ### Bytecode interpreter
-
 The bytecode interpreter in BVM is responsible for executing instructions. Instruction is an encoded behavior. It contains an opcode and one or more operands. Here is a sample instruction:
 
 ```
@@ -877,10 +870,5 @@ iadd 0 1 2 - Add integers in 0th and 1st registers and store the result in the 2
 ### Worker Scheduler 
 One of the core functionality of the Ballerina VM is the worker scheduler. This is used to schedule all the workers that are executed in the system. During a function invocation, all the workers that belong to the functions are scheduled to be executed in the BVM scheduler. The scheduler will check for available resources and will schedule the workers appropriately. Each worker has a life cycle state that it goes through, which represents being ready, running, waiting for response, waiting on locks, and finally the finished state. The worker scheduling follows a fully non-blocking mode, where the execution threads of the workers will never block for I/O, locks, sleep, etc. Instead, the execution thread will always be freed up for CPU usages for other workers. In this manner, Ballerina ensures the most efficient usage of CPU resources. 
 
-
 # Getting Started
 You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
-
-
-
-
