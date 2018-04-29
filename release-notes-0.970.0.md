@@ -2,7 +2,11 @@
 
 We proudly announce General Availability of Ballerina 0.970. Download now! Ballerina 0.970 is an exciting new release of the programming language. 
 
-Some key highlights of Ballerina capabilities included into this release are:
+The 0.970.0 release represents significant changes from the 0.964.0 release and is not backwards compatible. This release represents the changes after a series of design reviews that had material impact on the language design, syntax, and toolchain. The changes are so significant that to those with previous exposure, Ballerina will appear as an entirely new language. 
+
+With these changes, the release notes cover the features of the language from a design point of view, and we are forgoing the traditional approach of release notes covering the incremental changes from release to release. We hope to hit 1.0 milestone before the end of 2018 and will guarantee backwards compatibility at that stage.
+
+Key highlights of Ballerina capabilities included into this release are:
 
 **Concurrent**: Worker support for defining parallel execution units with fork/join semantics, and asynchronous function invocations, which contains improved BVM scheduler functionality.
 
