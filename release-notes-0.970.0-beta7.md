@@ -2,16 +2,16 @@
 
 # Overview to Ballerina 0.970.0-beta7
 
-This release include an improvements to the standard library APIs. The full list of APIs have been reviewed  and enhancements incorporated to this release to make the API usage simpler to the developer. 
+This release includes improvements to the standard library APIs. The full list of APIs has been reviewed and enhancements incorporated with the intention of making the API usage simpler to the developer. 
 
-For example the changes to the signatures of the HTTP client functions for the standard HTTP methods, to make the Request parameter, makes the usage much simple for developer. 
+For example, the `Request` parameter has been made optional in the signatures of the HTTP client functions for standard HTTP methods. This makes the usage much simpler for developers. 
 ```ballerina
 http:Request req = new;
 var clientResponse = clientEP->get("/echo"); // Passing a request is optional
 var clientResponse = clientEP->get("/echo", request = req); 
 ```
 Another example of the API refactoring from HTTP package is the merge of both `Client` and SimpleClient into a single endpoint called `Client`. 
-The simplified use of a sample of `FailoverClient` configuration:
+The simplified use of a sample of `FailoverClient` configuration now looks like:
 ```ballerina
 endpoint http:FailoverClient ClientEP {
     timeoutMillis:5000,
@@ -45,7 +45,7 @@ endpoint http:Client clientEP {
     timeoutMillis:5000
 };
 ```
-Numerous similar refactoring has been done across the standard library API and you can find further details by referring the latest API documentation. 
+Numerous similar refactoring have been done across the standard library API and you can find further details by referring latest API documentation. 
 
 
 Compiled version of a Ballerina package support, in short form referred to as “balo” in developer community, has been added to this release. 
@@ -54,7 +54,7 @@ When packages are built into a .balo, they will be installed into the project re
 ballerina build -c <package> [-o <output-file>.balo]
 ```
 
-This release ships many stabilization enhancements to the type system elements that were introduced in 0.970.0-beta0. All other parts of the language implementation has added many fixes. 
+This release ships many stabilization enhancements to the type system elements that were introduced in 0.970.0-beta0. All other parts of the language implementation have been stabilized with many fixes. 
 
 # Compatibility and Support
 You will have to update the API usage in sync with the API enhancements. Please use the latest API documentation to explore the latest API. 
