@@ -1,6 +1,6 @@
 # Overview to Ballerina 0.970
 
-We proudly announce General Availability of Ballerina 0.970. Download now! Ballerina 0.970 is an exciting new release of the programming language. 
+We proudly announce General Availability of Ballerina 0.970.0. Download now! Ballerina 0.970.0 is an exciting new release of the programming language. 
 
 The 0.970.0 release represents significant changes from the 0.964.0 release and is not backwards compatible. This release represents the changes after a series of design reviews that had material impact on the language design, syntax, and toolchain. The changes are so significant that to those with previous exposure, Ballerina will appear as an entirely new language. 
 
