@@ -30,7 +30,7 @@ The types `int`, `float`, `string`, `boolean`, `blob`, and `nil` are called simp
 * **int** - The `int` type denotes the set of 64-bit signed integers. The implicit initial value of a variable of type `int`  is `0`.
 * **float** -  The `float` type denotes double precision IEEE 754 floating point numbers. The implicit initial value of a variable of type `float` is `+0.0`.
 * **string** -  The `string` type denotes the set of sequences of unicode code points. The implicit initial value of a variable of type `string` is the empty sequence.
-* **blob** -  The `blob` type denotes the set of sequences of 8-bit bytes . The implicit initial value of a variable of type `blob` is the empty sequence. 
+* **blob** -  The `blob` type denotes the set of sequences of 8-bit bytes. The implicit initial value of a variable of type `blob` is the empty sequence. 
 
 ### Structured Basic Types
 Structured basic values create structures from other values. A structured value belongs to exactly one of the following basic types:
@@ -97,10 +97,9 @@ Iterable operations can be used with types such as `array`, `map`, `json`, `tabl
 ## Transaction
 A Ballerina transaction is a series of data manipulation statements that must either fully complete or fully fail, and thereby leave the system in a consistent state.  Ballerina supports following three types of transactions over databases and message brokers.
 
-Local Transactions - The transaction performed over single database or a message broker.
-
-XA Transactions - The transaction performed over multiple databases and/or message brokers using the XA two phase commit protocol.
-Distributed Transactions - Implements transactional behavior for micro-services by using an external coordinator to execute a two-phase-commit based protocol to manage service resources.
+* **Local Transactions** - The transaction performed over single database or a message broker.
+* **XA Transactions** - The transaction performed over multiple databases and/or message brokers using the XA two phase commit protocol.
+* **Distributed Transactions** - Implements transactional behavior for micro-services by using an external coordinator to execute a two-phase-commit based protocol to manage service resources.
 
 The transaction block is used handle Ballerina transactions. Any transaction aware operations performed within the transaction block are automatically committed or rolled back at the end of the block. Within transaction block, `abort` or `retry` statements can be used to explicitly force to abort the transaction or retry the transaction. 
 
@@ -136,11 +135,9 @@ Ballerina locks are used for concurrency management, encapsulating a block of st
 ## Functions
 Ballerina functions operate the same way as any other language. It is a mechanism to create a reusable unit of functionality within a program. Ballerina functions can have three types of parameters.
 
-Required parameters - Set of parameters that are mandatory to be provided, when invoking the function.
-
-Defaultable parameters - They are optional parameters with a default value. Such a function can be invoked without providing a value for those defaultable parameters. When invoking the function, the defalutable parameter needs to be passed as key-value pairs, and their position within the function call does not matter.
-
-Rest parameter - The rest parameter can take zero or more number of values of the given type. Inside the function, the rest parameter is equivalent to an array of the same type.
+* **Required parameters** - Set of parameters that are mandatory to be provided, when invoking the function.
+* **Defaultable parameters** - They are optional parameters with a default value. Such a function can be invoked without providing a value for those defaultable parameters. When invoking the function, the defalutable parameter needs to be passed as key-value pairs, and their position within the function call does not matter.
+* **Rest parameter** - The rest parameter can take zero or more number of values of the given type. Inside the function, the rest parameter is equivalent to an array of the same type.
 
 ### Function Pointers
 A function pointer is a Ballerina type that allows you to use functions as variables, arguments to functions, and function return values. The name of a function serves as a pointer to that function when called from other functions or operations. The definition of the function name provides the type of the pointer in terms of a function signature.
@@ -154,7 +151,7 @@ Ballerina’s underlying language semantics were designed by modeling how indepe
 ## Textual Syntax
 Ballerina’s textual syntax is largely inspired by C, Java, and Go languages. The key language constructs in Ballerina are as follows. 
 
-Function
+**Function:**
 ```ballerina
 import ballerina/io;
 
@@ -168,7 +165,7 @@ function main(string... args) {
 }
 ```
 
-Worker
+**Worker:**
 ```ballerina
 import ballerina/io;
 function main(string... args) {
@@ -182,7 +179,7 @@ function main(string... args) {
 }
 ```
 
-Service
+**Service:**
 ```ballerina
 import ballerina/http;
 
@@ -198,9 +195,7 @@ service<http:Service> hello bind { port: 9090 } {
 
 ## Graphical Syntax
 
-Ballerina’s graphical syntax resembles a sequence diagram. The control flow within a worker is represented with flow diagram based elements.
-
-Graphical representation of a service with network interactions. 
+Ballerina’s graphical syntax resembles a sequence diagram. The control flow within a worker is represented with flow diagram based elements. Graphical representation of a service is represented with network interactions. 
 
 Ballerina platform comes with the Composer IDE, which allows you to edit and view Ballerina programs graphically and textually. VS Code plugin can be also used to view Ballerina programs graphically.
 
@@ -209,178 +204,170 @@ Ballerina platform comes with the Composer IDE, which allows you to edit and vie
 Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSockets, WebSub, gRPC, and JMS are some of the available service types. These services are exposed via listener endpoints, which can be secured and monitored. Client endpoints connect to different types of external endpoints and they are inherently resilient. Additionally, commonly used integration message formats, such as XML and JSON, are built-in to the type system of the language. In the context of integration specialization, the following are the released features.
 
 ## HTTP
-Dispatching to service based on service version by introducing service config annotation to declare versioning rules
+* Dispatching to service based on service version by introducing service config annotation to declare versioning rules.
+  ```ballerina
+  @http:ServiceConfig {
+      basePath:"/hello/{version}",
+      versioning:{
+         pattern:"v{Major}.{Minor}",
+         allowNoVersion:true,
+         matchMajorVersion:true
+      }
+  }
+  ```
 
-```ballerina
-@http:ServiceConfig {
-    basePath:"/hello/{version}",
-    versioning:{
-       pattern:"v{Major}.{Minor}",
-       allowNoVersion:true,
-       matchMajorVersion:true
-    }
-}
-```
+* Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`.
+  ```ballerina
+  @http:ResourceConfig {
+       path:"/product/{id}/{name}/{price}"
+  }
+  
+  productInfo(endpoint caller, http:Request req, int id, string name, float price) {
+       // some code
+  }
+  ```
 
-Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`
-```ballerina
-@http:ResourceConfig {
-     path:"/product/{id}/{name}/{price}"
-}
+* HTTP caching support for client/server endpoints.
+* HTTP access logs support.
+* Connection throttling support for client endpoint.
+  ```ballerina
+  endpoint http:Client clientEP {
+      url: "some url",
+      connectionThrottling: {
+          maxActiveConnections: 5,
+          waitTime: 30000
+      }
+  };
+  ```
 
-productInfo(endpoint caller, http:Request req, int id, string name, float price) {
-     // some code
-}
-```
-
-- HTTP caching support for client/server endpoints
-- HTTP access logs support
-- Connection throttling support for client endpoint
-```ballerina
-endpoint http:Client clientEP {
-    url: "some url",
-    connectionThrottling: {
-        maxActiveConnections: 5,
-        waitTime: 30000
-    }
-};
-```
-
-Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`
-
-- Improved APIs for HTTP header related operations
-- Chunking support for per service
-- Functionalities supported for HTTPS,
-  - Certificate validation with CRL, OCSP, OCSP Stapling
-  - Configuration for SSL/TLS ciphers and protocols 
-  - Hostname verification support
-  - Mutual Authentication support
-- HTTP2
-  - Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
-  - Server Push support
-  - SSL/TLS support with ALPN 
+* Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`.
+* Improved APIs for HTTP header related operations.
+* Chunking support for per service.
+* Functionalities supported for HTTPS,
+  * Certificate validation with CRL, OCSP, OCSP Stapling.
+  * Configuration for SSL/TLS ciphers and protocols.
+  * Hostname verification support.
+  * Mutual Authentication support.
+* Functionalities supported for HTTP2,
+  * Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol.
+  * Server Push support.
+  * SSL/TLS support with ALPN.
 
 ## WebSockets  
 WebSocket client/server endpoint supports the following features.
 
-Read/write support for Text, Binary, Ping/Pong, and Close WebSocket frames. The following is a sample code for handling WebSockets Text and Binary frames.
-```ballerina
-service <http:WebSocketService> wsService bind {port:9090} {
-    onText(endpoint ep, string text, boolean finalFrame) {
-        ep->pushText(text, final = finalFrame)
-                but { error e => log:printError("Error", err=e) };
-    }
+* Read/write support for Text, Binary, Ping/Pong, and Close WebSocket frames. The following is a sample code for handling WebSockets Text and Binary frames.
+  ```ballerina
+  service <http:WebSocketService> wsService bind {port:9090} {
+      onText(endpoint ep, string text, boolean finalFrame) {
+          ep->pushText(text, final = finalFrame)
+                  but { error e => log:printError("Error", err=e) };
+      }
+  
+      onBinary(endpoint ep, blob data, boolean finalFrame) {
+          ep->pushBinary(data, final = finalFrame)
+                  but { error e => log:printError("Error", err=e) };
+      }
+  }
+  ```
 
-    onBinary(endpoint ep, blob data, boolean finalFrame) {
-        ep->pushBinary(data, final = finalFrame)
-                but { error e => log:printError("Error", err=e) };
-    }
-}
-```
-
-- WebSockets secure connections support (`WSS://`)
-- Custom headers support for handshake response message
-- Sub-protocols negotiation support
-- Connection idle timeout support
-- WebSocket service endpoint supports query and path parameters for upgrade request and maximum WebSocket frame size configuration.
+* WebSockets secure connections support (`WSS://`).
+* Custom headers support for handshake response message.
+* Sub-protocols negotiation support.
+* Connection idle timeout support.
+* WebSocket service endpoint supports query and path parameters for upgrade request and maximum WebSocket frame size configuration.
 
 ## Resiliency
-Retry support for HTTP client endpoint
-Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration:
-
-```ballerina
-endpoint http:Client cbClientEP {
-   url: "http://localhost:8080",
-   // Circuit breaker options
-   circuitBreaker: {
-       rollingWindow: {
-           timeWindowMillis: 10000,
-           bucketSizeMillis: 2000
+* Retry support for HTTP client endpoint.
+* Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration.
+    ```ballerina
+    endpoint http:Client cbClientEP {
+       url: "http://localhost:8080",
+       // Circuit breaker options
+       circuitBreaker: {
+           rollingWindow: {
+               timeWindowMillis: 10000,
+               bucketSizeMillis: 2000
+           },
+           failureThreshold: 0.2,
+           resetTimeMillis: 10000,
+           statusCodes: [400, 404, 500]
        },
-       failureThreshold: 0.2,
-       resetTimeMillis: 10000,
-       statusCodes: [400, 404, 500]
-   },
-   timeoutMillis: 2000
-};
-```
+       timeoutMillis: 2000
+    };
+    ```
 
-- Failover support for HTTP client endpoint
-- Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration:
-
-```ballerina
-endpoint http:LoadBalanceClient lbBackendEP {
-   // Define the set of HTTP clients that need to be load balanced.
-   targets: [
-       { url: "http://localhost:8080/mock1" },
-       { url: "http://localhost:8080/mock2" },
-       { url: "http://localhost:8080/mock3" }
-   ],
-   // The algorithm used for load balancing.
-   algorithm: http:ROUND_ROBIN,
-   timeoutMillis: 5000
-};
-```
+* Failover support for HTTP client endpoint.
+* Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration.
+    ```ballerina
+    endpoint http:LoadBalanceClient lbBackendEP {
+       // Define the set of HTTP clients that need to be load balanced.
+       targets: [
+           { url: "http://localhost:8080/mock1" },
+           { url: "http://localhost:8080/mock2" },
+           { url: "http://localhost:8080/mock3" }
+       ],
+       // The algorithm used for load balancing.
+       algorithm: http:ROUND_ROBIN,
+       timeoutMillis: 5000
+    };
+    ```
 
 ## MIME 
-- Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
-- Support discrete media types
-- Support composite media types 
-  - multipart/form-data
-  - multipart/mixed
-  - multipart/alternative
-  - multipart/relative
-- Ability to recognize and separate parts of unrecognized subtypes of multipart entities
-- Encapsulate multiple body parts in a single message
-- Decode multipart messages
+Ballerina provides  built-in implementation of the MIME specification. Following are some of the features.
+* Support discrete media types.
+* Support composite media types. 
+  * multipart/form-data.
+  * multipart/mixed.
+  * multipart/alternative.
+  * multipart/relative.
+* Ability to recognize and separate parts of unrecognized subtypes of multipart entities.
+* Encapsulate multiple body parts in a single message.
+* Decode multipart messages.
 
 ## WebSub
-Implementation of the WebSub recommendation that facilitates push-based content delivery/notification mechanism between publishers and subscribers.
-Allow introducing WebSub Hubs, Subscribers and Publishers and support WebSub features including subscription and unsubscription, honouring lease seconds values and authenticated content distribution.
+* Implementation of the WebSub recommendation that facilitates push-based content delivery/notification mechanism between publishers and subscribers.
+* Allow introducing WebSub Hubs, Subscribers and Publishers and support WebSub features including subscription and unsubscription, honouring lease seconds values and authenticated content distribution.
 
-Ballerina’s WebSub implementation supports JSON content and provides the following functionality:
-Ballerina WebSub Subscriber
-A service type that allows two resources - `onIntentVerification` accepting intent verification requests and `onNotification` accepting content delivery requests
-Features include:
-Sending subscription requests to a hub for a particular topic at start up, where the hub and topic are specified as or derived from an annotation
-Auto Intent Verification - if the `onIntentVerification` resource is not specified
-Signature validation for authenticated content
-Subscription and unsubscription requests could be sent explicitly via Client Endpoints
+* Ballerina’s WebSub implementation supports JSON content and provides the following functionalities.
+  * **Ballerina WebSub Subscriber:** A service type that allows two resources - `onIntentVerification` accepting intent verification requests and `onNotification` accepting content delivery requests. This includes following features.
+    * Sending subscription requests to a hub for a particular topic at start up, where the hub and topic are specified as or derived from an annotation.
+    * Auto Intent Verification - if the `onIntentVerification` resource is not specified.
+    * Signature validation for authenticated content.
+    * Subscription and unsubscription requests could be sent explicitly via Client Endpoints.
 
-```ballerina
-import ballerina/log;
-import ballerina/websub;
+    ```ballerina
+    import ballerina/log;
+    import ballerina/websub;
+    
+    endpoint websub:Listener websubEP {
+       port: 8181
+    };
+    
+    @websub:SubscriberServiceConfig {
+       path: "/websub",
+       subscribeOnStartUp: true,
+       topic: "<TOPIC_URL>",
+       hub: "<HUB_URL>",
+       leaseSeconds: 3600,
+       secret: "<SECRET>"
+    }
+    service websubSubscriber bind websubEP {
+    
+       onNotification(websub:Notification notification) {
+           log:printInfo("WebSub Notification Received: " + notification.payload.toString());
+       }
+    
+    }
+    ```
+    
+  * **Ballerina WebSub Hub:** A Hub service which accepts subscription requests from subscribers, and delivers content to the subscribers on notification from publishers. This includes following features.
+    * Authenticated content distribution.
+    * Honouring lease periods.
 
-endpoint websub:Listener websubEP {
-   port: 8181
-};
-
-@websub:SubscriberServiceConfig {
-   path: "/websub",
-   subscribeOnStartUp: true,
-   topic: "<TOPIC_URL>",
-   hub: "<HUB_URL>",
-   leaseSeconds: 3600,
-   secret: "<SECRET>"
-}
-service websubSubscriber bind websubEP {
-
-   onNotification(websub:Notification notification) {
-       log:printInfo("WebSub Notification Received: " + notification.payload.toString());
-   }
-
-}
-```
-Ballerina WebSub Hub 
-A Hub service which accepts subscription requests from subscribers, and delivers content to the subscribers on notification from publishers
-Features include:
-Authenticated content distribution
-Honouring lease periods
-
-Ballerina WebSub Publisher
-Publishers can bring up their own Ballerina Hub, to which they will publish updates, and allow subscribers to subscribe for their topics
-Client endpoints are available for publishers to publish updates to remote Hubs
-Utility functions are available to add a Link Header specifying hub and self URLs to facilitate WebSub discovery
+  * **Ballerina WebSub Publisher:** Publishers can bring up their own Ballerina Hub, to which they will publish updates, and allow subscribers to subscribe for their topics.
+    * Client endpoints are available for publishers to publish updates to remote Hubs.
+    * Utility functions are available to add a Link Header specifying hub and self URLs to facilitate WebSub discovery.
 
 ## gRPC
 gRPC is a protocol which is layered over HTTP/2 and enables client and server communication by combination of any supported languages. In gRPC a client application can directly call methods on a server application on a different machine, making it easier for you to create distributed applications and services.
@@ -537,73 +524,73 @@ service watcher bind localFolder {
 
 ## ballerina/io 
 Provides an asynchronous I/O framework to source/sink that reads/writes as bytes, characters, and records.
-Reading and writing bytes:
 
-```ballerina
-// Retrieving a ByteChannel to the file.
-io:ByteChannel channel = io:openFile(filePath, permission);
-// Reading the bytes from the channel
-var result = channel.read(numberOfBytes)
-// Writing some bytes to the channel.
-var result = channel.write(content, startOffset);
-```
+* Reading and writing bytes:
+  ```ballerina
+  // Retrieving a ByteChannel to the file.
+  io:ByteChannel channel = io:openFile(filePath, permission);
+  // Reading the bytes from the channel
+  var result = channel.read(numberOfBytes)
+  // Writing some bytes to the channel.
+  var result = channel.write(content, startOffset);
+  ```
 
-Reading and writing characters:
-```ballerina
-// Reading/writing characters of different encodings e.g.: utf-8
-// First, get the ByteChannel representation of the file.
-io:ByteChannel channel = io:openFile(filePath, permission);
-io:CharacterChannel characterChannel = new(channel, encoding);
-// Read content as characters 
-var content = characterChannel.read(numberOfChars);
-// Write characters  
-channel.write(content, startOffset);
+* Reading and writing characters:
+  ```ballerina
+  // Reading/writing characters of different encodings e.g.: utf-8
+  // First, get the ByteChannel representation of the file.
+  io:ByteChannel channel = io:openFile(filePath, permission);
+  io:CharacterChannel characterChannel = new(channel, encoding);
+  // Read content as characters 
+  var content = characterChannel.read(numberOfChars);
+  // Write characters  
+  channel.write(content, startOffset);
+  
+  // Reading a JSON
+  match characterChannel.readJson(){
+     json result =>{
+         return result;
+     }
+     error err =>{
+        //handle error
+     }
+  }
+  
+  // Writing a JSON
+  match characterChannel.writeJson(content){
+      //handle match conditions 
+  }
+  ```
 
-// Reading a JSON
-match characterChannel.readJson(){
-   json result =>{
-       return result;
-   }
-   error err =>{
-      //handle error
-   }
-}
-
-// Writing a JSON
-match characterChannel.writeJson(content){
-    //handle match conditions 
-}
-```
-
-Reading and writing text records:
-```ballerina
-// Reading and writing delimited text records
-
-io:ByteChannel channel = io:openFile(filePath, permission);
-// Create a `character channel` from the `byte channel` to read content as text.
-io:CharacterChannel characterChannel = new(channel, encoding);
-// Convert the `character channel` to a `record channel`
-//to read the content as records.
-io:DelimitedTextRecordChannel delimitedRecordChannel = new(characterChannel, rs=rs, fs=fs);
-//Read Text Record 
-var recordResp = delimitedRecordChannel.getNext();
-//Write string [] as records 
-delimitedRecordChannel.write(records);
-```
-
-Processing CSV records:
-```ballerina
-io:CSVChannel srcCsvChannel = io:openCsvFile("./filepath");
-
-match channel.getNext() {
-string[] fields => {
-       	// Process fields 
-}
-// Handle error and the rest
-}
-// Write an string [] as CSV
-dstChannel.write(records);
-```
+* Reading and writing text records:
+  ```ballerina
+  // Reading and writing delimited text records
+  
+  io:ByteChannel channel = io:openFile(filePath, permission);
+  // Create a `character channel` from the `byte channel` to read content as text.
+  io:CharacterChannel characterChannel = new(channel, encoding);
+  // Convert the `character channel` to a `record channel`
+  //to read the content as records.
+  io:DelimitedTextRecordChannel delimitedRecordChannel = new(characterChannel, rs=rs, fs=fs);
+  //Read Text Record 
+  var recordResp = delimitedRecordChannel.getNext();
+  //Write string [] as records 
+  delimitedRecordChannel.write(records);
+  ```
+  
+* Processing CSV records:
+  ```ballerina
+  io:CSVChannel srcCsvChannel = io:openCsvFile("./filepath");
+  
+  match channel.getNext() {
+  string[] fields => {
+         	// Process fields 
+  }
+  // Handle error and the rest
+  }
+  // Write an string [] as CSV
+  dstChannel.write(records);
+  ```
 
 ## ballerina/log
 Provides an API for logging.
@@ -798,7 +785,7 @@ The `ballerina push` command uploads the given package to the [Ballerina Central
 
 When you push a package to Ballerina Central, it will validate the organization for the user against the org-name defined in your package’s `ballerina.toml` file. Therefore, you must pick the organization name that you intend to push the package into and set that as the org-name in the package `ballerina.toml` file. 
 
-You may also push packages to your home repository if you want to share a package between two projects in the same dev machine using 'ballerina push --repository home'.  'ballerina install' is an alias for the same.
+You may also push packages to your home repository if you want to share a package between two projects in the same dev machine using `ballerina push --repository home`.  `ballerina install` is an alias for the same.
 
 The `ballerina pull` command downloads a package from Ballerina Central to your home repository cache. This same behavior happens when you build a project with a package import. The `pull` command will download it beforehand, so it will be available for build even when offline.
 
@@ -831,10 +818,10 @@ Ballerina is a compiled language. The Ballerina compiler transforms the source c
 
 ## Ballerina Virtual Machine (BVM)
 The Ballerina Virtual Machine (BVM) is a software process that executes Ballerina programs. BVM is a combination of all of the following components:
-- Instruction set (Ballerina bytecode)
-- Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute
-- Storage for instructions and operands
-- Function call stack
+- Instruction set (Ballerina bytecode).
+- Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute.
+- Storage for instructions and operands.
+- Function call stack.
 - Instruction pointer, which points to the next instruction to be executed.
 
 The BVM architecture and instruction set are designed based on register-based virtual machine architecture.
@@ -848,6 +835,40 @@ iadd 0 1 2 - Add integers in 0th and 1st registers and store the result in the 2
 
 ### Worker Scheduler 
 One of the core functionality of the Ballerina VM is the worker scheduler. This is used to schedule all the workers that are executed in the system. During a function invocation, all the workers that belong to the functions are scheduled to be executed in the BVM scheduler. The scheduler will check for available resources and will schedule the workers appropriately. Each worker has a life cycle state that it goes through, which represents being ready, running, waiting for response, waiting on locks, and finally the finished state. The worker scheduling follows a fully non-blocking mode, where the execution threads of the workers will never block for I/O, locks, sleep, etc. Instead, the execution thread will always be freed up for CPU usages for other workers. In this manner, Ballerina ensures the most efficient usage of CPU resources. 
+
+# Specification Deviations
+
+- Symbolic strings are not supported
+- External member function def uses :: instead of . currently
+- String expressions end (}}) should not allow whitespace in between the braces
+- Type references are not yet supported in records
+- Open records not supported
+- Object/record equivalence is not up to date
+- `map`/`record`/`json` are not the same yet
+- `error` type has does not have a isError property of the singleton `type`: 
+  record { true isError; string message; error? cause; }
+- `check` is an expression whereas in the spec it is defined as a statement.
+- Not all the patterns are not support in `match` statement and `but` expression
+- `table` values only support key constraints
+- Current language docs use the term `package` whereas the spec uses the terms `component` and `module`
+- Existing `identifier` lexer rules are not tight as the rules defined by the specification
+- The implicit initial value for a tuple type is not created, even if all the member types have implicit initial values. You get an NPE at the moment if you try to destructure a variable of type tuple if it is declared without an initial expression.  
+- The implicit initial value generation for union types is also not complete
+- Octal literal support is available in version 0.970.0 and it is not part of the spec
+- `blob` literals are not supported 
+- The current runtime does not fill the array with the implicit initial value of the member type 
+- The covariant property of arrays is not supported. i.e. int[] is not assignable to int?[]. Therefore storage type mismatches never happen in the current version
+- Optional fields are not supported in records 
+- The record rest descriptors are not supported in records 
+- Object syntax is different from the spec
+- Object-private is not supported; only public and package-private
+- Native object constructors are not supported
+- The explicit-type-indicators are not supported
+- `new` expressions are not supported for records and streams
+- Implicit `var` declarations are not allowed at the package level 
+- `match` statement expects the patterns to be exhaustive
+- `record` destructuring assignment is not available
+- Streaming query timespans are in spec as seconds | minutes | .. | years but impl has them without "s" at the end
 
 # Getting Started
 You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
