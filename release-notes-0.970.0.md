@@ -32,7 +32,7 @@ The types `int`, `float`, `string`, `boolean`, `blob`, and `nil` are called simp
 * **string** -  The `string` type denotes the set of sequences of unicode code points. The implicit initial value of a variable of type `string` is the empty sequence.
 * **blob** -  The `blob` type denotes the set of sequences of 8-bit bytes . The implicit initial value of a variable of type `blob` is the empty sequence. 
 
-### Structural Basic Types
+### Structured Basic Types
 Structured basic values create structures from other values. A structured value belongs to exactly one of the following basic types:
 * **Tuple** - A `tuple` is an immutable list of two or more values of fixed length. 
 * **Array** - Arrays are mutable lists of values with dynamic length where each member of the list is specified with the same type. The implicit initial value of an array is the array with a length of `0`.
