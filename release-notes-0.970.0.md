@@ -25,64 +25,43 @@ Ballerina programs operate on a universe of values, and each value belongs to on
 
 ### Simple Basic Types
 The types `int`, `float`, `string`, `boolean`, `blob`, and `nil` are called simple basic types because they are basic types with only simple values. Simple values are always immutable.
+* **nil** - The `nil` type has only one value that is denoted by `()`. 
+* **boolean** - The `boolean` type has only two values named `true` and `false`. The implicit initial value of a variable of type `boolean` is `false`.
+* **int** - The `int` type denotes the set of 64-bit signed integers. The implicit initial value of a variable of type `int`  is `0`.
+* **float** -  The `float` type denotes double precision IEEE 754 floating point numbers. The implicit initial value of a variable of type `float` is `+0.0`.
+* **string** -  The `string` type denotes the set of sequences of unicode code points. The implicit initial value of a variable of type `string` is the empty sequence.
+* **blob** -  The `blob` type denotes the set of sequences of 8-bit bytes. The implicit initial value of a variable of type `blob` is the empty sequence. 
 
-nil - The `nil` type has only one value that is denoted by `()`. 
-
-boolean - The `boolean` type has only two values named `true` and `false`. The implicit initial value of a variable of type `boolean` is `false`.
-
-int - The `int` type denotes the set of 64-bit signed integers. The implicit initial value of a variable of type `int`  is `0`.
-
-float -  The `float` type denotes double precision IEEE 754 floating point numbers. The implicit initial value of a variable of type `float` is `+0.0`.
-
-string -  The `string` type denotes the set of sequences of unicode code points. The implicit initial value of a variable of type `string` is the empty sequence.
-
-blob -  The `blob` type denotes the set of sequences of 8-bit bytes. The implicit initial value of a variable of type `blob` is the empty sequence. 
-
-### Structural Basic Types
+### Structured Basic Types
 Structured basic values create structures from other values. A structured value belongs to exactly one of the following basic types:
-
-Tuple - A `tuple` is an immutable list of two or more values of fixed length. 
-
-Array - Arrays are mutable lists of values with dynamic length where each member of the list is specified with the same type. The implicit initial value of an array is the array with a length of `0`.
-
-Map - The `map` type defines a mutable mapping from keys that are strings to values of the same type.
-
-Record - A mutable mapping from keys, which are strings, to values; specifies maps in terms of names of fields (required keys) and value for each field.
-
-Table - The `table` type is a data structure that organizes information in rows and columns. Can be used to create an in-memory table using a type constraint, insert data to it and then access/delete the data.
-
-XML - The `xml` type represents a sequence of zero or more XML items. Each item can be an element, a text, a comment, or a processing instruction.
+* **Tuple** - A `tuple` is an immutable list of two or more values of fixed length. 
+* **Array** - Arrays are mutable lists of values with dynamic length where each member of the list is specified with the same type. The implicit initial value of an array is the array with a length of `0`.
+* **Map** - The `map` type defines a mutable mapping from keys that are strings to values of the same type.
+* **Record** - A mutable mapping from keys, which are strings, to values; specifies maps in terms of names of fields (required keys) and value for each field.
+* **Table** - The `table` type is a data structure that organizes information in rows and columns. Can be used to create an in-memory table using a type constraint, insert data to it and then access/delete the data.
+* **XML** - The `xml` type represents a sequence of zero or more XML items. Each item can be an element, a text, a comment, or a processing instruction.
 
 
 ### Behavioural Basic Types
 The following are Ballerina's basic behavioural values.
-
-Function - A `function` with zero or more specified input parameter types and a single return type.
-
-Future - A `future` value represents a value to be returned by an asynchronous function invocation. 
-
-Object - An `object` is a collection of public/private typed fields along with attached functions that allows you to create new, user-defined data types with behavior. The implicit initial value would be an `object` where each field has the implicit initial value for its type.
-
-Stream - The `stream` type represents a stream of events, which allows publishing events to the stream and subscribing to receive events from the  stream. 
+* **Function** - A `function` with zero or more specified input parameter types and a single return type.
+* **Future** - A `future` value represents a value to be returned by an asynchronous function invocation. 
+* **Object** - An `object` is a collection of public/private typed fields along with attached functions that allows you to create new, user-defined data types with behavior. The implicit initial value would be an `object` where each field has the implicit initial value for its type.
+* **Stream** - The `stream` type represents a stream of events, which allows publishing events to the stream and subscribing to receive events from the  stream. 
 
 ### Other Types.
-Union Type - The `union` types are types whose set of values is the union of the value spaces of its component types. For example, you can use a variable of a union type to store a `string` or an `int`, but there is only one value at any given time. Syntactically, you can define a union type with component types separated by "|" (vertical bar). 
-
-Optional - One of the design principles of the type system of Ballerina is to eliminate null reference errors. Over the years, null reference errors have caused numerous system crashes, security vulnerabilities, etc. Optional types in Ballerina allows developers to identify where the value or the function is of type `T` optionally, for any T. You can syntactically represent this as `T?` or `T|()`.
-
-Any - The `any` data type is the root of the Ballerina data types. It can represent a variable of any data type. When you do not have prior knowledge of the data type of your variable, you can assign `any` as the type. Values of these variables can come from dynamic content such as the request and response messages and the user input. The `any` type allows you to skip compile-time data type checks.
-
-JSON - JSON is a textual format for representing a collection of values: a simple value (`string`, `number`, `true`, `false`, `null`), an array of values, or an object. Ballerina has a single type named `json` that can represent any JSON value. Thus, `json` is a built-in union type in Ballerina, which can contain values of type `string`, `float`, `boolean`, an `array of any`, or a `map of any`.
+* **Union Type** - The `union` types are types whose set of values is the union of the value spaces of its component types. For example, you can use a variable of a union type to store a `string` or an `int`, but there is only one value at any given time. Syntactically, you can define a union type with component types separated by "|" (vertical bar). 
+* **Optional** - One of the design principles of the type system of Ballerina is to eliminate null reference errors. Over the years, null reference errors have caused numerous system crashes, security vulnerabilities, etc. Optional types in Ballerina allows developers to identify where the value or the function is of type `T` optionally, for any T. You can syntactically represent this as `T?` or `T|()`.
+* **Any** - The `any` data type is the root of the Ballerina data types. It can represent a variable of any data type. When you do not have prior knowledge of the data type of your variable, you can assign `any` as the type. Values of these variables can come from dynamic content such as the request and response messages and the user input. The `any` type allows you to skip compile-time data type checks.
+* **JSON** - JSON is a textual format for representing a collection of values: a simple value (`string`, `number`, `true`, `false`, `null`), an array of values, or an object. Ballerina has a single type named `json` that can represent any JSON value. Thus, `json` is a built-in union type in Ballerina, which can contain values of type `string`, `float`, `boolean`, an `array of any`, or a `map of any`.
 
 
 ## Expressions
 
 ### Field access
 Field access is the syntax of accessing child elements inside structural typed values, such as objects, records, JSON, XML, etc. Fields can be accessed using two operators:
-
-Dot operator - Name of the field precedes by a dot, e.g., foo.bar
-
-Index operator - Name of the field comes within two brackets. Name can be any `string` value expression, e.g., foo[bar]
+* Dot operator - Name of the field precedes by a dot, e.g., foo.bar
+* Index operator - Name of the field comes within two brackets. Name can be any `string` value expression, e.g., foo[bar]
 
 Both of these operators perform the nil-lifting by default. That is, it allows to walk down the child fields, without worrying whether there will be null along the way. In an event of null, it will stop the navigation and the value of the entire expression will be null.
 
