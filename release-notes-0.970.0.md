@@ -806,7 +806,7 @@ The `ballerina push` command uploads the given package to the [Ballerina Central
 
 When you push a package to Ballerina Central, it will validate the organization for the user against the org-name defined in your package’s `ballerina.toml` file. Therefore, you must pick the organization name that you intend to push the package into and set that as the org-name in the package `ballerina.toml` file. 
 
-You may also push packages to your home repository if you want to share a package between two projects in the same dev machine using 'ballerina push --repository home'.  'ballerina install' is an alias for the same.
+You may also push packages to your home repository if you want to share a package between two projects in the same dev machine using `ballerina push --repository home`.  `ballerina install` is an alias for the same.
 
 The `ballerina pull` command downloads a package from Ballerina Central to your home repository cache. This same behavior happens when you build a project with a package import. The `pull` command will download it beforehand, so it will be available for build even when offline.
 
@@ -839,10 +839,10 @@ Ballerina is a compiled language. The Ballerina compiler transforms the source c
 
 ## Ballerina Virtual Machine (BVM)
 The Ballerina Virtual Machine (BVM) is a software process that executes Ballerina programs. BVM is a combination of all of the following components:
-- Instruction set (Ballerina bytecode)
-- Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute
-- Storage for instructions and operands
-- Function call stack
+- Instruction set (Ballerina bytecode).
+- Bytecode interpreter: a virtual CPU that performs the instruction cycle  fetch-decode-execute.
+- Storage for instructions and operands.
+- Function call stack.
 - Instruction pointer, which points to the next instruction to be executed.
 
 The BVM architecture and instruction set are designed based on register-based virtual machine architecture.
