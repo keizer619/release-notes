@@ -857,5 +857,39 @@ iadd 0 1 2 - Add integers in 0th and 1st registers and store the result in the 2
 ### Worker Scheduler 
 One of the core functionality of the Ballerina VM is the worker scheduler. This is used to schedule all the workers that are executed in the system. During a function invocation, all the workers that belong to the functions are scheduled to be executed in the BVM scheduler. The scheduler will check for available resources and will schedule the workers appropriately. Each worker has a life cycle state that it goes through, which represents being ready, running, waiting for response, waiting on locks, and finally the finished state. The worker scheduling follows a fully non-blocking mode, where the execution threads of the workers will never block for I/O, locks, sleep, etc. Instead, the execution thread will always be freed up for CPU usages for other workers. In this manner, Ballerina ensures the most efficient usage of CPU resources. 
 
+# Specification Deviations
+
+- Symbolic strings are not supported
+- External member function def uses :: instead of . currently
+- String expressions end (}}) should not allow whitespace in between the braces
+- Type references are not yet supported in records
+- Open records not supported
+- Object/record equivalence is not up to date
+- `map`/`record`/`json` are not the same yet
+- `error` type has does not have a isError property of the singleton `type`: 
+  record { true isError; string message; error? cause; }
+- `check` is an expression whereas in the spec it is defined as a statement.
+- Not all the patterns are not support in `match` statement and `but` expression
+- `table` values only support key constraints
+- Current language docs use the term `package` whereas the spec uses the terms `component` and `module`
+- Existing `identifier` lexer rules are not tight as the rules defined by the specification
+- The implicit initial value for a tuple type is not created, even if all the member types have implicit initial values. You get an NPE at the moment if you try to destructure a variable of type tuple if it is declared without an initial expression.  
+- The implicit initial value generation for union types is also not complete
+- Octal literal support is available in version 0.970.0 and it is not part of the spec
+- `blob` literals are not supported 
+- The current runtime does not fill the array with the implicit initial value of the member type 
+- The covariant property of arrays is not supported. i.e. int[] is not assignable to int?[]. Therefore storage type mismatches never happen in the current version
+- Optional fields are not supported in records 
+- The record rest descriptors are not supported in records 
+- Object syntax is different from the spec
+- Object-private is not supported; only public and package-private
+- Native object constructors are not supported
+- The explicit-type-indicators are not supported
+- `new` expressions are not supported for records and streams
+- Implicit `var` declarations are not allowed at the package level 
+- `match` statement expects the patterns to be exhaustive
+- `record` destructuring assignment is not available
+- Streaming query timespans are in spec as seconds | minutes | .. | years but impl has them without "s" at the end
+
 # Getting Started
 You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
