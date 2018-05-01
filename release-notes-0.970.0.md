@@ -36,7 +36,7 @@ float -  The `float` type denotes double precision IEEE 754 floating point numbe
 
 string -  The `string` type denotes the set of sequences of unicode code points. The implicit initial value of a variable of type `string` is the empty sequence.
 
-blob -  The `blob` type denotes the set of sequences of 8-bit bytes . The implicit initial value of a variable of type `blob` is the empty sequence. 
+blob -  The `blob` type denotes the set of sequences of 8-bit bytes. The implicit initial value of a variable of type `blob` is the empty sequence. 
 
 ### Structural Basic Types
 Structured basic values create structures from other values. A structured value belongs to exactly one of the following basic types:
@@ -266,7 +266,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
 * Chunking support for per service.
 * Functionalities supported for HTTPS,
   * Certificate validation with CRL, OCSP, OCSP Stapling.
-  * Configuration for SSL/TLS ciphers and protocols .
+  * Configuration for SSL/TLS ciphers and protocols.
   * Hostname verification support.
   * Mutual Authentication support.
 * Functionalities supported for HTTP2,
