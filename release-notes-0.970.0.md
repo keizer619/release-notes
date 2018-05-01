@@ -25,6 +25,7 @@ Ballerina programs operate on a universe of values, and each value belongs to on
 
 ### Simple Basic Types
 The types `int`, `float`, `string`, `boolean`, `blob`, and `nil` are called simple basic types because they are basic types with only simple values. Simple values are always immutable.
+
 * **nil** - The `nil` type has only one value that is denoted by `()`. 
 * **boolean** - The `boolean` type has only two values named `true` and `false`. The implicit initial value of a variable of type `boolean` is `false`.
 * **int** - The `int` type denotes the set of 64-bit signed integers. The implicit initial value of a variable of type `int`  is `0`.
@@ -34,6 +35,7 @@ The types `int`, `float`, `string`, `boolean`, `blob`, and `nil` are called simp
 
 ### Structured Basic Types
 Structured basic values create structures from other values. A structured value belongs to exactly one of the following basic types:
+
 * **Tuple** - A `tuple` is an immutable list of two or more values of fixed length. 
 * **Array** - Arrays are mutable lists of values with dynamic length where each member of the list is specified with the same type. The implicit initial value of an array is the array with a length of `0`.
 * **Map** - The `map` type defines a mutable mapping from keys that are strings to values of the same type.
@@ -44,6 +46,7 @@ Structured basic values create structures from other values. A structured value 
 
 ### Behavioural Basic Types
 The following are Ballerina's basic behavioural values.
+
 * **Function** - A `function` with zero or more specified input parameter types and a single return type.
 * **Future** - A `future` value represents a value to be returned by an asynchronous function invocation. 
 * **Object** - An `object` is a collection of public/private typed fields along with attached functions that allows you to create new, user-defined data types with behavior. The implicit initial value would be an `object` where each field has the implicit initial value for its type.
@@ -336,7 +339,7 @@ Ballerina provides  built-in implementation of the MIME specification. Following
     * Signature validation for authenticated content.
     * Subscription and unsubscription requests could be sent explicitly via Client Endpoints.
 
-    ```ballerina
+```ballerina
     import ballerina/log;
     import ballerina/websub;
     
@@ -359,7 +362,7 @@ Ballerina provides  built-in implementation of the MIME specification. Following
        }
     
     }
-    ```
+```
     
   * **Ballerina WebSub Hub:** A Hub service which accepts subscription requests from subscribers, and delivers content to the subscribers on notification from publishers. This includes following features.
     * Authenticated content distribution.
@@ -526,17 +529,19 @@ service watcher bind localFolder {
 Provides an asynchronous I/O framework to source/sink that reads/writes as bytes, characters, and records.
 
 * Reading and writing bytes:
-  ```ballerina
+
+```ballerina
   // Retrieving a ByteChannel to the file.
   io:ByteChannel channel = io:openFile(filePath, permission);
   // Reading the bytes from the channel
   var result = channel.read(numberOfBytes)
   // Writing some bytes to the channel.
   var result = channel.write(content, startOffset);
-  ```
+```
 
 * Reading and writing characters:
-  ```ballerina
+  
+```ballerina
   // Reading/writing characters of different encodings e.g.: utf-8
   // First, get the ByteChannel representation of the file.
   io:ByteChannel channel = io:openFile(filePath, permission);
@@ -560,10 +565,11 @@ Provides an asynchronous I/O framework to source/sink that reads/writes as bytes
   match characterChannel.writeJson(content){
       //handle match conditions 
   }
-  ```
+```
 
 * Reading and writing text records:
-  ```ballerina
+  
+```ballerina
   // Reading and writing delimited text records
   
   io:ByteChannel channel = io:openFile(filePath, permission);
@@ -576,10 +582,11 @@ Provides an asynchronous I/O framework to source/sink that reads/writes as bytes
   var recordResp = delimitedRecordChannel.getNext();
   //Write string [] as records 
   delimitedRecordChannel.write(records);
-  ```
+```
   
 * Processing CSV records:
-  ```ballerina
+  
+```ballerina
   io:CSVChannel srcCsvChannel = io:openCsvFile("./filepath");
   
   match channel.getNext() {
@@ -590,7 +597,7 @@ Provides an asynchronous I/O framework to source/sink that reads/writes as bytes
   }
   // Write an string [] as CSV
   dstChannel.write(records);
-  ```
+```
 
 ## ballerina/log
 Provides an API for logging.
@@ -685,6 +692,7 @@ The Ballerina API Gateway allows users to expose services in a managed manner. T
 - Authentication and authorization at downstream services via JWT token propagation
 
 Sample service secured with basic authentication:
+
 ```ballerina
 import ballerina/http;
 
