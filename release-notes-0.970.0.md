@@ -172,7 +172,7 @@ Ballerina’s underlying language semantics were designed by modeling how indepe
 ## Textual Syntax
 Ballerina’s textual syntax is largely inspired by C, Java, and Go languages. The key language constructs in Ballerina are as follows. 
 
-Function:
+**Function:**
 ```ballerina
 import ballerina/io;
 
@@ -186,7 +186,7 @@ function main(string... args) {
 }
 ```
 
-Worker:
+**Worker:**
 ```ballerina
 import ballerina/io;
 function main(string... args) {
@@ -200,7 +200,7 @@ function main(string... args) {
 }
 ```
 
-Service:
+**Service:**
 ```ballerina
 import ballerina/http;
 
@@ -216,9 +216,7 @@ service<http:Service> hello bind { port: 9090 } {
 
 ## Graphical Syntax
 
-Ballerina’s graphical syntax resembles a sequence diagram. The control flow within a worker is represented with flow diagram based elements.
-
-Graphical representation of a service with network interactions. 
+Ballerina’s graphical syntax resembles a sequence diagram. The control flow within a worker is represented with flow diagram based elements. Graphical representation of a service is represented with network interactions. 
 
 Ballerina platform comes with the Composer IDE, which allows you to edit and view Ballerina programs graphically and textually. VS Code plugin can be also used to view Ballerina programs graphically.
 
@@ -227,7 +225,7 @@ Ballerina platform comes with the Composer IDE, which allows you to edit and vie
 Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSockets, WebSub, gRPC, and JMS are some of the available service types. These services are exposed via listener endpoints, which can be secured and monitored. Client endpoints connect to different types of external endpoints and they are inherently resilient. Additionally, commonly used integration message formats, such as XML and JSON, are built-in to the type system of the language. In the context of integration specialization, the following are the released features.
 
 ## HTTP
-* Dispatching to service based on service version by introducing service config annotation to declare versioning rules
+* Dispatching to service based on service version by introducing service config annotation to declare versioning rules.
   ```ballerina
   @http:ServiceConfig {
       basePath:"/hello/{version}",
@@ -239,7 +237,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
   }
   ```
 
-* Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`
+* Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`.
   ```ballerina
   @http:ResourceConfig {
        path:"/product/{id}/{name}/{price}"
@@ -250,9 +248,9 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
   }
   ```
 
-* HTTP caching support for client/server endpoints
-* HTTP access logs support
-* Connection throttling support for client endpoint
+* HTTP caching support for client/server endpoints.
+* HTTP access logs support.
+* Connection throttling support for client endpoint.
   ```ballerina
   endpoint http:Client clientEP {
       url: "some url",
@@ -263,18 +261,18 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
   };
   ```
 
-* Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`
-* Improved APIs for HTTP header related operations
-* Chunking support for per service
+* Introduce `setPayload()` to the HTTP request and response to take any type of payload. The `any` type can be `string`, `xml`, `json`, `blob`, `io:ByteChannel`, or `mime:Entity[]`.
+* Improved APIs for HTTP header related operations.
+* Chunking support for per service.
 * Functionalities supported for HTTPS,
-  * Certificate validation with CRL, OCSP, OCSP Stapling
-  * Configuration for SSL/TLS ciphers and protocols 
-  * Hostname verification support
-  * Mutual Authentication support
+  * Certificate validation with CRL, OCSP, OCSP Stapling.
+  * Configuration for SSL/TLS ciphers and protocols .
+  * Hostname verification support.
+  * Mutual Authentication support.
 * Functionalities supported for HTTP2,
-  * Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol
-  * Server Push support
-  * SSL/TLS support with ALPN 
+  * Seamless upgrade from HTTP/1.1 to HTTP/2.0 protocol.
+  * Server Push support.
+  * SSL/TLS support with ALPN.
 
 ## WebSockets  
 WebSocket client/server endpoint supports the following features.
@@ -294,15 +292,15 @@ WebSocket client/server endpoint supports the following features.
   }
   ```
 
-* WebSockets secure connections support (`WSS://`)
-* Custom headers support for handshake response message
-* Sub-protocols negotiation support
-* Connection idle timeout support
+* WebSockets secure connections support (`WSS://`).
+* Custom headers support for handshake response message.
+* Sub-protocols negotiation support.
+* Connection idle timeout support.
 * WebSocket service endpoint supports query and path parameters for upgrade request and maximum WebSocket frame size configuration.
 
 ## Resiliency
-* Retry support for HTTP client endpoint
-* Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration:
+* Retry support for HTTP client endpoint.
+* Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration.
     ```ballerina
     endpoint http:Client cbClientEP {
        url: "http://localhost:8080",
@@ -320,8 +318,8 @@ WebSocket client/server endpoint supports the following features.
     };
     ```
 
-* Failover support for HTTP client endpoint
-* Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration:
+* Failover support for HTTP client endpoint.
+* Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration.
     ```ballerina
     endpoint http:LoadBalanceClient lbBackendEP {
        // Define the set of HTTP clients that need to be load balanced.
@@ -337,27 +335,27 @@ WebSocket client/server endpoint supports the following features.
     ```
 
 ## MIME 
-* Ballerina provides  built-in implementation of the MIME specification. Following are some of the features:
-* Support discrete media types
-* Support composite media types 
-  * multipart/form-data
-  * multipart/mixed
-  * multipart/alternative
-  * multipart/relative
-* Ability to recognize and separate parts of unrecognized subtypes of multipart entities
-* Encapsulate multiple body parts in a single message
-* Decode multipart messages
+Ballerina provides  built-in implementation of the MIME specification. Following are some of the features.
+* Support discrete media types.
+* Support composite media types. 
+  * multipart/form-data.
+  * multipart/mixed.
+  * multipart/alternative.
+  * multipart/relative.
+* Ability to recognize and separate parts of unrecognized subtypes of multipart entities.
+* Encapsulate multiple body parts in a single message.
+* Decode multipart messages.
 
 ## WebSub
 * Implementation of the WebSub recommendation that facilitates push-based content delivery/notification mechanism between publishers and subscribers.
 * Allow introducing WebSub Hubs, Subscribers and Publishers and support WebSub features including subscription and unsubscription, honouring lease seconds values and authenticated content distribution.
 
-* Ballerina’s WebSub implementation supports JSON content and provides the following functionality:
-  * Ballerina WebSub Subscriber: A service type that allows two resources - `onIntentVerification` accepting intent verification requests and `onNotification` accepting content delivery requests. This includes following features.
-    * Sending subscription requests to a hub for a particular topic at start up, where the hub and topic are specified as or derived from an annotation
-    * Auto Intent Verification - if the `onIntentVerification` resource is not specified
-    * Signature validation for authenticated content
-    * Subscription and unsubscription requests could be sent explicitly via Client Endpoints
+* Ballerina’s WebSub implementation supports JSON content and provides the following functionalities.
+  * **Ballerina WebSub Subscriber:** A service type that allows two resources - `onIntentVerification` accepting intent verification requests and `onNotification` accepting content delivery requests. This includes following features.
+    * Sending subscription requests to a hub for a particular topic at start up, where the hub and topic are specified as or derived from an annotation.
+    * Auto Intent Verification - if the `onIntentVerification` resource is not specified.
+    * Signature validation for authenticated content.
+    * Subscription and unsubscription requests could be sent explicitly via Client Endpoints.
 
     ```ballerina
     import ballerina/log;
@@ -384,13 +382,13 @@ WebSocket client/server endpoint supports the following features.
     }
     ```
     
-  * Ballerina WebSub Hub: A Hub service which accepts subscription requests from subscribers, and delivers content to the subscribers on notification from publishers. This includes following features.
-    * Authenticated content distribution
-    * Honouring lease periods
+  * **Ballerina WebSub Hub:** A Hub service which accepts subscription requests from subscribers, and delivers content to the subscribers on notification from publishers. This includes following features.
+    * Authenticated content distribution.
+    * Honouring lease periods.
 
-  * Ballerina WebSub Publisher: Publishers can bring up their own Ballerina Hub, to which they will publish updates, and allow subscribers to subscribe for their topics.
-    * Client endpoints are available for publishers to publish updates to remote Hubs
-    * Utility functions are available to add a Link Header specifying hub and self URLs to facilitate WebSub discovery
+  * **Ballerina WebSub Publisher:** Publishers can bring up their own Ballerina Hub, to which they will publish updates, and allow subscribers to subscribe for their topics.
+    * Client endpoints are available for publishers to publish updates to remote Hubs.
+    * Utility functions are available to add a Link Header specifying hub and self URLs to facilitate WebSub discovery.
 
 ## gRPC
 gRPC is a protocol which is layered over HTTP/2 and enables client and server communication by combination of any supported languages. In gRPC a client application can directly call methods on a server application on a different machine, making it easier for you to create distributed applications and services.
