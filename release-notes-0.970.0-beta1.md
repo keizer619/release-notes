@@ -1,5 +1,5 @@
 # Overview to Ballerina 0.970.0-beta1
-This release has improvements to the `main` fuction argument passing model where the user will not have to wrestle with `string` array to access command line parameters.
+This release has improvements to the `main` function argument passing model where the user will not have to wrestle with `string` array to access command line parameters.
 ```ballerina
 function main (string... args) {
     io:println("Hello, World!");
@@ -74,7 +74,7 @@ There are no compatibility and support changes from 0.970.0-beta0 other than the
 - Add anonymous endpoint support for Kubernetes and Docker
 
 # Getting Started
-You can download the Ballerina distributions, try samples, and read the documentation at http://ballerinalang.org. You can also visit [Quick Tour][1] to get started. We encourage you to report issues, improvements, and suggestions at [Ballerina Github Repository][2].
+You can download the Ballerina distributions, try samples, and read the documentation at <https://ballerina.io>. You can also visit [Quick Tour][1] to get started. We encourage you to report issues, improvements, and suggestions at [Ballerina Github Repository][2].
 
-[1]: https://ballerinalang.org/docs/quick-tour/quick-tour
-[2]: https://github.com/ballerina-lang/ballerina
+[1]: https://ballerina.io/learn/quick-tour/
+[2]: https://github.com/ballerina-platform/ballerina-lang
