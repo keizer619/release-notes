@@ -1,5 +1,5 @@
 # Overview to Ballerina 0.970.1
-This is a patch release which is mainly focused on fixing bugs of previous release 0.970.0 and have improvements in language server and packaging.
+This is a patch release that mainly focused on fixing bugs in the previous release (0.970.0) and includes improvements in the language server and packaging.
 
 # Improvements
 ## Packaging
@@ -9,4 +9,4 @@ This is a patch release which is mainly focused on fixing bugs of previous relea
 - Add Documentation Support for Endpoints, Records and Objects
 
 # Bug Fixes 
-Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-lang) to view bug fixes
+Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aclosed+milestone%3A0.970.1) to view bug fixes
