@@ -155,6 +155,7 @@ Ballerina’s underlying language semantics were designed by modeling how indepe
 Ballerina’s textual syntax is largely inspired by C, Java, and Go languages. The key language constructs in Ballerina are as follows. 
 
 **Function:**
+
 ```ballerina
 import ballerina/io;
 
@@ -169,6 +170,7 @@ function main(string... args) {
 ```
 
 **Worker:**
+
 ```ballerina
 import ballerina/io;
 function main(string... args) {
@@ -183,6 +185,7 @@ function main(string... args) {
 ```
 
 **Service:**
+
 ```ballerina
 import ballerina/http;
 
@@ -208,6 +211,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
 
 ## HTTP
 * Dispatching to service based on service version by introducing service config annotation to declare versioning rules.
+
   ```ballerina
   @http:ServiceConfig {
       basePath:"/hello/{version}",
@@ -220,6 +224,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
   ```
 
 * Primitive type support for the Path parameter. The primitive types are `string`, `int`, `float`, and `boolean`.
+
   ```ballerina
   @http:ResourceConfig {
        path:"/product/{id}/{name}/{price}"
@@ -233,6 +238,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
 * HTTP caching support for client/server endpoints.
 * HTTP access logs support.
 * Connection throttling support for client endpoint.
+
   ```ballerina
   endpoint http:Client clientEP {
       url: "some url",
@@ -260,6 +266,7 @@ Ballerina has first class support for services and endpoints. HTTP/HTTP2, WebSoc
 WebSocket client/server endpoint supports the following features.
 
 * Read/write support for Text, Binary, Ping/Pong, and Close WebSocket frames. The following is a sample code for handling WebSockets Text and Binary frames.
+
   ```ballerina
   service <http:WebSocketService> wsService bind {port:9090} {
       onText(endpoint ep, string text, boolean finalFrame) {
@@ -283,6 +290,7 @@ WebSocket client/server endpoint supports the following features.
 ## Resiliency
 * Retry support for HTTP client endpoint.
 * Circuit breaker support for the HTTP client endpoint to gracefully handle network failures. Following is a sample of CircuitBreaker configuration.
+
     ```ballerina
     endpoint http:Client cbClientEP {
        url: "http://localhost:8080",
@@ -302,6 +310,7 @@ WebSocket client/server endpoint supports the following features.
 
 * Failover support for HTTP client endpoint.
 * Load balancing support for the HTTP client endpoint. Following is the simplified use of a sample of LoadBalanceClient configuration.
+
     ```ballerina
     endpoint http:LoadBalanceClient lbBackendEP {
        // Define the set of HTTP clients that need to be load balanced.
