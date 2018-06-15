@@ -6,7 +6,7 @@ Ballerina 0.975.0 is an iteration for Ballerina 0.970.0, which was released prev
 
 ## New int range expression
 
-Previously '[x .. y]' syntax was used to represents an integer range in a `foreach` statement. This syntax is now 'x ... y' in Ballerina 0.975.0.
+Previously `[x .. y]` syntax was used to represents an integer range in a `foreach` statement. This syntax is now `x ... y` in Ballerina 0.975.0.
 
 Old syntax (0.970.1)
 ```ballerina
