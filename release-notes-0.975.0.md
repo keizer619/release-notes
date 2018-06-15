@@ -1,6 +1,6 @@
 # Overview to Ballerina 0.975.0
 
-Ballerina 0.975.0 is an iteration for Ballerina 0.970.0, which was released previously. This release has significant improvements to the standard library and IDE support. Apart from that, there are also some improvements made to the language syntax.
+Ballerina 0.975.0 is an iteration for Ballerina 0.970.0, which was released previously. This release has significant improvements to the standard library and IDE support. Apart from that, there are also some improvements made to the language syntax. Introduction of new BALO format has improvements on compilation time as well.
 
 # Compatibility and Support
 
