@@ -129,14 +129,6 @@ function print(string n) {
 
 # Improvements
 
-## Language & Runtime
-
-- Blob literal support
-- Make parentheses optional for 'if' and 'while' statements
-- Integer range binary operators to create arrays of integers
-- Syntax change in record type definitions.
-- Variable shadowing support removed.
-
 ## Standard Library
 
 - Add capability to read/write fixed signed integer, float, boolean and string values via data IO APIs
@@ -153,7 +145,7 @@ service<http:WebSocketService> errorService bind { port: 9090 } {
 }
 ```
 
-- Allow different types of payloads to be used directly with HTTP client actions and response calls. E.g :-
+- Allow different types of payloads to be used directly with HTTP client actions and response calls. E.g.,
 
 ```ballerina
 response = clientEP->post("/test", xml `<color>Red</color>`);
@@ -163,7 +155,7 @@ _ = caller -> respond("Hello World!");
 
 - Improve redirect functionality so that it supports both HTTP and HTTP2
 - Support event notification payloads of different content types with WebSub
-- HTTP Name based virtual hosting support.
+- HTTP name based virtual hosting support
 
 ```ballerina
         @http:ServiceConfig {
@@ -172,8 +164,8 @@ _ = caller -> respond("Hello World!");
 }
 ```
 
-- Improve HTTP error handler to recover from source connection failure.
-- Enhance the API to control the circuit breaker status as per user requirements.
+- Improve the HTTP error handler to recover from source connection failure
+- Enhance the API to control the circuit breaker status as per user requirements
 
 ```ballerina
  http:CircuitBreakerClient cbClient = check <http:CircuitBreakerClient>clientEP.getCallerActions();
@@ -194,13 +186,13 @@ _ = caller -> respond("Hello World!");
 
 ### Language Server
 
-- Add initial Indexing Support for Language Server.
-- Improve Language Server Error Reporting.
-- Add Renaming Support for Variable Symbols.
-- Signature Help Support for Action Invocations.
-- Match Expression Completion Support with Snippets.
-- Completion Support for Function Invocation Scope.
-- Code Action Improvements with Generate Function for Undefined Functions.
+- Add initial indexing support for Language Server.
+- Improve Language Server error reporting.
+- Add renaming support for variable symbols.
+- Signature help support for action invocations.
+- Match expression completion support with snippets.
+- Completion support for function invocation scope.
+- Code action improvements with generate function for undefined functions.
 
 ### IntelliJ IDEA
 
@@ -216,7 +208,7 @@ _ = caller -> respond("Hello World!");
 
 # Bug Fixes
 
-From previous stable 0.970.1 release, bug fixing has been conducted in few release iterations. Please refer following github milestones of bug fixes.
+Bug fixing was conducted as part of multiple release iterations based on the previous Ballerina 0.970.1 release. Please refer to the following GitHub milestones for bug fixes.
 
 - [0.971.0](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+label%3AType%2FBug+milestone%3A0.971.0)
 - [0.972.0](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+label%3AType%2FBug+milestone%3A0.972.0)
