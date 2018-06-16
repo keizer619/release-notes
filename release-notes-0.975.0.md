@@ -158,7 +158,7 @@ _ = caller -> respond("Hello World!");
 - HTTP name based virtual hosting support
 
 ```ballerina
-        @http:ServiceConfig {
+@http:ServiceConfig {
    basePath:"/page",
    host:"abc.com"
 }
