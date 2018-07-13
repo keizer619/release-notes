@@ -21,7 +21,7 @@ Person tom = { name : "tom", age : 20, country : "USA"};
 any country = tom.country; // or use tom["country"]
 ```
 
-Extra fields can be defined by using an optional `record rest descriptor`; `RecordRestType...` at end of the record definition. In the above example, the Person record definition is equivalent to the definition with `any...`.
+Extra fields can be defined by using an optional `record rest descriptor`; `RecordRestType...` at end of the record definition. In the above example, the **Person record** definition is equivalent to the definition with `any...`.
 
 ```ballerina
 type Person record {
@@ -30,7 +30,7 @@ type Person record {
     any...
 };
 ```
-In the following record definition, the “rest fields” are constrained to `string`.
+In the following record definition, the **rest fields** are constrained to `string`.
 
 ```ballerina
 type Person record {
@@ -44,7 +44,7 @@ Person tom = { name : "tom", age : 20, country : "USA"};
 string country = tom.country;
 ```
 
-If RecordRestType is `!`, then the record may not contain any extra fields. 
+If `RecordRestType` is `!`, then the record may not contain any extra fields. 
 
 ```ballerina
 type Person record {
@@ -68,7 +68,8 @@ Now the length of an array can be fixed by providing the array length with the a
 int[5] array1 = [2, 15, 200, 1500, 5000];
 int[5] array2; // Creates an integer array of size five, filled with default integer values
 ```
-An array length of `!...` means that the length of the array is to be implied from the context; as shown below:
+
+An array length of `!...` means that the length of the array is to be implied from the context as shown below:
 
 ```ballerina
 int[!...] sealedArray = [1, 3, 5]; // Creates a sealed integer array of size 3.
@@ -112,6 +113,7 @@ byte[] arr3 = base64 `aGVsbG8gYmFsbGVyaW5hICEhIQ==`;
 Above bitwise operations have been added for `byte` type and `int` type with the following rules.
 
 Both the right-hand-side and left-hand-side of the expression should be of the same type (`byte` or `int`), and the expected type will be also of the same type. If this is not the case, it will result in a compilation error.
+
 An explicit conversion operation should be applied if the type of one side is not the same as the other side.
 
 ```ballerina
@@ -124,7 +126,7 @@ byte e = a ^ b;
 
 ## Table Expression Change
 
-The table expression has changed to support following syntax. A table is intended to be similar to the table of relational database table. A table value contains an immutable set of column names and a set of data rows.
+The table expression has changed to support the following syntax. A table is intended to be similar to the table of a relational database table. A table value contains an immutable set of column names and a set of data rows.
 
 ```ballerina
 table<Person> t1 = table {
@@ -149,7 +151,8 @@ table<Person> t1 = table {
 
 ```ballerina
 ## Map Access Change
-Values of a map can be accessed using index-based syntax as well as field-access syntax. These two syntaxes now behave differently. Getting a value using field-access syntax returns the value if the key exists. Otherwise a runtime error is thrown. Index-based syntax also will return the value if the key exists. However, it will return a null value if the key does not exist.
+Values of a map can be accessed using index-based syntax as well as field-access syntax. These two syntaxes now behave differently. Getting a value using field-access syntax returns the value if the key exists. Alternately, a runtime error is thrown. Index-based syntax also will return the value if the key exists. However, it will return a null value if the key does not exist.
+
 This would also mean that, for a constrained map, the type of the return value for the index-based syntax is always the `constraint_type|()`.
 
 ``` ballerina
@@ -164,9 +167,7 @@ string? firstName = m["fname"];
 string? middleName = m["mname"];     // returns null
 ```
 
-
 # Improvements
-
 
 ## Standard Library
 -  **WebSocket**
@@ -176,8 +177,7 @@ string? middleName = m["mname"];     // returns null
 - The HTTP transport error handler has been improved so that it recovers execution from inbound/outbound failures such as idle socket timeout and abrupt connection closure. 
 
 -  **Circuit Breaker**
-     - Introduce requestVolumeThreshold parameter support
-This parameter sets the minimum number of requests in a `RollingWindow` that will trip the circuit. So the rollingWindow configurations can be specified as follows.
+     - Introduced `requestVolumeThreshold` parameter support. This parameter sets the minimum number of requests in a `RollingWindow` that will trip the circuit. So the rollingWindow configurations can be specified as follows.
 
 ``` ballerina
 rollingWindow: {
@@ -189,20 +189,20 @@ rollingWindow: {
 
 ## Build & Package Management
 ### CLI
-- Enhance build output
-- Integrate test execution to build
-- Mandate build on push
+- Enhance build output.
+- Integrate test execution to build.
+- Mandate build on push.
 ### Central 
 - View previous versions of a package.
-- Show ballerina compatibility section.
+- Show Ballerina compatibility section.
 ## IDEs & Language Server
 	### Composer
-	- Shipping composer as a native Electron App.
+	- The Composer is now shipped as a native Electron App.
 	### Language Server
-	- Introducing source code formatting.
-- Supporting find all symbols in a document and in the workspace.
+	- Source code formatting is introduced.
+- The ability to find all symbols in a document and in the workspace is now supported.
 	### IntelliJ IDEA
-- Improve debugger
+- Improvements have been made to the debugger
 ## Ballerina Observability
 - Introduced APIs such that developers can define their own trace blocks and metrics.
 - Developers can attach the trace information of their code block to the default Ballerina traces, or a new trace.
@@ -279,105 +279,110 @@ Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-
 
 ## Values,Type and Variable
 
-Nil
+### Nil
 Use of "null" value in a non-JSON related context is not restricted yet. 
-Int
+
+### Int
 Binary and Octal literal support is available in Ballerina 0.980.0 and it is not part of the specification.
-Decimal
-Type decimal is not supported yet.
 
-String
-Symbolic string literal is not supported yet. 
-String iteration is not supported yet.
+### Decimal
+Type `decimal` is not supported yet.
 
-Record
-Record iteration is not supported yet. 
-Required and Optional fields syntax in a record are not supported yet. 
-Record Type reference (*T) in a record type descriptor is not supported yet.
-Record type descriptor allows default values for fields, but the speciation does not allow default values.
-Table
+### String
+- Symbolic string literal is not supported yet. 
+- String iteration is not supported yet.
+
+### Record
+- Record iteration is not supported yet. 
+- Required and Optional fields syntax in a record are not supported yet. 
+- Record Type reference (*T) in a record type descriptor is not supported yet.
+- Record type descriptor allows default values for fields, but the speciation does not allow default values.
+
+### Table
 Table type descriptor is not supported yet. 
-Error
+
+### Error
 Error type is not supported yet. Instead the implementation uses a record based error type.
-XML
+
+### XML
 In an XML sequence, a character set is treated as a single string. However, in the specification, each character item is represented by a string with a single code point.
-Object
-Abstract object type support exists, but there are some syntax changes in the new specification. 
-Object field descriptor allows default values, but the specification does not indicate that default values are allowed.
-The order of fields, methods, and constructors in object types is no longer constrained according to the specification.
-Object fields and method names are in the same namespaces, whereas the specification mentions that they are in separate namespaces. 
-In the runtime, the object's fields and methods are implicitly in-scope. However, the specification indicates otherwise. Hence, in runtime, the "self" keyword is not required to access the object’s fields within an object body.
-External member function definition uses `::` instead of `.` currently.
-Object type reference is not supported yet. 
 
+### Object
+- Abstract object type support exists, but there are some syntax changes in the new specification. 
+- Object field descriptor allows default values, but the specification does not indicate that default values are allowed.
+- The order of fields, methods, and constructors in object types is no longer constrained according to the specification.
+- Object fields and method names are in the same namespaces, whereas the specification mentions that they are in separate namespaces. 
+- In the runtime, the object's fields and methods are implicitly in-scope. However, the specification indicates otherwise. Hence, in runtime, the "self" keyword is not required to access the object’s fields within an object body.
+- External member function definition uses `::` instead of `.` currently.
+- Object type reference is not supported yet. 
 
-Singleton Types
-Runtime allows float values as a singleton type.
+### Singleton Types
+- Runtime allows float values as a singleton type.
 
-Union types
-The implicit initial value generation for union types is also not complete
+### Union types
+- The implicit initial value generation for union types is also not complete
 
-Built-in object types
-Iterator type is not supported yet. 
-Iterable and collection interfaces are not implemented yet.
+### Built-in object types
+- Iterator type is not supported yet. 
+- Iterable and collection interfaces are not implemented yet.
 
 
 ## Expressions
-Table constructor expression.
-For column constraint, `primarykey` is used instead of `key`. Other constraints are not supported.
-Error constructor expression is not supported.
-XML attributes expression
-The result type is not `map<string>`. It needs to be explicitly cast to `map` type to use.
-Built-in methods are not supported/implemented yet.
-Anonymous function syntax has changed in the specification. Instead the specification provides two alternatives syntaxes: Anonymous function expression and arrow function expression. Both are not supported.
-Unary ~ operator is not supported.
-Additive expression for `string` and `xml` is not supported.
-Shift expression for signed right shift is not supported. 
-Table query expressions are not supported.
+- Table constructor expression.
+   - For column constraint, `primarykey` is used instead of `key`. Other constraints are not supported.
+- Error constructor expression is not supported.
+- XML attributes expression
+   - The result type is not `map<string>`. It needs to be explicitly cast to `map` type to use.
+- Built-in methods are not supported/implemented yet.
+- Anonymous function syntax has changed in the specification. Instead the specification provides two alternatives syntaxes: Anonymous function expression and arrow function expression. Both are not supported.
+- Unary ~ operator is not supported.
+- Additive expression for `string` and `xml` is not supported.
+- Shift expression for signed right shift is not supported. 
+- Table query expressions are not supported.
 
 
 ## Statements
 
-Variable Definition
-A variable defined without initializing must be checked and verified that it has been assigned at each point that the variable is referenced. This validation is not yet supported.
+### Variable Definition
+- A variable defined without initializing must be checked and verified that it has been assigned at each point that the variable is referenced. This validation is not yet supported.
 
-Compound Assignment Statement
-The compound operators  &=,  |=, ^=,  <<=,  >>=, >>>= are not yet supported.
+### Compound Assignment Statement
+- The compound operators  &=,  |=, ^=,  <<=,  >>=, >>>= are not yet supported.
 
-Destructuring Assignment Statement
-Only tuple-binding-patterns (i.e., (p1, p2, ..., pn) ) are allowed in the lhs of a destructuring assignment statement. Other types of patterns (record-binding-patterns and error-binding-patterns) are not yet supported.
+### Destructuring Assignment Statement
+- Only tuple-binding-patterns (i.e., (p1, p2, ..., pn) ) are allowed in the lhs of a destructuring assignment statement. Other types of patterns (record-binding-patterns and error-binding-patterns) are not yet supported.
 
-Checked Statement
-Check construct is supported for both statements as well as expressions in the current release. However, the specification indicates that it is only allowed to be used in the statement format.
-Check construct currently throws an error if the associated expression returns an error. According to specification, if the associated expression returns an error, check constructs should return that error value as a result of the containing function, similar to a return statement.
+### Checked Statement
+- Check construct is supported for both statements as well as expressions in the current release. However, the specification indicates that it is only allowed to be used in the statement format.
+- Check construct currently throws an error if the associated expression returns an error. According to specification, if the associated expression returns an error, check constructs should return that error value as a result of the containing function, similar to a return statement.
 
-Match Statement
-Use of `var` in a type-binding-pattern of a match-clause is not yet supported .
-Only simple-binding-patterns are supported in a type-binding-pattern of a match-clause.
+### Match Statement
+- Use of `var` in a type-binding-pattern of a match-clause is not yet supported.
+- Only simple-binding-patterns are supported in a type-binding-pattern of a match-clause.
 
-Foreach Statement
-Type descriptor is not allowed in the the binding-pattern of the foreach statement.
+### Foreach Statement
+- Type descriptor is not allowed in the the binding-pattern of the foreach statement.
 
-Fork-Join
-Enclosing parentheses are required for the join-condition in the current fork-join syntax, where it is not required according to the specification.
+### Fork-Join
+- Enclosing parentheses are required for the join-condition in the current fork-join syntax, where it is not required according to the specification.
 
-Forever statement 
-For the time-scale in the forever statement, ‘minute’, ‘hour’, ‘day’, ‘month’, and ‘year’ is supported in the current release. This is not stated in the specification.
+### Forever statement 
+- For the time-scale in the forever statement, ‘minute’, ‘hour’, ‘day’, ‘month’, and ‘year’ is supported in the current release. This is not stated in the specification.
 
-Transaction Statement
-Current transaction statement includes a ‘with’ keyword, but this has been removed from the specification.
+### Transaction Statement
+- Current transaction statement includes a ‘with’ keyword, but this has been removed from the specification.
 
 
 ## Other Deviations
 
-The specification suggests that there are no longer any implicit numeric conversions. However, the runtime supports `int` to `float` implicit numeric conversions.
-Documentation String and Ballerina Flavored Markdown are not supported yet. The runtime supports only documentation node `documentation { }` syntax only.
-Deprecated construct has been removed in the specification.
-Forward recovery support is not added yet. 
-The ‘native’ keyword is used to identify a function whose implementation is not provided in the Ballerina source module.
-In a function call or method call, named arguments have changed to use `:`. However, runtime uses `=`.
-The `lengthof` unary expression has been removed in the specification. However, runtime supports it.
-A function or method can be defined as `extern`. The `native` keyword has been removed. However, Runtime uses the `native` keyword.
+- The specification suggests that there are no longer any implicit numeric conversions. However, the runtime supports `int` to `float` implicit numeric conversions.
+- Documentation String and Ballerina Flavored Markdown are not supported yet. The runtime supports only documentation node `documentation { }` syntax only.
+- Deprecated construct has been removed in the specification.
+- Forward recovery support is not added yet. 
+- The ‘native’ keyword is used to identify a function whose implementation is not provided in the Ballerina source module.
+- In a function call or method call, named arguments have changed to use `:`. However, runtime uses `=`.
+- The `lengthof` unary expression has been removed in the specification. However, runtime supports it.
+- A function or method can be defined as `extern`. The `native` keyword has been removed. However, runtime uses the `native` keyword.
 
 
 # Getting Started
