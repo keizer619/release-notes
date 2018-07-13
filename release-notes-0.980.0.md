@@ -5,7 +5,7 @@ Ballerina 0.980.0 is an iteration for Ballerina 0.970.0, which was released prev
 
 ## Closed and Open Records
 
-Now records may contain extra fields, that is fields other than those named by individual type descriptors in the record type definition. By defaults, records can contain extra fields with `any` value.
+Now records may contain extra fields, that is, fields other than those named by individual type descriptors in the record type definition. By default, records can contain extra fields with `any` value.
 
 ```ballerina
 type Person record {
@@ -14,10 +14,10 @@ type Person record {
 };
 
 ...
-// The "country" is an extra filed, which is not defined in the person type descriptor.
+// The "country" is an extra field, which is not defined in the person type descriptor.
 Person tom = { name : "tom", age : 20, country : "USA"};
 
-// You can access "country" field similar to other fields, but return type will be any.
+// You can access the "country" field similar to other fields, but the return type will be `any`.
 any country = tom.country; // or use tom["country"]
 ```
 
@@ -57,10 +57,10 @@ type Person record {
 Person tom = { name : "tom", age : 20, country : "USA"}; // This is a compile time error.
 ```
 
-A record type including !... is called `closed`; a record type that is not closed is called `open`.
+A record type including `!...` is called `closed`; a record type that is not closed is called `open`.
 
 
-## Fixed length Arrays
+## Fixed Length Arrays
 
 Now the length of an array can be fixed by providing the array length with the array type descriptor. 
 
@@ -74,7 +74,7 @@ An array length of `!...` means that the length of the array is to be implied fr
 int[!...] sealedArray = [1, 3, 5]; // Creates a sealed integer array of size 3.
 ```
 
-## Object Syntax change.
+## Object Syntax Change.
 
 Object type descriptor now has some syntax changes. 
 1 - Object field definition change. 
@@ -90,7 +90,7 @@ public type Person object {
 2 - Member functions defined outside of the object should not specify any visibility modifiers
 3 - New addition of “private” visibility modifier to object fields and member functions
 
-## Byte type and Blob type Change
+## Byte Type and Blob Type Change
 
 The `byte` type represents the set of 8-bit unsigned integers. The implicit initial value of the `byte` type is `0`. Value space for `byte` is 0-255 both inclusive. 
 
@@ -122,9 +122,33 @@ byte d = a | b;
 byte e = a ^ b;
 ```
 
-## Table literal change
+## Table Expression Change
 
-## Map access change
+The table expression has changed to support following syntax. A table is intended to be similar to the table of relational database table. A table value contains an immutable set of column names and a set of data rows.
+
+```ballerina
+table<Person> t1 = table {
+	{ primarykey id, primarykey salary, name, age, married }, [
+		 {1, 300.5, "jane",  30, true},
+		 {2, 302.5, "anne",  23, false},
+		 {3, 320.5, "john",  33, true}
+	]
+};
+```
+
+```ballerina
+Person p1 = { id: 1, age: 30, salary: 300.50, name: "jane", married: true };
+Person p2 = { id: 1, age: 30, salary: 300.50, name: "jane", married: true };
+
+table<Person> t1 = table {
+	{ primarykey id, salary, name, age, married },
+	[p1, p2]
+};
+```
+
+
+```ballerina
+## Map Access Change
 Values of a map can be accessed using index-based syntax as well as field-access syntax. These two syntaxes now behave differently. Getting a value using field-access syntax returns the value if the key exists. Otherwise a runtime error is thrown. Index-based syntax also will return the value if the key exists. However, it will return a null value if the key does not exist.
 This would also mean that, for a constrained map, the type of the return value for the index-based syntax is always the `constraint_type|()`.
 
@@ -142,8 +166,7 @@ string? middleName = m["mname"];     // returns null
 
 
 # Improvements
-## Runtime
-- improvement 1 
+
 
 ## Standard Library
 -  **WebSocket**
@@ -215,9 +238,9 @@ rollingWindow: {
    observe:StatisticConfig[] statsConfigs = [];
    observe:StatisticConfig config = {timeWindow:30000, percentiles:[0.33, 0.5, 0.9, 0.99], buckets:3};
    statsConfigs[0]=config;
-
+          
    observe:Gauge gaugeWithStats = new ("GaugeWithTags", desc = "Some description",
-                                           tags = gaugeTags, statisticConfig = statsConfigs);
+                                           tags = gaugeTags, statisticConfig = statsConfigs);                                       
 ```
 
 - All metrics registered can be retrieved and looked up individually.
@@ -228,7 +251,7 @@ rollingWindow: {
     foreach metric in metrics {
        //do something.
     }
-
+   
     //Look up a registered metric.
      map<string> tags = { "method": "GET" };
         observe:Counter|observe:Gauge|() metric = observe:lookupMetric("MetricName", tags = tags);
@@ -245,9 +268,117 @@ rollingWindow: {
         }
 ```
 
+
 # Bug Fixes
 
 Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.980.0+is%3Aclosed+label%3AType%2FBug) to view bug fixes
+
+
+
+# Specification Deviations in 0.980.0 Release.
+
+## Values,Type and Variable
+
+Nil
+Use of "null" value in a non-JSON related context is not restricted yet. 
+Int
+Binary and Octal literal support is available in Ballerina 0.980.0 and it is not part of the specification.
+Decimal
+Type decimal is not supported yet.
+
+String
+Symbolic string literal is not supported yet. 
+String iteration is not supported yet.
+
+Record
+Record iteration is not supported yet. 
+Required and Optional fields syntax in a record are not supported yet. 
+Record Type reference (*T) in a record type descriptor is not supported yet.
+Record type descriptor allows default values for fields, but the speciation does not allow default values.
+Table
+Table type descriptor is not supported yet. 
+Error
+Error type is not supported yet. Instead the implementation uses a record based error type.
+XML
+In an XML sequence, a character set is treated as a single string. However, in the specification, each character item is represented by a string with a single code point.
+Object
+Abstract object type support exists, but there are some syntax changes in the new specification. 
+Object field descriptor allows default values, but the specification does not indicate that default values are allowed.
+The order of fields, methods, and constructors in object types is no longer constrained according to the specification.
+Object fields and method names are in the same namespaces, whereas the specification mentions that they are in separate namespaces. 
+In the runtime, the object's fields and methods are implicitly in-scope. However, the specification indicates otherwise. Hence, in runtime, the "self" keyword is not required to access the object’s fields within an object body.
+External member function definition uses `::` instead of `.` currently.
+Object type reference is not supported yet. 
+
+
+Singleton Types
+Runtime allows float values as a singleton type.
+
+Union types
+The implicit initial value generation for union types is also not complete
+
+Built-in object types
+Iterator type is not supported yet. 
+Iterable and collection interfaces are not implemented yet.
+
+
+## Expressions
+Table constructor expression.
+For column constraint, `primarykey` is used instead of `key`. Other constraints are not supported.
+Error constructor expression is not supported.
+XML attributes expression
+The result type is not `map<string>`. It needs to be explicitly cast to `map` type to use.
+Built-in methods are not supported/implemented yet.
+Anonymous function syntax has changed in the specification. Instead the specification provides two alternatives syntaxes: Anonymous function expression and arrow function expression. Both are not supported.
+Unary ~ operator is not supported.
+Additive expression for `string` and `xml` is not supported.
+Shift expression for signed right shift is not supported. 
+Table query expressions are not supported.
+
+
+## Statements
+
+Variable Definition
+A variable defined without initializing must be checked and verified that it has been assigned at each point that the variable is referenced. This validation is not yet supported.
+
+Compound Assignment Statement
+The compound operators  &=,  |=, ^=,  <<=,  >>=, >>>= are not yet supported.
+
+Destructuring Assignment Statement
+Only tuple-binding-patterns (i.e., (p1, p2, ..., pn) ) are allowed in the lhs of a destructuring assignment statement. Other types of patterns (record-binding-patterns and error-binding-patterns) are not yet supported.
+
+Checked Statement
+Check construct is supported for both statements as well as expressions in the current release. However, the specification indicates that it is only allowed to be used in the statement format.
+Check construct currently throws an error if the associated expression returns an error. According to specification, if the associated expression returns an error, check constructs should return that error value as a result of the containing function, similar to a return statement.
+
+Match Statement
+Use of `var` in a type-binding-pattern of a match-clause is not yet supported .
+Only simple-binding-patterns are supported in a type-binding-pattern of a match-clause.
+
+Foreach Statement
+Type descriptor is not allowed in the the binding-pattern of the foreach statement.
+
+Fork-Join
+Enclosing parentheses are required for the join-condition in the current fork-join syntax, where it is not required according to the specification.
+
+Forever statement 
+For the time-scale in the forever statement, ‘minute’, ‘hour’, ‘day’, ‘month’, and ‘year’ is supported in the current release. This is not stated in the specification.
+
+Transaction Statement
+Current transaction statement includes a ‘with’ keyword, but this has been removed from the specification.
+
+
+## Other Deviations
+
+The specification suggests that there are no longer any implicit numeric conversions. However, the runtime supports `int` to `float` implicit numeric conversions.
+Documentation String and Ballerina Flavored Markdown are not supported yet. The runtime supports only documentation node `documentation { }` syntax only.
+Deprecated construct has been removed in the specification.
+Forward recovery support is not added yet. 
+The ‘native’ keyword is used to identify a function whose implementation is not provided in the Ballerina source module.
+In a function call or method call, named arguments have changed to use `:`. However, runtime uses `=`.
+The `lengthof` unary expression has been removed in the specification. However, runtime supports it.
+A function or method can be defined as `extern`. The `native` keyword has been removed. However, Runtime uses the `native` keyword.
+
 
 # Getting Started
 
