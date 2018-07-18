@@ -30,6 +30,7 @@ type Person record {
     any...
 };
 ```
+
 In the following record definition, the **rest fields** are constrained to `string`.
 
 ```ballerina
@@ -59,7 +60,6 @@ Person tom = { name : "tom", age : 20, country : "USA"}; // This is a compile ti
 
 A record type including `!...` is called `closed`; a record type that is not closed is called `open`.
 
-
 ## Fixed Length Arrays
 
 Now the length of an array can be fixed by providing the array length with the array type descriptor. 
@@ -75,10 +75,11 @@ An array length of `!...` means that the length of the array is to be implied fr
 int[!...] sealedArray = [1, 3, 5]; // Creates a sealed integer array of size 3.
 ```
 
-## Object Syntax Change.
+## Object Syntax Change
 
-Object type descriptor now has some syntax changes. 
-1 - Object field definition change. 
+Object type descriptor now has some syntax changes.
+
+1. Object field definition change.
 
 ```ballerina
 public type Person object {
@@ -88,8 +89,8 @@ public type Person object {
 };
 ```
 
-2 - Member functions defined outside of the object should not specify any visibility modifiers
-3 - New addition of “private” visibility modifier to object fields and member functions
+2. Member function.
+3. New addition of “private” visibility modifier to object fields and member functions.
 
 ## Byte Type and Blob Type Change
 
@@ -172,7 +173,7 @@ string? middleName = m["mname"];     // returns null
 	- The signatures of the `onBinary`, `onPing`, and `onPong` resources were changed due to removal of the `blob` type. These resources now have `byte[]` in their signature instead of a blob.
 	- The method signatures of  `pushBinary()`,  `ping()`, and `pong()` have also been changed to take the `byte[]` input parameter instead of a blob.
 
-- The HTTP transport error handler has been improved so that it recovers execution from inbound/outbound failures such as idle socket timeout and abrupt connection closure. 
+- The HTTP transport error handler has been improved so that it recovers execution from inbound/outbound failures such as idle socket timeout and abrupt connection closure.
 
 -  **Circuit Breaker**
      - Introduced `requestVolumeThreshold` parameter support. This parameter sets the minimum number of requests in a `RollingWindow` that will trip the circuit. So the rollingWindow configurations can be specified as follows.
@@ -186,32 +187,45 @@ rollingWindow: {
 ```
 
 ## Build & Package Management
+
 ### CLI
+
 - Enhance build output.
 - Integrate test execution to build.
 - Mandate build on push.
+
 ### Central 
+
 - View previous versions of a package.
 - Show Ballerina compatibility section.
+
 ## IDEs & Language Server
+
 ### Composer
+
 - The Composer is now shipped as a native Electron App.
+
 ### Language Server
+
 - Source code formatting is introduced.
 - The ability to find all symbols in a document and in the workspace is now supported.
+
 ### IntelliJ IDEA
-- Improvements have been made to the debugger
+
+- Improvements have been made to the debugger.
+
 ## Ballerina Observability
+
 - Introduced APIs such that developers can define their own trace blocks and metrics.
 - Developers can attach the trace information of their code block to the default Ballerina traces, or a new trace.
 
 ```ballerina
    //Create and attach span to the default Ballerina request trace.
-   int spanId = check observe:startSpan("Child Span"); 
+   int spanId = check observe:startSpan("Child Span");
        // Do Something
    _ = observe:finishSpan(spanId);
   
-   //Create a completely new trace.    
+   //Create a completely new trace.
    int spanId = observe:startRootSpan("Parent Span");
        //Do Something
    int spanId2 = check observe:startSpan("Child Span", parentSpanId = spanId);
@@ -236,9 +250,9 @@ rollingWindow: {
    observe:StatisticConfig[] statsConfigs = [];
    observe:StatisticConfig config = {timeWindow:30000, percentiles:[0.33, 0.5, 0.9, 0.99], buckets:3};
    statsConfigs[0]=config;
-          
+
    observe:Gauge gaugeWithStats = new ("GaugeWithTags", desc = "Some description",
-                                           tags = gaugeTags, statisticConfig = statsConfigs);                                       
+                                           tags = gaugeTags, statisticConfig = statsConfigs);
 ```
 
 - All metrics registered can be retrieved and looked up individually.
@@ -249,7 +263,7 @@ rollingWindow: {
     foreach metric in metrics {
        //do something.
     }
-   
+
     //Look up a registered metric.
      map<string> tags = { "method": "GET" };
         observe:Counter|observe:Gauge|() metric = observe:lookupMetric("MetricName", tags = tags);
@@ -266,66 +280,76 @@ rollingWindow: {
         }
 ```
 
-
 # Bug Fixes
 
 Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.980.0+is%3Aclosed+label%3AType%2FBug) to view bug fixes
 
-
-
-# Specification Deviations in 0.980.0 Release.
+# Specification Deviations in 0.980.0 Release
 
 ## Values,Type and Variable
 
 ### Nil
-Use of "null" value in a non-JSON related context is not restricted yet. 
+
+Use of "null" value in a non-JSON related context is not restricted yet.
 
 ### Int
+
 Binary and Octal literal support is available in Ballerina 0.980.0 and it is not part of the specification.
 
 ### Decimal
+
 Type `decimal` is not supported yet.
 
 ### String
-- Symbolic string literal is not supported yet. 
+
+- Symbolic string literal is not supported yet.
 - String iteration is not supported yet.
 
 ### Record
-- Record iteration is not supported yet. 
+
+- Record iteration is not supported yet.
 - Required and Optional fields syntax in a record are not supported yet. 
 - Record Type reference (*T) in a record type descriptor is not supported yet.
 - Record type descriptor allows default values for fields, but the speciation does not allow default values.
 
 ### Table
-Table type descriptor is not supported yet. 
+
+Table type descriptor is not supported yet.
 
 ### Error
+
 Error type is not supported yet. Instead the implementation uses a record based error type.
 
 ### XML
+
 In an XML sequence, a character set is treated as a single string. However, in the specification, each character item is represented by a string with a single code point.
 
 ### Object
-- Abstract object type support exists, but there are some syntax changes in the new specification. 
+
+- Abstract object type support exists, but there are some syntax changes in the new specification.
 - Object field descriptor allows default values, but the specification does not indicate that default values are allowed.
 - The order of fields, methods, and constructors in object types is no longer constrained according to the specification.
 - Object fields and method names are in the same namespaces, whereas the specification mentions that they are in separate namespaces. 
 - In the runtime, the object's fields and methods are implicitly in-scope. However, the specification indicates otherwise. Hence, in runtime, the "self" keyword is not required to access the object’s fields within an object body.
 - External member function definition uses `::` instead of `.` currently.
-- Object type reference is not supported yet. 
+- Object type reference is not supported yet.
 
 ### Singleton Types
+
 - Runtime allows float values as a singleton type.
 
 ### Union types
+
 - The implicit initial value generation for union types is also not complete
 
 ### Built-in object types
+
 - Iterator type is not supported yet. 
 - Iterable and collection interfaces are not implemented yet.
 
 
 ## Expressions
+
 - Table constructor expression.
    - For column constraint, `primarykey` is used instead of `key`. Other constraints are not supported.
 - Error constructor expression is not supported.
@@ -338,36 +362,44 @@ In an XML sequence, a character set is treated as a single string. However, in t
 - Shift expression for signed right shift is not supported. 
 - Table query expressions are not supported.
 
-
 ## Statements
 
 ### Variable Definition
+
 - A variable defined without initializing must be checked and verified that it has been assigned at each point that the variable is referenced. This validation is not yet supported.
 
 ### Compound Assignment Statement
+
 - The compound operators  &=,  |=, ^=,  <<=,  >>=, >>>= are not yet supported.
 
 ### Destructuring Assignment Statement
+
 - Only tuple-binding-patterns (i.e., (p1, p2, ..., pn) ) are allowed in the lhs of a destructuring assignment statement. Other types of patterns (record-binding-patterns and error-binding-patterns) are not yet supported.
 
 ### Checked Statement
+
 - Check construct is supported for both statements as well as expressions in the current release. However, the specification indicates that it is only allowed to be used in the statement format.
 - Check construct currently throws an error if the associated expression returns an error. According to specification, if the associated expression returns an error, check constructs should return that error value as a result of the containing function, similar to a return statement.
 
 ### Match Statement
+
 - Use of `var` in a type-binding-pattern of a match-clause is not yet supported.
 - Only simple-binding-patterns are supported in a type-binding-pattern of a match-clause.
 
 ### Foreach Statement
+
 - Type descriptor is not allowed in the the binding-pattern of the foreach statement.
 
 ### Fork-Join
+
 - Enclosing parentheses are required for the join-condition in the current fork-join syntax, where it is not required according to the specification.
 
-### Forever statement 
+### Forever statement
+
 - For the time-scale in the forever statement, ‘minute’, ‘hour’, ‘day’, ‘month’, and ‘year’ is supported in the current release. This is not stated in the specification.
 
 ### Transaction Statement
+
 - Current transaction statement includes a ‘with’ keyword, but this has been removed from the specification.
 
 
@@ -381,7 +413,6 @@ In an XML sequence, a character set is treated as a single string. However, in t
 - In a function call or method call, named arguments have changed to use `:`. However, runtime uses `=`.
 - The `lengthof` unary expression has been removed in the specification. However, runtime supports it.
 - A function or method can be defined as `extern`. The `native` keyword has been removed. However, runtime uses the `native` keyword.
-
 
 # Getting Started
 
