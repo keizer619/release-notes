@@ -148,8 +148,6 @@ table<Person> t1 = table {
 };
 ```
 
-
-```ballerina
 ## Map Access Change
 Values of a map can be accessed using index-based syntax as well as field-access syntax. These two syntaxes now behave differently. Getting a value using field-access syntax returns the value if the key exists. Alternately, a runtime error is thrown. Index-based syntax also will return the value if the key exists. However, it will return a null value if the key does not exist.
 
@@ -196,12 +194,12 @@ rollingWindow: {
 - View previous versions of a package.
 - Show Ballerina compatibility section.
 ## IDEs & Language Server
-	### Composer
-	- The Composer is now shipped as a native Electron App.
-	### Language Server
-	- Source code formatting is introduced.
+### Composer
+- The Composer is now shipped as a native Electron App.
+### Language Server
+- Source code formatting is introduced.
 - The ability to find all symbols in a document and in the workspace is now supported.
-	### IntelliJ IDEA
+### IntelliJ IDEA
 - Improvements have been made to the debugger
 ## Ballerina Observability
 - Introduced APIs such that developers can define their own trace blocks and metrics.
