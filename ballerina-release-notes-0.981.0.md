@@ -1,6 +1,6 @@
 # Overview to Ballerina 0.981.0
 
-This release has considered about further stabilizing previous release with bug fixing effort. Apart from that there is a major improvement on Websocket standard library with the introduction of supporting union type for pushText() and multiple type support for onText() functions. Also there are few language syntax changes.
+This release has considered about further stabilizing previous release with bug fixing effort. Apart from that there is a major improvement on Websocket standard library with the introduction of supporting union type for `pushText()` and multiple type support for `onText()` functions. Also there are few language syntax changes.
 
 # Compatibility and Support
 
