@@ -4,15 +4,15 @@ This release has considered about further stabilizing previous release with bug 
 
 # Compatibility and Support
 
-`native` keyword has been changed as `extern` due to ballerina is moving towards a model of native compilation. With this model code will be an external library and everything is native. Libraries can be written in Ballerina and not written in Ballerina.
+The `native` keyword has been changed to `extern` due to Ballerina moving towards a model of native compilation. With this model, code will be an external library and everything is native. Libraries can be written or not written in Ballerina.
 
-Old syntax
+Old syntax:
 
 ``` ballerina
 public native function string::toUpper() returns string;
 ```
 
-New syntax
+New syntax:
 
 ``` ballerina
 public extern function string::toUpper() returns string;
@@ -42,13 +42,13 @@ x[1] = 4;
 
 - **WebSocket**
 
-- The `pushText` function takes a union type instead of a string  type. The new signature is as follows: 
+- The `pushText` function takes a union type instead of a string type. The new signature is as follows: 
 
 ``` ballerina
 public function pushText(string|json|xml|boolean|int|float|byte|byte[] data, boolean final = true) returns error? 
 ```
 
-- The `onText` function can take a string, json, xml, record or a byte[] types instead of only string. The `onText` signature can be any one of the following:
+- The `onText` function can take a string, JSON, XML, record, or byte[] types instead of only string. The `onText` signature can be any one of the following:
 
 ``` ballerina
 onText(endpoint caller, string text, boolean final)
@@ -58,22 +58,23 @@ onText(endpoint caller, Person person)
 onText(endpoint caller, byte[] data)
 ```
 
-Where Person is a record type.
-For all values except for the string type, the values are aggregated if a continuation frame is received. Hence the value of final is not relevant in the case of other types except string.
+> **Note**: In the above code snippet, Person is a record type.
+
+For all values except for string type, the values are aggregated if a continuation frame is received. Hence the value of final is not relevant in the case of other types except string.
 
 ## IDEs & Language Server
 
 ### Composer
 
-- Sealed types source generation support
+- Sealed types source generation support.
 
 ### Language Server
 
-- Nil lifting completion support
+- Nil lifting completion support.
 
 # Bug Fixes
 
-Please refer [Github milestone](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.981.0+is%3Aclosed+label%3AType%2FBug) to view bug fixes
+Please see [Github milestone](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.981.0+is%3Aclosed+label%3AType%2FBug) for bug fixes.
 
 # Getting Started
 
