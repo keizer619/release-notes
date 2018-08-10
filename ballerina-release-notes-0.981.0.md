@@ -40,7 +40,7 @@ x[1] = 4;
 
 ## Standard Library
 
-- **WebSocket**
+### WebSocket
 
 - The `pushText` function takes a union type instead of a string type. The new signature is as follows: 
 
