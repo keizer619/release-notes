@@ -150,10 +150,12 @@ float x = 0.0; // Working Code
   - ballerina run calculator:add 4 5
   - If a function is not specified, `main` is considered as the function to run.
 - The function invoked via `ballerina run` (including the `main` function) will be data-binding and can have zero or more parameters of any supported type, including any number of required/defaultable parameters and a single rest parameter. This function can also return a value. For example, consider the following public function in the `currency` package:
-    ```ballerina
+
+```ballerina
   function queryChanges(string host, int port = 8080, string… params) returns float {
   }
-    ```
+```
+
     invoking this function via `ballerina run`
     ballerina run --printreturn currency:queryChanges localhost -port=8181 high day
     will result in the following value assignments
@@ -215,7 +217,8 @@ Following additional flags are valid when the --native flag is provided:
 
 - Tracking tainted state changes of function parameters : Taint analyzer keeps track of the tainted state of the parameters in different execution conditions. This information is used to update the tainted state of the arguments used in a function invocation, and to make sure that the tainted state of arguments propagate correctly when the parameter is an out parameter or an in-out parameter.
 - Introduction of abstract objects. An abstract object is identified by the ‘abstract’ keyword. It describes the type of each field and each method, but not the implementation of the methods. An abstract object type must not have an object constructor method and does not have an implicit initial value. An abstract object type cannot be initialized using the object initializer.
-    ```ballerina
+
+```ballerina
   public type Foo abstract object {
       public string name;
       public int id;
@@ -224,28 +227,33 @@ Following additional flags are valid when the --native flag is provided:
 
       function getID() returns int;
   };
-    ```
+```
+
 - Introduction of record iteration support. Records are now an iterable type. Therefore, the foreach loop and iterable operations can now be used with records. When iterating a record, you can either iterate over the fields (i.e., field name and value pair) or iterate only over the field values.
 
-    ```ballerina
+```ballerina
   type Person record {
        string name;
        int age;
        string address;
   };
-    ```
-    Foreach loop can be used on an instance of this record as follows:
-    ```ballerina
+```
+
+Foreach loop can be used on an instance of this record as follows:
+
+```ballerina
   foreach field, value in person {
        io:println(field + " : " + <string>value);
   }
-    ```
-    Or if iterating only through the field values:
-    ```ballerina
+```
+
+Or if iterating only through the field values:
+
+```ballerina
   foreach value in person {
        io:println(value);
   }
-    ```
+```
 
 - Introduction of Channel type. Channel is a constrained type that can be defined only as a top level node. It is introduced for communication between parallel processes in Ballerina programs. Channels can be used for message correlation by sending and receiving messages via different resources to the same channel. It can also be used for  inter-worker communication and synchronize workers.
 
