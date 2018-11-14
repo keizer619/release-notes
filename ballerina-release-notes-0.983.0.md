@@ -1,6 +1,6 @@
 # Overview to Ballerina 0.983.0
 
-This release consist of significant changes on the ballerina distribution. The name of the distribution has been changed from ballerina-platform to ballerina. The Composer is now removed from the distribution and functionalities of it is now included in the VSCode plugin.
+This release consist of significant changes on the Ballerina distribution. The name of the distribution has been changed from ballerina-platform to Ballerina. The Composer is now removed from the distribution and functionalities of it is now included in the VSCode plugin.
 
 # Compatibility and Support
 
