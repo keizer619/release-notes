@@ -67,7 +67,7 @@ table<Employee> tbEmployee = table {
 ```
 
 **Post increment and decrement operators**
-These operators are removed..
+These were statements in Ballerina and there was no siginificant improvement as these cannot be used as expressions. Therefore these have been removed to simplify.
 
 Old syntax
 
@@ -76,7 +76,7 @@ int i = 1;
 i++;
 ```
 
-New syntax
+Alternative syntax
 
 ```ballerina
 int i = 1;
