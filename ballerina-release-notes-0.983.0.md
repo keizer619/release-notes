@@ -1,12 +1,12 @@
 # Overview to Ballerina 0.983.0
 
-This release consist of significant changes on the Ballerina distribution. The name of the distribution has been changed from ballerina-platform to Ballerina. The Composer is now removed from the distribution and functionalities of it is now included in the VSCode plugin.
+This release consist of significant changes on the Ballerina distribution. The name of the distribution has been changed from Ballerina Platform to Ballerina. The Composer is not shipped with the distribution anymore and its functionalities are now included in the VSCode plugin directly.
 
 # Compatibility and Support
 
-Ballerina distribution now consists of Ballerina language and toolings components. This is also reflected in the Docker hub images. From this release onwards [Ballerina](https://hub.docker.com/r/ballerina/ballerina) image consists of Ballerina language and tooling components. Ballerina runtime is available in an image named [ballerina-runtime](https://hub.docker.com/r/ballerina/ballerina-runtime)
+Ballerina distribution now consists of Ballerina language and toolings components. This change is also reflected in the Docker hub images. From this release onwards, the [Ballerina Docker](https://hub.docker.com/r/ballerina/ballerina) image consists of Ballerina language and tooling components. Ballerina runtime is available in an image named [ballerina-runtime](https://hub.docker.com/r/ballerina/ballerina-runtime).
 
-## Syntax changes
+## Syntax Changes
 
 **Object type reference syntax**
 Object type references provide a way to copy the members from an abstract object into another object. It is equivalent to specifying the members explicitly within the new object.
@@ -32,7 +32,8 @@ type Manager object {
 };
 ```
 
-Optional fields in records
+**Optional fields in records**
+
 Fields in records can now be marked as optional by adding `?` to the end of the identifier. When creating a record, optional fields can be omitted. Omitting a required field results in a compile error. Fields with implicit initial values or explicitly defined default values are effectively optional fields even if they are not marked as optional. Explicit default values cannot be set to optional fields.
 
 ```ballerina
@@ -53,7 +54,7 @@ public function main() {
 }
 ```
 
-**Table Syntax**
+**Table syntax**
 The keyword used for the primary key of a table has changed to “key”.
 
 ```ballerina
@@ -67,7 +68,7 @@ table<Employee> tbEmployee = table {
 ```
 
 **Post increment and decrement operators**
-These were statements in Ballerina and there was no siginificant improvement as these cannot be used as expressions. Therefore these have been removed to simplify.
+These were statements in Ballerina and there was no siginificant improvement as these cannot be used as expressions. Therefore, these statements have been removed to simplify usage.
 
 Old syntax
 
@@ -124,9 +125,9 @@ From this release onwards, Composer is removed from the distribution. You can vi
 
 ### Language Support
 
-- The following new features are now supported in both VSCode and IDEA plugins.
+The following new features are now supported in both VSCode and IDEA plugins.
 - `Pull Module`, code action support for the unfetched module imports.
-- Completion support for a module’s functions, Records, Objects, etc., even without the module import.
+- Completion support for a module’s functions, Records, Objects, etc. even without the module import.
 - Auto import modules on completion of item selection.
 - Updated icons for completion of item categories.
 - Improved source formatting.
@@ -137,13 +138,13 @@ From this release onwards, Composer is removed from the distribution. You can vi
 
 - Allow creating Resource Quotas.
 - Enable copying directories.
-- Allow creating deployments using main functions.
+- Allow creating deployments using `main` functions.
 - Support reference values for environment variables in deployments.
-- Allow setting sessionAffinity field for services.
+- Allow setting the `sessionAffinity` field for services.
 
-# Performance results
+# Performance Results
 
-Please refer Ballerina [performace test results](https://github.com/ballerina-platform/ballerina-lang/blob/v0.983.0/performance/benchmarks/summary.md) available in the repository.
+Please refer to [Ballerina performace test results](https://github.com/ballerina-platform/ballerina-lang/blob/v0.983.0/performance/benchmarks/summary.md) that is available in the repository.
 
 # Bug Fixes
 
