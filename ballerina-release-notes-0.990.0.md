@@ -609,80 +609,65 @@ Please refer [Github milestone issues](https://github.com/ballerina-platform/bal
 ## Values,Type and Variable
 
 ### Nil
-
-Use of “null” value in a non-JSON related context is not restricted yet.
-An array that contains a nil value has an invalid string representation. 
+- Use of `null` value in a non-JSON related context is not restricted yet.
+- An array that contains a nil value has an invalid string representation. 
 
 ### Int
-
-Binary Literal are allowed as an integer literal. But it is not part of the 0.990.0 language  specification. This support to be removed from the Compiler in future.
+- Binary Literal are allowed as an integer literal. But it is not part of the 0.990.0 language  specification. This support to be removed from the Compiler in future.
 
 ### Float and Decimal
 
-Two NaN values with different bit patterns are not considered as same at the runtime, but the specification mentioned otherwise. 
-In Decimal implicit initial value taken as “0” instead of “+0.0”
-For floating point, === means the same member of value space. For example,
-NaN === NaN, -0.0 !== +0.0 But this validation gives incorrect results at runtime. 
+- Two NaN values with different bit patterns are not considered as same at the runtime, but the specification mentioned otherwise. 
+- In Decimal implicit initial value taken as `0` instead of `+0.0`
+- For floating point, === means the same member of value space. For example,
+`NaN === NaN`, `-0.0 !== +0.0` But this validation gives incorrect results at runtime. 
 
 ### String
-
-String values are not iterable in this release.
+- String values are not iterable in this release.
 
 ### Record
-
-A Required field of a record can have a default value. But 0.990.0 language specification does not allow default values. If a record mapping constructor doesn’t have a value given for such field, then the default value is taken. 
+- A Required field of a record can have a default value. But 0.990.0 language specification does not allow default values. If a record mapping constructor doesn’t have a value given for such field, then the default value is taken. 
 
 ### Table
-
-Table values are not iterable using foreach statement.
+- Table values are not iterable using foreach statement.
 
 ### Error
-
-Detail value of an error is not frozen.
-The runtime implementation doesn’t enforce the "detail" value of an error to be a subtype of map<anydata|error>.
+- Detail value of an error is not frozen.
+- The runtime implementation doesn’t enforce the "detail" value of an error to be a subtype of map<anydata|error>.
 
 ### XML
-
-In an XML sequence, a character set is treated as a single string. However, in the specification, each character item is represented by a string with a single code point.
+- In an XML sequence, a character set is treated as a single string. However, in the specification, each character item is represented by a string with a single code point.
 
 ### Object
-
-Error handling in the object initialization method is not supported yet. Only nil returning  __init methods are allowed. This prevents using "check" expression inside the object initialization function.
- Similar to record fields, an Object field can have a default value.
- Built-in Iterator, Iterable, and Collection abstract object type are not supported yet.
+- Error handling in the object initialization method is not supported yet. Only nil returning  `__init` methods are allowed. This prevents using `check` expression inside the object initialization function.
+- Similar to record fields, an Object field can have a default value.
+- Built-in `Iterator`, `Iterable`, and `Collection` abstract object type are not supported yet.
 
 ### Singleton Types
-
-Runtime allows float values as a singleton type.
-Defining a variable with singleton type is not allowed. Eg: 5 a = 5
+- Runtime allows float values as a singleton type.
+- Defining a variable with singleton type is not allowed. Eg: `5 a = 5`.
 
 ### Anydata
-
- In the implementation, A structured value that contains an error value doesn’t consider as "anydata".
+- In the implementation, A structured value that contains an error value doesn’t consider as `anydata`.
 
 ### Const
-
-An integer constant reference can’t be used to define the length of an array.
+- An integer constant reference can’t be used to define the length of an array.
 
 ### Freeze
-
-The compiler doesn't do data flow analysis for frozen value. This results in a panic at run-time if a value is updated after a freeze. 
-'freeze()` and `isFrozen()` are not allowed on nil value.
+- The compiler doesn't do data flow analysis for frozen value. This results in a panic at run-time if a value is updated after a freeze. 
+`freeze()` and `isFrozen()` are not allowed on nil value.
 
 ### Functions
-
-Falling off an end of a function body will not implicitly return () if the function returns an optional type. Explicit return () statement is required.
+- Falling off an end of a function body will not implicitly `return ()` if the function returns an optional type. Explicit `return ()` statement is required.
 
 ## Expressions
-
-In this release, Const support only added for Boolean literals, int literals, floating point literals, and string literals. 
-The current implementation uses different interpolation syntax “{{expr}}” instead of “${expr}” in string templates
-Decimal division and remainder operations panic if the second operand is 0.0;.
-Iiterator, unfrozenClone, stackTrace built-in methods are not supported yet.
+- In this release, Const support only added for Boolean literals, int literals, floating point literals, and string literals. 
+- The current implementation uses different interpolation syntax `{{expr}}` instead of `${expr}` in string templates
+- Decimal division (`/`) and remainder (`%`) operations panic if the second operand is `0.0`.
+- `iterator`, `unfrozenClone`, `stackTrace` built-in methods are not supported yet.
 
 ## Binding Patterns
-
-Error binding pattern is not supported in this release.
+- Error binding pattern is not supported in this release.
 
 # Getting Started
 You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour] (https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
