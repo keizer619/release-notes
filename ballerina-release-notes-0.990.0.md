@@ -8,98 +8,104 @@ Ballerina 0.990.0 consists of significant improvements of language syntax which 
 
 # Breaking Language Changes
 
-Implicit variable initialization has been removed. Therefore the code int a; io:println(a); that was valid in the previous release will fail with error ‘variable 'a' is not initialized’. Variables must be initialized explicitly before using them. For more information, refer to variable initialization [in ‘What’s new’ section] section.  
-The match statement no longer selects a block statement or an expression to execute based on which pattern a type matches. Now it selects a block statement based on which patterns a value matches. For more information, refer to match statement section for. 
-The but expression has been removed. You can use type tests instead. For more information, refer to structural types section.  
-The error type is no longer a built-in record type. Therefore you will get syntax errors for error literals in the form of {message: “error message goes here”, cause: e}. From this release onwards, the error type is a structured basic type, used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, a stack trace. For more information, refer to error handling section. 
-The any type no longer includes the error type. The any type is now a union of all types except error type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
-The map type without type parameter is not allowed from this release onwards. The same applies to future and stream types. For more information refer to structural types section.
-The try-catch-finally and throw statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to error handling section.
-The check expression semantics has been changed not to throw an error if return type of the enclosing function or resource does not contain the error type.
-The self keyword has been now mandated to access object members within the object definition. The following code will not compile with this Ballerina version.
-type Person object {
-    private string name;
-    function getName () returns string {
-        return name;
-    }
-};
-
- 	Now you need to use self when referring to object members as follows. 
-
+- Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with error `variable 'a' is not initialized`. Variables must be initialized explicitly before using them. For more information, refer to variable initialization [in ‘What’s new’ section] section.  
+- The match statement no longer selects a block statement or an expression to execute based on which pattern a type matches. Now it selects a block statement based on which patterns a value matches. For more information, refer to match statement section for. 
+- The but expression has been removed. You can use type tests instead. For more information, refer to structural types section.  
+- The error type is no longer a built-in record type. Therefore you will get syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type, used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, a stack trace. For more information, refer to error handling section. 
+- The any type no longer includes the error type. The any type is now a union of all types except error type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
+- The map type without type parameter is not allowed from this release onwards. The same applies to future and stream types. For more information refer to structural types section.
+- The try-catch-finally and throw statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to error handling section.
+- The check expression semantics has been changed not to throw an error if return type of the enclosing function or resource does not contain the error type.
+- The `lengthof` expression has been removed from this release onwards.  Use `length()` built-in function instead. 
+- The self keyword has been now mandated to access object members within the object definition. The following code will not compile with this Ballerina version.
+```
+		type Person object {
+		    private string name;
+		    function getName () returns string {
+			return name;
+		    }
+		};
+```
+ Now you need to use self when referring to object members as follows. 
+```
 		type Person object {
         	    private string name;
         	    function getName () returns string {
                     return self.name;
         	    }
 		};
-Object constructor syntax has been changed from this release onwards. Here is the old syntax.  
-type Person object {
-    private string name;
-    new (name) {
-    }
-};
-
-Here is the new syntax. With this change, we’ve removed the special signature in constructor we had in the previous release. 
-
+```
+- Object constructor syntax has been changed from this release onwards. Here is the old syntax.  
+```
+		type Person object {
+		    private string name;
+		    new (name) {
+		    }
+		};
+```
+ Here is the new syntax. With this change, we’ve removed the special signature in constructor we had in the previous release. 
+```
 		type Person object {
     		    private string name;
     		    function __init (string name) {
         	        self.name = name;
     		    }
 		};
-	For more information, refer to object constructor redesign section 
-An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was object-type-name::method-name and the new syntax is object-type-name.method-name.
-Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We’ve changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax. 
+```
+ For more information, refer to object constructor redesign section 
+- An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
+- Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We’ve changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax. 
+```
 endpoint http:Listener httpEp {
     port: 9095
 };
-
-Now listener endpoints are Ballerina objects that implement the abstract listener object. Therefore you can create a new instance of a module-level listener endpoint as follows. For more information, refer to endpoints and services section. 
-
+```
+ Now listener endpoints are Ballerina objects that implement the abstract listener object. Therefore you can create a new instance of a module-level listener endpoint as follows. For more information, refer to endpoints and services section. 
+```
 listener http:Listener httpEp = new (9095);
- 
-The service and resource definition syntax has been changed. Here is the old syntax. 
-
+```
+- The service and resource definition syntax has been changed. Here is the old syntax. 
+```
 service hello bind httpEp {
     hi (endpoint caller, http:Request req) {
         _ = caller->respond("Hello, World!");
     }
 }
-
-Now services are first-class values and are like singleton objects. Resource definition has been slightly changed. Now a resource definition looks like a function definition with the resource qualifier. For more information, refer to endpoints and services section.
-
+```
+ Now services are first-class values and are like singleton objects. Resource definition has been slightly changed. Now a resource definition looks like a function definition with the resource qualifier. For more information, refer to endpoints and services section.
+```
 service hello on httpEp {
     resource function hi (http:Caller caller, http:Request req) {
         _ = caller->respond("Hello, World!");
     }
 }
-
-The syntax of defining client endpoints(outbound endpoints) has been simplified. For more information, refer to endpoints and services syntax.
-The annotations @final, @readonly has been removed from this release onwards. Now you can declare final variables using the final keyword. final int port = readPortFromConfig();
-The @doc annotation which was deprecated in previous releases has been removed from this release onwards.
-The syntax and semantics of functions calls, workers defined in function body has been changed. For more information, refer to concurrency section.
-The fork/join statement has been removed. You can use the new fork statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type future<T> where T is the return type of the worker. You can use the new wait action to wait for one or more workers. For more information on fork statement, wait action and other concurrency-related changes, refer to concurrency section.
-The done statement has been removed. Now workers can return values using the return statement.  For more information, refer to concurrency section.
-The await statement has been replaced by the new wait statement. For more information, refer to concurrency section 
-Foreach statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax. 
-
-map<Student> class = { ... } 
-
-foreach name, std in class {
-    string msg = name + " details: ";
-    io:println(msg, std);
-}
+```
+- The syntax of defining client endpoints(outbound endpoints) has been simplified. For more information, refer to endpoints and services syntax.
+- The annotations @final, @readonly has been removed from this release onwards. Now you can declare final variables using the final keyword. final int port = readPortFromConfig();
+- The @doc annotation which was deprecated in previous releases has been removed from this release onwards.
+- The syntax and semantics of functions calls, workers defined in function body has been changed. For more information, refer to concurrency section.
+- The fork/join statement has been removed. You can use the new fork statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type future<T> where T is the return type of the worker. You can use the new wait action to wait for one or more workers. For more information on fork statement, wait action and other concurrency-related changes, refer to concurrency section.
+- The done statement has been removed. Now workers can return values using the return statement.  For more information, refer to concurrency section.
+- The await statement has been replaced by the new wait statement. For more information, refer to concurrency section 
+- Foreach statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax. 
+```	
+	map<Student> class = { ... } 
+	foreach name, std in class {
+	    string msg = name + " details: ";
+	    io:println(msg, std);
+	}
+```
 
 Now foreach statement allows the value to be destructured while iterating over a sequence, Here is an example. 
-
+```
 foreach (string, Student)  (name, std) in class {
     string msg = name + " details: ";
     io:println(msg, std);
 }
-
+```
 Additionally, list type iteration provides only the value as an argument. It no longer gives the index variable as the first argument. JSON are no longer iterable, instead, use array of JSON (json[]) or map of JSON (map<json>). For more information, refer to the binding pattern section.  
 
-Iterable Operations' (foreach, map, filter) signatures have been changed to be consistent with the foreach statement arguments.
+- Iterable Operations' (foreach, map, filter) signatures have been changed to be consistent with the foreach statement arguments.
 
 # What's new in Ballerina 0.990.0
 
@@ -341,11 +347,6 @@ Modulus
 Negation
 Type conversions (float → decimal, decimal → float, int → decimal, decimal → int...)
 Comparisons (==, !=, >, <, >=, <=)
-
-#### length
-#### isNaN
-#### isFinite
-#### isInfinite
 
 # Experimental Language Features 
 
