@@ -8,25 +8,25 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 # Breaking Language Changes
 
-Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`. 
+- Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`. 
 
-Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [‘What’s new’ section].  
+- Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [‘What’s new’ section].  
 
-The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section]. 
+- The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section]. 
 
-The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section]. 
+- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section]. 
 
-The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section]. 
+- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section]. 
 
-The `any` type no longer includes the `error` type. The `any` type is now a union of all types except `error` type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
+- The `any` type no longer includes the `error` type. The `any` type is now a union of all types except `error` type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
 
-The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section].
+- The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section].
 
-The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section].
+- The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section].
 
-The `check` expression semantics has been changed to not throw an error if `return` type of the enclosing function or resource does not contain the `error` type.
+- The `check` expression semantics has been changed to not throw an error if `return` type of the enclosing function or resource does not contain the `error` type.
 
-The `self` keyword has been mandated to access object members within the object definition. The following code will not compile with this Ballerina version.
+- The `self` keyword has been mandated to access object members within the object definition. The following code will not compile with this Ballerina version.
 
 ```ballerina
 type Person object {
@@ -782,9 +782,11 @@ In an XML sequence, a character set is treated as a single string. However, in t
 
 ### Object
 
-Error handling in the object initialization method is not supported yet. Only nil returning  __init methods are allowed. This prevents using "check" expression inside the object initialization function.
- Similar to record fields, an Object field can have a default value.
- Built-in Iterator, Iterable, and Collection abstract object type are not supported yet.
+Error handling in the object initialization method is not supported yet. Only nil returning `__init` methods are allowed. 
+
+This prevents using "check" expression inside the object initialization function.
+
+Similar to record fields, an Object field can have a default value. Built-in Iterator, Iterable, and Collection abstract object type are not supported yet.
 
 ### Singleton Types
 
