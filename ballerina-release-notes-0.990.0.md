@@ -75,9 +75,9 @@ type Person object {
 
 For more information, refer to the [object constructor redesign section]. 
 
-An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
+- An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
 
-Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level of abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We have changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax.
+- Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level of abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We have changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax.
 
 ```ballerina
 endpoint http:Listener httpEp {
@@ -115,21 +115,21 @@ service hello on httpEp {
 
 ```
 
-The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [endpoints and services syntax section].
+- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [endpoints and services syntax section].
 
-The annotations `@final` and `@readonly` have been removed from this release onwards. Now you can declare final variables using the `final` keyword. For example, `final int port = readPortFromConfig();`.
+- The annotations `@final` and `@readonly` have been removed from this release onwards. Now you can declare final variables using the `final` keyword. For example, `final int port = readPortFromConfig();`.
 
-The `@doc` annotation that was deprecated in previous releases has been removed from this release onwards.
+- The `@doc` annotation that was deprecated in previous releases has been removed from this release onwards.
 
-The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section].
+- The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section].
 
-The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section].
+- The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section].
 
-The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section].
+- The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section].
 
-The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section]. 
+- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section]. 
 
-The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax. 
+- The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax. 
 
 ```ballerina
 map<Student> class = { ... } 
@@ -150,9 +150,9 @@ foreach (string, Student)  (name, std) in class {
 
 ```
 
-Additionally, `list` type iteration provides only the value as an argument. It no longer gives the index variable as the first argument. JSON is no longer iterable, instead, use array of JSON (`json[]`) or map of JSON (`map<json>`). For more information, refer to the [binding pattern section].  
+- Additionally, `list` type iteration provides only the value as an argument. It no longer gives the index variable as the first argument. JSON is no longer iterable, instead, use array of JSON (`json[]`) or map of JSON (`map<json>`). For more information, refer to the [binding pattern section].  
 
-Iterable Operations (`foreach`, `map`, `filter`) signatures have been changed to be consistent with the `foreach` statement arguments.
+- Iterable Operations (`foreach`, `map`, `filter`) signatures have been changed to be consistent with the `foreach` statement arguments.
 
 # What's new in Ballerina 0.990.0
 
