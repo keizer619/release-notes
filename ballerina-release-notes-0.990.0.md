@@ -507,6 +507,48 @@ resource function testSaveToDatabaseSuccessfulInParticipant(http:Caller ep, http
 
 ## HTTP Listener/Client
 
+With endpoints and service syntax changes, HTTP endpoint and service are changed as follows:
+
+HTTP Listener:
+
+```ballerina
+listener http:Listener httpEp = new(9090, config = {
+    secureSocket: {}
+});
+```
+
+> **Note**: Listener endpoint port is the first argument which is a required parameter and other listener configurations go under the second argument. 
+
+Service and resource definition:
+
+```ballerina
+service hello on httpEp {
+	resource function sayHello(http:Caller caller, http:Request req) {
+    	_ = caller->respond("hello ballerina!");
+    }
+}
+```
+
+Service can get attached to a listener endpoint that is declared inline as follows.
+
+```ballerina
+service hello on new http:Listener(9090) {
+	//...
+}
+
+```
+
+Client endpoint:
+
+```ballerina
+http:Client clientEndpoint = new("https://localhost:9092", config = {
+    secureSocket: {}
+});
+
+```
+
+> **Note**: URL is the first argument which is compulsory and other endpoint configurations go under the second argument.
+
 ## Load Balancer
 
 The Load Balancer exposes an abstract object to allow users to customize the routing decision making(load balancing rule) for special purposes. Only one rule is active at any time and it is specified with the lbRule in the `LoadBalanceClientEndpointConfiguration` record. By default, round robin rule is used as the load balancing strategy.
@@ -600,7 +642,7 @@ Client endpoint:
 
 ```ballerina
 HelloClient helloEp = new("https://localhost:9090", config = {
-secureSocket: {}
+    secureSocket: {}
 });
 
 ```
@@ -639,7 +681,27 @@ service clientService = @http:WebSocketServiceConfig {} service {
 
 ## WebSub
 
-Improvements have been made to the WebSub Hub start up function. Parameters accepted by the hub start up function are categorized into two categories. The hub start up function now accepts an `http:Listener`, on which the hub service will start on, as the first parameter, and a `HubListenerConfiguration` record as a defaultable parameter to specify hub related configuration.  
+WebSub endpoint and service are changed as follows with the new endpoints and service syntax change
+
+Listener:
+
+```ballerina
+listener websub:Listener websubEP = new(8181);
+```
+
+Service and resource definition:
+
+```ballerina
+service websubSubscriber on websubEP {
+    resource function onNotification(websub:Notification notification) {
+        log:printInfo("WebSub Notification Received");
+    }
+}
+```
+
+WebSub Hub start up function signature is improved to accept parameters under two categories. 
+It accepts an `http:Listener`, on which the hub service will start on, as the first parameter, 
+and a `HubListenerConfiguration` record as a defaultable parameter to specify hub related configuration.  
 
 ```ballerina
 var webSubHub = websub:startHub(new http:Listener(9090), hubConfiguration = {
@@ -648,7 +710,7 @@ var webSubHub = websub:startHub(new http:Listener(9090), hubConfiguration = {
 
 ```
 
-Improvements to the hub client, by extending configuration to have the complete functionality of the HTTP Client.
+Improved the hub client by extending configuration to have the complete functionality of the HTTP Client.
 
 ```ballerina
 http:ClientEndpointConfig conf = {
