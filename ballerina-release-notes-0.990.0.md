@@ -4,11 +4,11 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 # Highlights
 
-- We have introduced changes to the Ballerina type system to encourage data-oriented thinking, to provide the foundation for safe concurrency by introducing immutable values, and to make structural types and mutability work together smoothly. 
+- We have introduced changes to the Ballerina type system to encourage data-oriented thinking, to provide the foundation for safe concurrency by introducing immutable values, and to make structural types and mutability work together smoothly.
 - We have introduced changes to error handling in Ballerina to maintain a consistent policy on normal and abnormal errors throughout the language. 
-- Error handling related changes affects the semantics of concurrency constructs: error types are statically propagated to interacting workers. Workers can now have a statically-typed return value, which may be an error. 
-- Cloning and immutability of structured values contribute to message send/receive safety across workers. 
-- Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level abstraction when compared to traditional languages. We have introduced significant changes to endpoints and services syntax and semantics. 
+- Error handling related changes affects the semantics of concurrency constructs: error types are statically propagated to interacting workers. Workers can now have a statically-typed return value, which may be an error.
+- Cloning and immutability of structured values contribute to message send/receive safety across workers.
+- Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level abstraction when compared to traditional languages. We have introduced significant changes to endpoints and services syntax and semantics.
 
 # Breaking Language Changes
 
@@ -18,15 +18,15 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 - The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section](###Match-statement).
 
-- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section].
+- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section](##Structural-Types).
 
-- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section].
+- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section](##Error-Handling).
 
 - The `any` type no longer includes the `error` type. The `any` type is now a union of all types except `error` type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
 
-- The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section].
+- The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section](##Structural-Types).
 
-- The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section].
+- The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section](##Error-Handling).
 
 - The `check` expression semantics has been changed to not throw an error if `return` type of the enclosing function or resource does not contain the `error` type.
 
@@ -77,7 +77,7 @@ type Person object {
 
 ```
 
-For more information, refer to the [object constructor redesign section]. 
+For more information, refer to the [object constructor redesign section].
 
 - An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
 
@@ -131,12 +131,12 @@ service hello on httpEp {
 
 - The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section].
 
-- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section]. 
+- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section].
 
-- The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax. 
+- The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax.
 
 ```ballerina
-map<Student> class = { ... } 
+map<Student> class = { ... }
 foreach name, std in class {
     string msg = name + " details: ";
     io:println(msg, std);
@@ -144,7 +144,7 @@ foreach name, std in class {
 
 ```
 
-Now the `foreach` statement allows the value to be destructured, while iterating over a sequence. Here is an example. 
+Now the `foreach` statement allows the value to be destructured, while iterating over a sequence. Here is an example.
 
 ```ballerina
 foreach (string, Student)  (name, std) in class {
@@ -170,11 +170,12 @@ Ballerina has a structural type system in which compatibility of types and value
 
 Ballerina programs use types to categorize values both at compile-time and runtime. Types deal with an abstraction of values, which does not consider storage location or mutability. This abstraction is called a shape. 
 
-A type denotes a set of shapes. A type S is a subtype of type T if the set of shapes denoted by S is a subset of the set of shapes denoted by T. 
+A type denotes a set of shapes. A type S is a subtype of type T if the set of shapes denoted by S is a subset of the set of shapes denoted by T.
 
 Every value has a corresponding shape. Since shapes do not deal with storage location, they have no concept of identity; shapes therefore represent trees rather graphs. Shapes differ from values only for reference values. For simple values, there is no difference between a shape and a value; the shape of a simple value is just that value. A shape is specific to a basic type: if two values have different basic types, they have different shapes.
 
 There are two important relations between a value and a type:
+
 - A value looks like a type at a particular point in the execution of a program if its shape at that point is a member of the type.
 - A value belongs to a type if it looks like the type, and it will necessarily continue to look like the type no matter how the value is mutated.
 
@@ -184,7 +185,6 @@ When a Ballerina program declares a variable to have a compile-time type, this m
 
 A container has an inherent type, which is a type descriptor that is part of the container’s runtime value. At runtime, the container prevents any mutation that might lead to the container having a shape that is not a member of its inherent type. Thus, a container value belongs to a type if and only if that type is its inherent type or a subset of its inherent type.
 
-
 ### Pure values
 
 A value is considered as a pure value if it is a simple value (`nil`, `boolean`, `int`, `float`, `string`) or a structured value that contains only pure members. Error values are also considered as structured values. 
@@ -193,11 +193,11 @@ A value is considered as a pure value if it is a simple value (`nil`, `boolean`,
 
 The `anydata` type consists of pure values whose `basic` type is not `error`. Thus `(anydata|error)` contains all pure values. So `anydata` is equivalent to `() | int | float | decimal | string | (anydata|error)[] | map<anydata|error> | xml | table`.
 
-Ballerina records are by default open. In the previous release, `record {}` means `record { any … }`. With the introduction of pure values now `record {}` means it is open only to pure values. 
+Ballerina records are by default open. In the previous release, `record {}` means `record { any … }`. With the introduction of pure values now `record {}` means it is open only to pure values.
 
 ### clone() built-in method
 
-Performs a deep copy of a pure value. It is a no-op operation on simple values and error values. This operation is guaranteed to succeed on pure values and preserves cycles, inherent type, and immutability of values. 
+Performs a deep copy of a pure value. It is a no-op operation on simple values and error values. This operation is guaranteed to succeed on pure values and preserves cycles, inherent type, and immutability of values.
 
 ### Record type referencing
 
@@ -231,15 +231,15 @@ type Employee record {
 
 ```
 
-### Value equality and reference equality 
+### Value equality and reference equality
 
 From this release onwards, we have changed the semantics of operator `==` to perform a deep value equality only on `anydata` values. A compile time error occurs if used for some other purpose. This operator is not allowed on error values.
 
-We have introduced a new operator `===` that performs reference equality on reference types and is otherwise same as `==`. The `!==` operator results in the negation of the result of the `===` operator. 
+We have introduced a new operator `===` that performs reference equality on reference types and is otherwise same as `==`. The `!==` operator results in the negation of the result of the `===` operator.
 
 ### Immutable values
 
-We have introduced immutable values from this release onwards. Immutability is not part of the static type system in the language. It exists only in the runtime. You can use the `freeze` built-in method to make a structured value frozen at runtime. This method sets the `frozen` flags in the value. A `frozen` structured value cannot be modified afterward and any such attempts will results in panics. 
+We have introduced immutable values from this release onwards. Immutability is not part of the static type system in the language. It exists only in the runtime. You can use the `freeze` built-in method to make a structured value frozen at runtime. This method sets the `frozen` flags in the value. A `frozen` structured value cannot be modified afterward and any such attempts will results in panics.
 
 The `freeze` built-in method changes the value to which it is applied to be frozen and returns that value. It works in a similar way to the `clone` method.
 
@@ -253,7 +253,9 @@ boolean b = p1 === p1Frozen; // true
 ```
 
 ### Type test expression
-The type test can be used to determine whether a value is of a particular type. 
+
+The type test can be used to determine whether a value is of a particular type.
+
 ```ballerina
 int|string x = getValue();
 if x is string {
@@ -264,7 +266,9 @@ if x is string {
 ```
 
 ### Type assertions
+
 Type assertions can be used to assert the inherent type of a value. Assertion fails and results in a panic, if the asserted type is not exactly the storage type.
+
 ```ballerina
 
 Employee e = { ... };
@@ -314,7 +318,6 @@ There are two types of relationships between a value and a type in this section.
 - `T.stamp(v)`: Mutate the value v itself and set its inherent type to T.
 - `T.convert(v)`: Make copy of the value v and set its inherent type to T.
 
-
 ## Error Handling
 
 Ballerina distinguishes two kinds of errors; normal and abnormal errors. Abnormal errors are unusual occurances and they are usually signs of bugs or programmer errors. It is usually not possible to recover from abnormal errors. Normal errors, on the other hand, are recoverable and they are part of your business logic. 
@@ -323,7 +326,7 @@ Normal errors can be returned from functions, workers and resources hence have a
 
 ### The error type
 
-The error type is a structured basic type which is used only for representing errors. A value of error type contains a reason which is a string identifier for the category of error, a detail which is a frozen mapping providing additional information and a stack trace. Error values are made immutable from this release onwards, since they can propagate across concurrent execution blocks. Allowing them to be mutable can be dangerous. 
+The error type is a structured basic type which is used only for representing errors. A value of error type contains a reason which is a string identifier for the category of error, a detail which is a frozen mapping providing additional information and a stack trace. Error values are made immutable from this release onwards, since they can propagate across concurrent execution blocks. Allowing them to be mutable can be dangerous.
 
 Here is an example for usage of error type. The function `getAcctBalance` returns a union of `decimal` and `error<string, AccountData>` types.
 
@@ -332,7 +335,7 @@ type AccountData record {
     string accountID;
 };
 
-function getAcctBalance(int id) 
+function getAcctBalance(int id)
 returns decimal | error<string, AccountData> {...}
 
 ```
@@ -408,7 +411,7 @@ io:println(personName + “ “ + age);
 
 Ballerina has built in support for concurrency. `worker` and `start` creates new concurrent flows. `wait`, `->` (send), `<-` (receive), and 'flush' constructs offer flow control and communication between concurrent flows. `lock` construct can be used to achieve safe concurrent access.
 
-Ballerina execution model is based on 'strands' that are lightweight execution flows. Strands may run parallely and scheduled by the runtime. Strands are represented by `futures` in the language. 
+Ballerina execution model is based on 'strands' that are lightweight execution flows. Strands may run parallely and scheduled by the runtime. Strands are represented by `futures` in the language.
 
 ### Start
 
@@ -457,7 +460,9 @@ public function invokeWorkers() returns int {
 ```
 
 ## Variable Initialization
+
 ### Compile time constants
+
 A compile-time constant is a typed identifier whose value is computed at compile time. Compile time reference values are `frozen` values. 
 
 ```ballerina
@@ -465,6 +470,7 @@ const i = 10;
 ```
 
 ### Final variables
+
 The modified `final` variable can be applied to a variable declaration to mean that the variable cannot be modified after it has been initialized.
 
 ```ballerina
@@ -474,16 +480,16 @@ final int port = getValue();
 final var addr = getAddr();
 ```
 
-
 ## Endpoints, Services and Listeners
 
 ### Endpoints
 
-In Ballerina, endpoints represent an external system that one or more workers interact with. There are two types of endpoints, Listener endpoints or client endpoints. 
+In Ballerina, endpoints represent an external system that one or more workers interact with. There are two types of endpoints, Listener endpoints or client endpoints.
 
 Previously, both these endpoints were modeled using two object definitions. One defined the life cycle of the endpoint, other defined the actions of the endpoint. Additionally, the endpoint keyword was used to represent endpoint instances and it had its own initialization and assignment syntax.
 
-With this release, the endpoints are declared as client objects. Also, the following are removed from the language. 
+With this release, the endpoints are declared as client objects. Also, the following are removed from the language.
+
 - Endpoint declaration e.g., `endpoint http:Listener helloWorldEP { port : 9090 }`
 - Action invocation statement (only a terminology change).
 
@@ -491,21 +497,23 @@ With this release, the endpoints are declared as client objects. Also, the follo
 
 An object that has a client modifier is a client object type. A method on a client object can have a remote modifier; a method with a remote modifier is called a remote method. A remote method can be called only using a `remote method call`.  E.g., `clientObj->remoteFunctionName (arguments)`. This is previously called `action invocation`.
 
-E.g.: 
+E.g.:
+
 ```ballerina
 	public type Twitter client object {
 		public remote function tweet (string message) returns error? { ... }
 	};
 ```
 
-A Client Object variable declaration is allowed only in following places 
+A Client Object variable declaration is allowed only in following places
  - module level as a module level variable.
  - in a function initialization (before any worker declarations or statements).
  - as an argument to the function.
 
 Eg:
+
 ```ballerina
-Twitter globalClient = new;	
+Twitter globalClient = new;
 
 public function tweetSomething(Twitter paramClient)  {
     Twitter localClient= new;
@@ -547,11 +555,12 @@ There is a new basic type of behavioral value called `service`, which represents
 
 Precise service typing is not provided in this version of Ballerina. This will be added in future versions.
 
-A service value can be constructed using the service constructor expression. 
+A service value can be constructed using the service constructor expression.
 
 Eg: 
+
 ```ballerina
-        service myService = @http:ServiceConfig { basePath : "/hello"} service { 
+        service myService = @http:ServiceConfig { basePath : "/hello"} service {
                 resource function hi (http:Caller caller, http:Request request ) {
                         _ = caller -> respond(self.getHelloWorld());
                 }
@@ -564,7 +573,7 @@ Eg:
 
 `resource` qualifier is used to represent the resource methods of the service. Resource methods cannot be called using the `method call` expression. They are intended to invoke in response to an incoming network request. A service’s non-resource methods can be called using a method call expression.
 
-### Module Services 
+### Module Services
 
 A module service is a syntax for creating service value at the module level. A module service must have one or more module listeners or anonymous module listeners (created using type new expression) attached. Here is the syntax.
 
