@@ -8,7 +8,7 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 # Breaking Language Changes
 
-- Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`. 
+- Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`.
 
 - Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [‘What’s new’ section].  
 
@@ -92,7 +92,7 @@ Now listener endpoints are Ballerina objects that implement the abstract listene
 listener http:Listener httpEp = new (9095);
 
 ```
- 
+
 The service and resource definition syntax has been changed. Here is the old syntax. 
 
 ```ballerina
@@ -824,4 +824,4 @@ Iiterator, unfrozenClone, stackTrace built-in methods are not supported yet.
 Error binding pattern is not supported in this release.
 
 # Getting Started
-You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour] (https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
+You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
