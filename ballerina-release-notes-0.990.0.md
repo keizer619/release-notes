@@ -14,13 +14,13 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 - Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`.
 
-- Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [‘What’s new’ section].  
+- Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [What’s new section](#What's-new-in-Ballerina-0.990.0).  
 
-- The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section]. 
+- The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section](###Match-statement).
 
-- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section]. 
+- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section].
 
-- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section]. 
+- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section].
 
 - The `any` type no longer includes the `error` type. The `any` type is now a union of all types except `error` type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
 
@@ -90,14 +90,14 @@ endpoint http:Listener httpEp {
 
 ```
 
-Now listener endpoints are Ballerina objects that implement the abstract listener object. Therefore, you can create a new instance of a module-level listener endpoint as follows. For more information, refer to endpoints and services section. 
+Now listener endpoints are Ballerina objects that implement the abstract listener object. Therefore, you can create a new instance of a module-level listener endpoint as follows. For more information, refer to endpoints and services section.
 
 ```ballerina
 listener http:Listener httpEp = new (9095);
 
 ```
 
-The service and resource definition syntax has been changed. Here is the old syntax. 
+The service and resource definition syntax has been changed. Here is the old syntax.
 
 ```ballerina
 service hello bind httpEp {
@@ -119,7 +119,7 @@ service hello on httpEp {
 
 ```
 
-- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [standard library syntax section].
+- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [standard library syntax section](#Standard-Library).
 
 - The annotations `@final` and `@readonly` have been removed from this release onwards. Now you can declare final variables using the `final` keyword. For example, `final int port = readPortFromConfig();`.
 
@@ -274,7 +274,7 @@ Employee e2 = <Employee> p; // successful since storage type is Employee
 Person p2 = <Person> p; // panics since storage type is Employee
 ```
 
-### Match statement 
+### Match statement
 
 The existing match has been changed in this release from a type match to a value match statement. The match statement is a value switching construct that allows selective code execution based on the value of the expression that is being tested.
 
