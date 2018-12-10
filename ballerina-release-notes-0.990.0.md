@@ -390,6 +390,130 @@ Final variables
 Regular variables
 structure members
 
+## Endpoints, Services and Listeners
+
+### Endpoints
+
+In Ballerina, endpoints represent an external system that one or more workers interact with. There are two types of endpoints, Listener endpoints or client endpoints. 
+
+Previously, both these endpoints were modeled using two object definitions. One defined the life cycle of the endpoint, other defined the Actions of the endpoint. Additionally, endpoint keyword was used to represent endpoint instances and it had its own initialization and assignment syntax.
+
+With this release, the endpoints are declared as client objects. With this change following are removed from the language. 
+- endpoint declaration eg: `endpoint http:Listener helloWorldEP { port : 9090 }`
+- action invocation statement. (Only a terminology change)
+
+## Client Object
+
+An object that has a client modifier which makes it a client object type. A method on a client object can have a remote modifier; a method with a remote modifier is called a remote method. A remote method can be called only using a `remote method call`.  Eg: `clientObj->remoteFunctionName (arguments)`. This is previously called `action invocation`.
+
+Eg: 
+```ballerina
+	public type Twitter client object {
+		public remote function tweet (string message) returns error? { ... }
+	};
+```
+
+A Client Object variable declaration is allowed only in following places 
+ - module level as a module level variable.
+ - in a function initialization ( before any worker declarations or statements)
+ - as an argument to the function.
+
+Eg:
+```ballerina
+Twitter globalClient = new;	
+
+public function tweetSomething(Twitter paramClient)  {
+	Twitter localClient= new;
+	worker w1 {
+		_ = localClient->tweet("tweeting  from local client.");
+	}
+    	worker w2 {
+       		_ = paramClient->tweet("tweeting  from param client.");
+   	}
+	_ = globalClient ->tweet("tweeting  from global client");
+}
+```
+
+### Listeners
+
+A listener is an object that implements the abstract listener object. It defines the life cycle of the listener.
+
+```ballerina
+public type AbstractListener abstract object {
+    public function __start() returns error?;
+    public function __stop() returns error?;
+    public function __attach(service s, map<any> annotationData) returns error?;
+};
+```
+
+### Module Listeners
+
+A module listener is a Listener object that is managed as part of the module’s lifecycle. It is like a final global variable but registers itself with the module life cycle. So a module starts all its module listeners after all services have been attached the listeners and stops the listeners when module stops. Module listeners are created as follows.
+
+```ballerina
+listener http:Listener httpEp = new (9095);
+```
+
+Module Listeners can be attached to module service.  With this change, the old endpoint declaration and endpoint bind syntax have been removed from the language. 
+
+### Service Types and Values
+
+There is a new basic type of behavioral value called `service`, which represents a named collection of resource functions. A type-descriptor `service` contains all values of basic type service.
+
+Precise service typing is not provided in this version of Ballerina. This will be added in future versions.
+
+A service value can be constructed using the service constructor expression. 
+
+Eg: 
+```ballerina
+        service myService = @http:ServiceConfig { basePath : "/hello"} service { 
+                resource function hi (http:Caller caller, http:Request request ) {
+                        _ = caller -> respond(self.getHelloWorld());
+                }
+
+                function getHelloWorld() returns string {
+                        return "hello world ...!";
+                }
+        };
+```
+
+`resource` qualifier is used to represent the resource methods of the service. Resource methods cannot be called using the `method call` expression. They are intended to invoke in response to an incoming network request. A service’s non-resource methods can be called using a method call expression.
+
+Module Services 
+
+A Module service is a syntax for creating service value at the module level. A Module service must have one or more module listeners or anonymous module listeners (created using type new expression) attached. Here is the syntax.
+
+```ballerina
+listener http:Listener httpEp = new (9095);
+
+@http:ServiceConfig { basePath : "/hello"} 
+service MyService on httpEp, new http:Listener (9085) {
+    resource function hi (http:Caller caller, http:Request req) {
+        _ = caller->respond("Hello, World!");
+    }
+}
+```
+
+`MyService` is a service value, which is attached to both httpEP listener and new http module Listener.  Previously this was referred as services name, Now it is a final module service variable.
+
+Above code is a syntactic sugar and equal to the following code, which runs at module init time. 
+
+```ballerina
+http:Listener httpEp = new http:Listener(9085);
+
+service MyService = @http:ServiceConfig { basePath : "/hello"} service  {
+    resource function hi (http:Caller caller, http:Request req) {
+        _ = caller->respond("Hello, World!");
+    }
+};
+
+check httpEp.attach(MyService ); // if fails, module init fails.
+http:Listener anonEP = new http:Listener(9085);
+check anonEP.__attache(MyService);
+check httpEp.__start();
+check anonEP.__start();
+```
+
 ## ‘decimal’ type
 
 Decimal type is a basic, simple type in Ballerina. The decimal type corresponds to the 128-bit IEEE 754-2008 decimal (radix 10) floating point number format. A decimal value has 34 decimal digits of significand and an exponent range of −6143 to +6144.
