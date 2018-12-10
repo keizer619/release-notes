@@ -280,13 +280,13 @@ The existing match has been changed in this release from a type match to a value
 
 ```ballerina
 match variable {
-	“Bal” => io:println(“Matched a String with value Bal”);
-	0 => io:println(“Matched an int with value 0”);
-	10 => io:println(“Matched an int with value 10”);
-	(15, “Lang”) => io:println(“Matched a tuple with (15, “Lang” values”);
-	false => io:println(“Matched a boolean with value false”);
-	{a: 15, b: “Lang”}=> io:println(“Matched a mapping value”);
-	_ => io:println(“Matched to Default Pattern”);
+    “Bal” => io:println(“Matched a String with value Bal”);
+    0 => io:println(“Matched an int with value 0”);
+    10 => io:println(“Matched an int with value 10”);
+    (15, “Lang”) => io:println(“Matched a tuple with (15, “Lang” values”);
+    false => io:println(“Matched a boolean with value false”);
+    {a: 15, b: “Lang”}=> io:println(“Matched a mapping value”);
+    _ => io:println(“Matched to Default Pattern”);
 }
 
 ```
@@ -295,15 +295,15 @@ The `match` statement can also be used to match the structure of a value by usin
 
 ```ballerina
 match variable {
-	var (var1, var2) => { // match a tuple value with two members
+    var (var1, var2) => { // match a tuple value with two members
         io:println(var1);
         io:println(var2);
     }
-	var {a: var1, b: var2} => { //match a mapping value with fields “a” and “b”
+    var {a: var1, b: var2} => { //match a mapping value with fields “a” and “b”
         io:println(var1);
         io:println(var2);
     }
-	var x => io:println(“Matched to Default Pattern”); //all values will match
+    var x => io:println(“Matched to Default Pattern”); //all values will match
 }
 ```
 
@@ -508,14 +508,14 @@ Eg:
 Twitter globalClient = new;	
 
 public function tweetSomething(Twitter paramClient)  {
-	Twitter localClient= new;
-	worker w1 {
-		_ = localClient->tweet("tweeting  from local client.");
-	}
+    Twitter localClient= new;
+    worker w1 {
+        _ = localClient->tweet("tweeting  from local client.");
+    }
     worker w2 {
         _ = paramClient->tweet("tweeting  from param client.");
-   	}
-	_ = globalClient ->tweet("tweeting  from global client");
+    }
+    _ = globalClient ->tweet("tweeting  from global client");
 }
 ```
 
@@ -649,16 +649,16 @@ You can unlock experimental language features with the `--experimental` flag.
 
 ```ballerina
 transaction with retries = 2 {
-	_ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
-                        	values ('James', 'Clerk', 200, 5000.75, 'USA')");
-	_ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
-                        	values ('James', 'Clerk', 200, 5000.75, 'USA')");
+    _ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
+                            values ('James', 'Clerk', 200, 5000.75, 'USA')");
+    _ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
+                            values ('James', 'Clerk', 200, 5000.75, 'USA')");
 } onretry {
-	returnVal = -1;
+    returnVal = -1;
 } committed {
-	committedBlockExecuted = true;
+    committedBlockExecuted = true;
 } aborted {
-	abortedBlockExecuted = true;
+    abortedBlockExecuted = true;
 }
 ```
 
@@ -674,15 +674,15 @@ With this introduction of transaction participants, nesting transaction blocks a
 
 ```ballerina
 @transactions:Participant {
-	oncommit:commitFunc,
-	onabort:abortFunc
+    oncommit:commitFunc,
+    onabort:abortFunc
 }
 public function participantLocal() {
     string trxId = transactions:getCurrentTransactionId();
-	io:println("In transaction participant of: " + trxId);
-	// Simulate participant failure.
-	error e = error("An error");
-	panic e;
+    io:println("In transaction participant of: " + trxId);
+    // Simulate participant failure.
+    error e = error("An error");
+    panic e;
 } 
 ```
 
@@ -701,10 +701,10 @@ Panic in remote participants will result in transaction failure.
 ```ballerina
 @transactions:Participant {
     oncommit:commitFunc,
-	onabort:abortFunc
+    onabort:abortFunc
 }
 resource function participantRemote(http:Caller ep, http:Request req) {
-	saveToDatabase(ep, req, false);
+    Database(ep, req, false);
 }
 
 ```
