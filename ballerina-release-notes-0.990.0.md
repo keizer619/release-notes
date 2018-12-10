@@ -104,7 +104,7 @@ service hello bind httpEp {
 
 ```
 
-Now services are first-class values and are like singleton objects. Resource definition has been modified slightly. Now a resource definition looks like a function definition with the resource qualifier. For more information, refer to endpoints and services section.
+Now services are first-class values and are like singleton objects. Resource definition has been modified slightly. Now a resource definition looks like a function definition with the resource qualifier. For more information, refer to standard library syntax section.
 
 ```ballerina
 service hello on httpEp {
@@ -115,7 +115,7 @@ service hello on httpEp {
 
 ```
 
-- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [endpoints and services syntax section].
+- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [standard library syntax section].
 
 - The annotations `@final` and `@readonly` have been removed from this release onwards. Now you can declare final variables using the `final` keyword. For example, `final int port = readPortFromConfig();`.
 
@@ -389,8 +389,6 @@ Compile time constants
 Final variables
 Regular variables
 structure members
-
-## Endpoints and Services
 
 ## ‘decimal’ type
 
