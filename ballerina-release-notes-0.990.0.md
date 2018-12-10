@@ -396,17 +396,17 @@ structure members
 
 In Ballerina, endpoints represent an external system that one or more workers interact with. There are two types of endpoints, Listener endpoints or client endpoints. 
 
-Previously, both these endpoints were modeled using two object definitions. One defined the life cycle of the endpoint, other defined the Actions of the endpoint. Additionally, endpoint keyword was used to represent endpoint instances and it had its own initialization and assignment syntax.
+Previously, both these endpoints were modeled using two object definitions. One defined the life cycle of the endpoint, other defined the actions of the endpoint. Additionally, the endpoint keyword was used to represent endpoint instances and it had its own initialization and assignment syntax.
 
-With this release, the endpoints are declared as client objects. With this change following are removed from the language. 
-- endpoint declaration eg: `endpoint http:Listener helloWorldEP { port : 9090 }`
-- action invocation statement. (Only a terminology change)
+With this release, the endpoints are declared as client objects. Also, the following are removed from the language. 
+- Endpoint declaration e.g., `endpoint http:Listener helloWorldEP { port : 9090 }`
+- Action invocation statement (only a terminology change).
 
 ## Client Object
 
-An object that has a client modifier which makes it a client object type. A method on a client object can have a remote modifier; a method with a remote modifier is called a remote method. A remote method can be called only using a `remote method call`.  Eg: `clientObj->remoteFunctionName (arguments)`. This is previously called `action invocation`.
+An object that has a client modifier is a client object type. A method on a client object can have a remote modifier; a method with a remote modifier is called a remote method. A remote method can be called only using a `remote method call`.  E.g., `clientObj->remoteFunctionName (arguments)`. This is previously called `action invocation`.
 
-Eg: 
+E.g.: 
 ```ballerina
 	public type Twitter client object {
 		public remote function tweet (string message) returns error? { ... }
@@ -415,7 +415,7 @@ Eg:
 
 A Client Object variable declaration is allowed only in following places 
  - module level as a module level variable.
- - in a function initialization ( before any worker declarations or statements)
+ - in a function initialization (before any worker declarations or statements).
  - as an argument to the function.
 
 Eg:
@@ -448,7 +448,7 @@ public type AbstractListener abstract object {
 
 ### Module Listeners
 
-A module listener is a Listener object that is managed as part of the module’s lifecycle. It is like a final global variable but registers itself with the module life cycle. So a module starts all its module listeners after all services have been attached the listeners and stops the listeners when module stops. Module listeners are created as follows.
+A module listener is a Listener object that is managed as part of the module’s lifecycle. It is like a final global variable but registers itself with the module life cycle. So a module starts all its module listeners after all services have been attached the listeners and stops the listeners when the module stops. Module listeners are created as follows.
 
 ```ballerina
 listener http:Listener httpEp = new (9095);
@@ -458,7 +458,7 @@ Module Listeners can be attached to module service.  With this change, the old e
 
 ### Service Types and Values
 
-There is a new basic type of behavioral value called `service`, which represents a named collection of resource functions. A type-descriptor `service` contains all values of basic type service.
+There is a new basic type of behavioral value called `service`, which represents a named collection of resource functions. A type-descriptor `service` contains all values of `basic` type service.
 
 Precise service typing is not provided in this version of Ballerina. This will be added in future versions.
 
