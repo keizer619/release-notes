@@ -125,13 +125,13 @@ service hello on httpEp {
 
 - The `@doc` annotation that was deprecated in previous releases has been removed from this release onwards.
 
-- The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section].
+- The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section](##Concurrency).
 
-- The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section].
+- The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section](##Concurrency).
 
-- The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section].
+- The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section](##Concurrency).
 
-- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section].
+- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section](##Concurrency).
 
 - The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax.
 
@@ -322,7 +322,7 @@ There are two types of relationships between a value and a type in this section.
 
 Ballerina distinguishes two kinds of errors; normal and abnormal errors. Abnormal errors are unusual occurances and they are usually signs of bugs or programmer errors. It is usually not possible to recover from abnormal errors. Normal errors, on the other hand, are recoverable and they are part of your business logic. 
 
-Normal errors can be returned from functions, workers and resources hence have an explicit control flow. They are also statically type checked. Abnormal errors stop the execution of a program unless they are trapped: implicit control flow. Following changes and improvements defines consistent policy on error handling throughout the language. Also, these changes have an impact on concurrency features which is explained in the concurrency section.
+Normal errors can be returned from functions, workers and resources hence have an explicit control flow. They are also statically type checked. Abnormal errors stop the execution of a program unless they are trapped: implicit control flow. Following changes and improvements defines consistent policy on error handling throughout the language. Also, these changes have an impact on concurrency features which is explained in the [concurrency section](##Concurrency).
 
 ### The error type
 
