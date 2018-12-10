@@ -402,7 +402,7 @@ With this release, the endpoints are declared as client objects. Also, the follo
 - Endpoint declaration e.g., `endpoint http:Listener helloWorldEP { port : 9090 }`
 - Action invocation statement (only a terminology change).
 
-## Client Object
+### Client Object
 
 An object that has a client modifier is a client object type. A method on a client object can have a remote modifier; a method with a remote modifier is called a remote method. A remote method can be called only using a `remote method call`.  E.g., `clientObj->remoteFunctionName (arguments)`. This is previously called `action invocation`.
 
@@ -479,7 +479,7 @@ Eg:
 
 `resource` qualifier is used to represent the resource methods of the service. Resource methods cannot be called using the `method call` expression. They are intended to invoke in response to an incoming network request. A service’s non-resource methods can be called using a method call expression.
 
-Module Services 
+### Module Services 
 
 A Module service is a syntax for creating service value at the module level. A Module service must have one or more module listeners or anonymous module listeners (created using type new expression) attached. Here is the syntax.
 
