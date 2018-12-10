@@ -1132,10 +1132,11 @@ Falling off an end of a function body will not implicitly return () if the funct
 
 ## Expressions
 
-In this release, Const support only added for Boolean literals, int literals, floating point literals, and string literals. 
-The current implementation uses different interpolation syntax “{{expr}}” instead of “${expr}” in string templates
-Decimal division and remainder operations panic if the second operand is 0.0;.
-Iiterator, unfrozenClone, stackTrace built-in methods are not supported yet.
+In this release, `const` support is only added for `boolean` literals, `int` literals, floating point literals, and `string` literals. 
+
+The current implementation uses different interpolation syntax `{{expr}}` instead of `${expr}` in string templates. Decimal division and remainder operations panic if the second operand is `0.0;`.
+
+Iiterator, unfrozenClone, and stackTrace built-in methods are not supported yet.
 
 ## Binding Patterns
 
