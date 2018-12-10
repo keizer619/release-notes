@@ -72,7 +72,7 @@ type Person object {
      private string name;
      function __init (string name) {
           self.name = name;
-    	  }
+     }
 };
 
 ```
@@ -221,7 +221,7 @@ type Employee record {
 The above Employee type descriptor is equivalent to the following type descriptor:
 
 ```ballerina
-	type Employee record {
+type Employee record {
    string name;
    int age = 25;
    string company?;
@@ -280,13 +280,13 @@ The existing match has been changed in this release from a type match to a value
 
 ```ballerina
 match variable {
-	“Bal” => io:println(“Matched a String with value Bal”);
-	0 => io:println(“Matched an int with value 0”);
-	10 => io:println(“Matched an int with value 10”);
-	(15, “Lang”) => io:println(“Matched a tuple with (15, “Lang” values”);
-	false => io:println(“Matched a boolean with value false”);
-	{a: 15, b: “Lang”}=> io:println(“Matched a mapping value”);
-	_ => io:println(“Matched to Default Pattern”);
+    “Bal” => io:println(“Matched a String with value Bal”);
+    0 => io:println(“Matched an int with value 0”);
+    10 => io:println(“Matched an int with value 10”);
+    (15, “Lang”) => io:println(“Matched a tuple with (15, “Lang” values”);
+    false => io:println(“Matched a boolean with value false”);
+    {a: 15, b: “Lang”}=> io:println(“Matched a mapping value”);
+    _ => io:println(“Matched to Default Pattern”);
 }
 
 ```
@@ -295,15 +295,15 @@ The `match` statement can also be used to match the structure of a value by usin
 
 ```ballerina
 match variable {
-	var (var1, var2) => { // match a tuple value with two members
-io:println(var1); 
-io:println(var2); 
-}
-	var {a: var1, b: var2} => { //match a mapping value with fields “a” and “b”
-io:println(var1); 
-io:println(var2); 
-}
-	var x => io:println(“Matched to Default Pattern”); //all values will match
+    var (var1, var2) => { // match a tuple value with two members
+        io:println(var1);
+        io:println(var2);
+    }
+    var {a: var1, b: var2} => { //match a mapping value with fields “a” and “b”
+        io:println(var1);
+        io:println(var2);
+    }
+    var x => io:println(“Matched to Default Pattern”); //all values will match
 }
 ```
 
@@ -508,14 +508,14 @@ Eg:
 Twitter globalClient = new;	
 
 public function tweetSomething(Twitter paramClient)  {
-	Twitter localClient= new;
-	worker w1 {
-		_ = localClient->tweet("tweeting  from local client.");
-	}
-    	worker w2 {
-       		_ = paramClient->tweet("tweeting  from param client.");
-   	}
-	_ = globalClient ->tweet("tweeting  from global client");
+    Twitter localClient= new;
+    worker w1 {
+        _ = localClient->tweet("tweeting  from local client.");
+    }
+    worker w2 {
+        _ = paramClient->tweet("tweeting  from param client.");
+    }
+    _ = globalClient ->tweet("tweeting  from global client");
 }
 ```
 
@@ -648,17 +648,17 @@ You can unlock experimental language features with the `--experimental` flag.
 `oncommit` and `onabort` function handlers are removed from the transaction statement and are substituted with committed and aborted blocks.
 
 ```ballerina
-transaction  with retries=2{
-	_ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
-                        	values ('James', 'Clerk', 200, 5000.75, 'USA')");
-	_ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
-                        	values ('James', 'Clerk', 200, 5000.75, 'USA')");
+transaction with retries = 2 {
+    _ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
+                            values ('James', 'Clerk', 200, 5000.75, 'USA')");
+    _ = testDB->update("Insert into Customers (firstName,lastName,registrationID,creditLimit,country)
+                            values ('James', 'Clerk', 200, 5000.75, 'USA')");
 } onretry {
-	returnVal = -1;
+    returnVal = -1;
 } committed {
-	committedBlockExecuted = true;
+    committedBlockExecuted = true;
 } aborted {
-	abortedBlockExecuted = true;
+    abortedBlockExecuted = true;
 }
 ```
 
@@ -674,19 +674,19 @@ With this introduction of transaction participants, nesting transaction blocks a
 
 ```ballerina
 @transactions:Participant {
-	oncommit:commitFunc,
-	onabort:abortFunc
+    oncommit:commitFunc,
+    onabort:abortFunc
 }
-public function participantFoo() {
-string trxId = transactions:getCurrentTransactionId();
-	io:println("In transaction participant of: " + trxId);
-	// Simulate participant failure.
-	error e = error("An error");
-	panic e;
+public function participantLocal() {
+    string trxId = transactions:getCurrentTransactionId();
+    io:println("In transaction participant of: " + trxId);
+    // Simulate participant failure.
+    error e = error("An error");
+    panic e;
 } 
 ```
 
-Athe above code will cause the calling transaction to fail due to the panicking of a participant.
+The above code will cause the calling transaction to fail due to the panicking of a participant.
 
 If the participantFoo is called without a transaction, all the transaction related annotations will be ignored for that particular call.
 
@@ -699,12 +699,12 @@ Similar to local transactions we can also annotate resource functions so that th
 Panic in remote participants will result in transaction failure.
 
 ```ballerina
- @transactions:Participant {
-oncommit:commitFunc,
-	onabort:abortFunc
+@transactions:Participant {
+    oncommit:commitFunc,
+    onabort:abortFunc
 }
-resource function testSaveToDatabaseSuccessfulInParticipant(http:Caller ep, http:Request req) {
-	saveToDatabase(ep, req, false);
+resource function participantRemote(http:Caller ep, http:Request req) {
+    Database(ep, req, false);
 }
 
 ```
@@ -1016,10 +1016,9 @@ listener jms:QueueReceiver consumerEndpoint = new({
 });
 
 service jmsListener on consumerEndpoint {
-resource function onMessage(jms:QueueReceiverCaller
-                                      consumer, jms:Message message) {
-            }
-      }
+    resource function onMessage(jms:QueueReceiverCaller consumer, jms:Message message) {
+    }
+}
       
 ```
 
