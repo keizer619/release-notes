@@ -162,6 +162,19 @@ This release contains significant changes and new features in areas such as stru
 
 Ballerina has a structural type system in which compatibility of types and values is determined based on their structure; this is particularly useful in integration scenarios that combine multiple, independently-designed systems. The following changes to the Ballerina type system encourage data-oriented thinking, provides the foundation for safe concurrency by introducing immutable values, makes structural types, and mutability work together smoothly.  
 
+### Typing of mutable structure values
+Ballerina programs use types to categorize values both at compile-time and runtime. Types deal with an abstraction of values, which does not consider storage location or mutability. This abstraction is called a shape.  A type denotes a set of shapes. A type S is a subtype of type T if the set of shapes denoted by S is a subset of the set of shapes denoted by T. Every value has a corresponding shape. Since shapes do not deal with storage location, they have no concept of identity; shapes therefore represent trees rather graphs. Shapes differ from values only for reference values. For simple values, there is no difference between a shape and a value; the shape of a simple value is just that value. A shape is specific to a basic type: if two values have different basic types, then they have different shapes.
+
+There are two important relations between a value and a type:
+- a value looks like a type at a particular point in the execution of a program if its shape at that point is a member of the type;
+- a value belongs to a type if it looks like the type, and it will necessarily continue to look like the type no matter how the value is mutated.
+For an immutable value, looking like a type and belonging to a type are the same thing.
+
+When a Ballerina program declares a variable to have a compile-time type, this means that the Ballerina compiler together with the runtime system will ensure that the variable will only ever contain a value that belongs to the type. Ballerina also provides mechanisms that take a value that looks like a type and use it to create a value that belongs to a type. 
+
+A container has an inherent type, which is a type descriptor which is part of the container’s runtime value. At runtime, the container prevents any mutation that might lead to the container having a shape that is not a member of its inherent type. Thus a container value belongs to a type if and only if that type is its inherent type or a subset of its inherent type.
+
+
 ### Pure values
 
 A value is considered as a pure value if it is a simple value (`nil`, `boolean`, `int`, `float`, `string`) or a structured value that contains only pure members. Error values are also considered as structured values. 
@@ -178,7 +191,33 @@ Performs a deep copy of a pure value. It is a no-op operation on simple values a
 
 ### Record type referencing
 
-Record type referencing is a mechanism for copying the fields from one record type descriptor into another record type descriptor. 
+Record type referencing is a mechanism for copying the fields from one record type descriptor into another record type descriptor. It is equivalent to defining those fields in the new type descriptor. If the fields have explicit default values specified, those values will be copied as well.
+
+```ballerina
+type Person record {
+   string name;
+   int age = 25;
+   !...
+};
+
+type Employee record {
+   *Person;  // Referencing the `Person` record
+   string company;
+   string designation;
+   !...
+};
+```
+The above Employee type descriptor is equivalent to the following type descriptor:
+```ballerina
+	type Employee record {
+   string name;
+   int age = 25;
+   string company?;
+   string designation;
+   !...
+};
+
+```
 
 ### Value equality and reference equality 
 
@@ -201,14 +240,29 @@ boolean b = p1 === p1Frozen; // true
 
 ```
 
-Structural typing and mutability
-is and is-like 
-Type test expression
-Type assertions
-Type guards
-convert()
-stamp()
-match statement 
+### Type test expression
+The type test can be used to determine whether a value is of a particular type. 
+```ballerina
+int|string x = getValue();
+if x is string {
+   // x is now string after implicit narrowing
+   return;
+}
+// x is now int
+```
+
+### Type assertions
+Type assertions can be used to assert the inherent type of a value. Assertion fails and results in a panic, if the asserted type is not exactly the storage type.
+```ballerina
+
+Employee e = { ... };
+Person p = e;
+
+Employee e2 = <Employee> p; // successful since storage type is Employee
+Person p2 = <Person> p; // panics since storage type is Employee
+```
+
+### match statement 
 
 The existing match has been changed in this release from a type match to a value match statement. The match statement is a value switching construct that allows selective code execution based on the value of the expression that is being tested.
 
@@ -239,8 +293,14 @@ io:println(var2);
 }
 	var x => io:println(“Matched to Default Pattern”); //all values will match
 }
-
 ```
+
+### Dynamically narrowing type
+We talked about two types of relationships between a value and a type in this section: looks like and belongs to. With the introduction of these two relationships, one might want to transform a value that looks like a type into a value that belongs to that type. We’ve introduced two built-in methods to do that.
+
+- T.stamp(v): mutate the value v itself and set its inherent type to T.
+- T.convert(v): Make copy of the value v and  set its inherent type to T.
+
 
 ## Error Handling
 
@@ -384,11 +444,21 @@ public function invokeWorkers() returns int {
 ```
 
 ## Variable Initialization
+### Compile time constants
+A compile-time constant is a typed identifier whose value is computed at compile time. Compile time reference values are frozen values 
+```ballerina
+const i = 10;
+```
 
-Compile time constants
-Final variables
-Regular variables
-structure members
+### Final variables
+The final modified can be applied to a variable declaration to mean that the variable cannot be modified after it has been initialized
+```ballerina
+final int port = getValue();
+
+// Here the type is inferred from the right-hand side expression. 
+final var addr = getAddr();
+```
+
 
 ## Endpoints, Services and Listeners
 
