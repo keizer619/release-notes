@@ -77,7 +77,7 @@ type Person object {
 
 ```
 
-For more information, refer to the [object constructor redesign section].
+For more information, refer to the [object constructor redesign section](###Object).
 
 - An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
 
@@ -646,11 +646,6 @@ This is because of the non-representability of 0.1 (0.0001100110011..) and 0.2 (
   - int → decimal
   - decimal → int
 - Comparisons (==, !=, >, <, >=, <=)
-
-#### length
-#### isNaN
-#### isFinite
-#### isInfinite
 
 # Experimental Language Features 
 
