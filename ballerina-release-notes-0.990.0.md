@@ -4,7 +4,11 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 # Highlights
 
-[Key highlights of Ballerina language included into this release]
+- We’ve introduced changes to the Ballerina type system to encourage data-oriented thinking, to provide the foundation for safe concurrency by introducing immutable values, and to make structural types and mutability work together smoothly. 
+- We’ve introduced changes to error handling in Ballerina to maintain a consistent policy on normal and abnormal errors throughout the language. 
+- Error handling related changes affects the semantics of concurrency constructs: error types are statically propagated to interacting workers. Workers can now have a statically-typed return value which may be an error. 
+- Cloning and immutability of structured values contribute to message send/receive safety across workers. 
+- Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level abstraction when compared to traditional languages. We’ve introduced significant changes to endpoints and services syntax and semantics. 
 
 # Breaking Language Changes
 
@@ -624,8 +628,7 @@ Comparisons (==, !=, >, <, >=, <=)
 
 # Experimental Language Features 
 
---experimental
-This section should contain all the language features that we tag as experimental for 1.0.
+You can unlock experimental language features with the `--experimental` flag
 
 ## Micro-Transactions
 
