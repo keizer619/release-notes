@@ -565,9 +565,59 @@ service ClientService = service {
 
 `socket:Client/socket:Caller` has `shutdownRead` and `shutdownWrite` functions available in addition to the write.
 
+## MySQL Client
+MySQL client syntax is changed as follows.
 
-## H2 Client
-	### Compile time validation for InMemory, Server and Embedded Mode configurations
+```ballerina
+mysql:Client testDB = new({
+        host: "localhost",
+        port: 3306,
+        name: "testdb",
+        username: "root",
+        password: "root",
+        poolOptions: { maximumPoolSize: 5 },
+        dbOptions: { "useSSL": false }
+    });
+```
+
+## H2 Database Client
+Compile time validation for InMemory, Server and Embedded Mode configurations are introduced along with the
+changes in client syntax changes.
+
+Creating a client in H2 Embedded Mode
+```ballerina
+h2:Client testDB = new({
+        path: "/home/ballerina/test/",
+        name: "testdb",
+        username: "SA",
+        password: "",
+        poolOptions: { maximumPoolSize: 5 }
+    });
+```
+
+Creating a client in H2 Server Mode
+
+```ballerina
+h2:Client testDB = new({
+        host: "localhost",
+        port: 9092,
+        name: "testdb",
+        username: "SA",
+        password: "",
+        poolOptions: { maximumPoolSize: 5 }
+    });
+```
+
+Creating a client in H2 In-Memory Mode
+
+```ballerina
+h2:Client testDB = new({
+        name: "testdb",
+        username: "SA",
+        password: "",
+        poolOptions: { maximumPoolSize: 5 }
+    });
+```
 
 ## gRPC
 gRPC is a protocol that is layered over HTTP/2 and enables client and server communication by combination of any supported languages. In gRPC, a client application can directly call methods on a server application on a different machine, making it easier for you to create distributed applications and services.
