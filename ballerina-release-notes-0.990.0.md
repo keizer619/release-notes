@@ -481,7 +481,7 @@ Eg:
 
 ### Module Services 
 
-A Module service is a syntax for creating service value at the module level. A Module service must have one or more module listeners or anonymous module listeners (created using type new expression) attached. Here is the syntax.
+A module service is a syntax for creating service value at the module level. A module service must have one or more module listeners or anonymous module listeners (created using type new expression) attached. Here is the syntax.
 
 ```ballerina
 listener http:Listener httpEp = new (9095);
@@ -494,7 +494,7 @@ service MyService on httpEp, new http:Listener (9085) {
 }
 ```
 
-`MyService` is a service value, which is attached to both httpEP listener and new http module Listener.  Previously this was referred as services name, Now it is a final module service variable.
+`MyService` is a service value, which is attached to both `httpEP listener` and the new HTTP module Listener.  Previously this was referred as a services name, now it is a final module service variable.
 
 Above code is a syntactic sugar and equal to the following code, which runs at module init time. 
 
