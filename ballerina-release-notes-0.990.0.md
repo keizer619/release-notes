@@ -16,17 +16,17 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 - Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [What’s new section](#What's-new-in-Ballerina-0.990.0).  
 
-- The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section](###Match-statement).
+- The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section](#match-statement).
 
-- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section](##Structural-Types).
+- The `but` expression has been removed. You can use type tests instead. For more information, refer to the [structural types section](#structural-types).
 
-- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section](##Error-Handling).
+- The error type is no longer a built-in record type. Therefore, you will see syntax errors for error literals in the form of `{message: “error message goes here”, cause: e}`. From this release onwards, the error type is a structured basic type used only for representing errors. It contains a reason; a string identifier for the category of error, a detail; a frozen mapping providing additional information, and a stack trace. For more information, refer to the [error handling section](#error-handling).
 
 - The `any` type no longer includes the `error` type. The `any` type is now a union of all types except `error` type (and its subtypes). This change forces errors to be documented explicitly, even if a function returns any.
 
-- The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section](##Structural-Types).
+- The `map` type without type parameter is not allowed from this release onwards. The same applies to `future` and `stream` types. For more information refer to the [structural types section](#structural-types).
 
-- The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section](##Error-Handling).
+- The `try-catch-finally` and `throw` statements have been removed from this release. It encourages exception handling mechanism available in languages such as Java, JavaScript, and C++ where they allow mixing both normal errors (which programmers must be aware of and handle) and abnormal errors (which cannot be dealt with and often indicates a program error). For more information, refer to the [error handling section](#error-handling).
 
 - The `check` expression semantics has been changed to not throw an error if `return` type of the enclosing function or resource does not contain the `error` type.
 
@@ -77,6 +77,8 @@ type Person object {
 
 ```
 
+- For more information, refer to the [object constructor redesign section](#object).
+
 - An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
 
 - Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level of abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We have changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax.
@@ -117,19 +119,19 @@ service hello on httpEp {
 
 ```
 
-- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [standard library syntax section](#Standard-Library).
+- The syntax of defining client endpoints (outbound endpoints) has been simplified. For more information, refer to the [standard library syntax section](#standard-library).
 
 - The annotations `@final` and `@readonly` have been removed from this release onwards. Now you can declare final variables using the `final` keyword. For example, `final int port = readPortFromConfig();`.
 
 - The `@doc` annotation that was deprecated in previous releases has been removed from this release onwards.
 
-- The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section](##Concurrency).
+- The syntax and semantics of functions calls and workers defined in the function body has changed. For more information, refer to the [concurrency section](#concurrency).
 
-- The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section](##Concurrency).
+- The `fork/join` statement has been removed. You can use the new `fork` statement to start multiple workers in parallel with each other. Each worker name becomes a variable of type `future<T>` where T is the return type of the worker. You can use the new `wait` action to wait for one or more workers. For more information on the fork statement, wait action, and other concurrency-related changes, refer to the [concurrency section](#concurrency).
 
-- The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section](##Concurrency).
+- The `done` statement has been removed. Now workers can return values using the `return` statement.  For more information, refer to the [concurrency section](#concurrency).
 
-- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section](##Concurrency).
+- The `await` statement has been replaced by the new `wait` statement. For more information, refer to the [concurrency section](#concurrency).
 
 - The `foreach` statement has been changed in a consistent way to match with type binding patterns. Here is the old syntax.
 
@@ -320,7 +322,7 @@ There are two types of relationships between a value and a type in this section.
 
 Ballerina distinguishes two kinds of errors; normal and abnormal errors. Abnormal errors are unusual occurances and they are usually signs of bugs or programmer errors. It is usually not possible to recover from abnormal errors. Normal errors, on the other hand, are recoverable and they are part of your business logic. 
 
-Normal errors can be returned from functions, workers and resources hence have an explicit control flow. They are also statically type checked. Abnormal errors stop the execution of a program unless they are trapped: implicit control flow. Following changes and improvements defines consistent policy on error handling throughout the language. Also, these changes have an impact on concurrency features which is explained in the [concurrency section](##Concurrency).
+Normal errors can be returned from functions, workers and resources hence have an explicit control flow. They are also statically type checked. Abnormal errors stop the execution of a program unless they are trapped: implicit control flow. Following changes and improvements defines consistent policy on error handling throughout the language. Also, these changes have an impact on concurrency features which is explained in the [concurrency section](#concurrency).
 
 ### The error type
 
