@@ -14,7 +14,7 @@ Ballerina 0.990.0 consists of significant improvements of the language syntax, w
 
 - Implicit variable initialization has been removed. Therefore the code `int a; io:println(a);` that was valid in the previous release will fail with an error: `variable 'a' is not initialized`.
 
-- Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [What’s new section](#what's-new-in-Ballerina-0.990.0).  
+- Variables must be initialized explicitly before using them. For more information, refer to variable initialization in the [What’s new section](#whats-new-in-ballerina-09900).  
 
 - The `match` statement no longer selects a `block` statement or an expression to execute based on which pattern a type matches. Now it selects a `block` statement based on the patterns a value matches. For more information, refer to the [match statement section](#match-statement).
 
