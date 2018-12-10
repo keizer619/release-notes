@@ -608,18 +608,20 @@ check httpEp.__start();
 check anonEP.__start();
 ```
 
-## ‘decimal’ type
+## Decimal type
 
 Decimal type is a basic, simple type in Ballerina. The decimal type corresponds to the 128-bit IEEE 754-2008 decimal (radix 10) floating point number format. A decimal value has 34 decimal digits of significand and an exponent range of −6143 to +6144.
 
-Syntax:
+```ballerina
 decimal d = 4.565;
+```
+
 Defining a decimal variable is very similar to defining a float variable in Ballerina
 By default, all the floating point literals will be treated as float values unless otherwise we explicitly state as decimal
 
 Requirements:
 To represent high precision and high scale numbers
-Current float type (64 bits) may not be adequate in certain cases 
+Current float type (64 bits) may not be adequate in certain cases
 Financial and commercial use cases
 Currency representations
 To resolve floating point precision error problem exists in float type
@@ -627,19 +629,23 @@ Floating-point numbers cannot precisely represent all real numbers
 Hence, it leads to many erroneous results when performing arithmetic operations
 For example, the below boolean expression would result false when the numbers are represented using float type
        0.1 + 0.2 == 0.3 
-// Above would result `false` if the numbers are represented using `float` 
+// Above would result `false` if the numbers are represented using `float`
 This is because of the non-representability of 0.1 (0.0001100110011..) and 0.2 (0.001100110011..) in binary
- IEEE 754-2008 Decimal128 format resolves this problem by treating the radix 10 when representing the values 
+ IEEE 754-2008 Decimal128 format resolves this problem by treating the radix 10 when representing the values
 
-Basic functionalities:
-Addition
-Multiplication
-Division
-Subtraction
-Modulus
-Negation
-Type conversions (float → decimal, decimal → float, int → decimal, decimal → int...)
-Comparisons (==, !=, >, <, >=, <=)
+- Basic functionalities
+  - Addition
+  - Multiplication
+  - Division
+  - Subtraction
+  - Modulus
+  - Negation
+- Type conversions
+  - float → decimal
+  - decimal → float
+  - int → decimal
+  - decimal → int
+- Comparisons (==, !=, >, <, >=, <=)
 
 #### length
 #### isNaN
@@ -652,7 +658,7 @@ You can unlock experimental language features with the `--experimental` flag.
 
 ## Micro-Transactions
 
-###Transaction initiator statement
+### Transaction initiator statement
 
 `oncommit` and `onabort` function handlers are removed from the transaction statement and are substituted with committed and aborted blocks.
 
@@ -823,6 +829,7 @@ service ClientService = service {
 `socket:Client/socket:Caller` has `shutdownRead` and `shutdownWrite` functions available in addition to the write.
 
 ## MySQL Client
+
 MySQL client syntax is changed as follows.
 
 ```ballerina
@@ -838,10 +845,12 @@ mysql:Client testDB = new({
 ```
 
 ## H2 Database Client
+
 Compile time validation for InMemory, Server and Embedded Mode configurations are introduced along with the
 changes in client syntax changes.
 
 Creating a client in H2 Embedded Mode
+
 ```ballerina
 h2:Client testDB = new({
         path: "/home/ballerina/test/",
@@ -877,6 +886,7 @@ h2:Client testDB = new({
 ```
 
 ## gRPC
+
 gRPC is a protocol that is layered over HTTP/2 and enables client and server communication by combination of any supported languages. In gRPC, a client application can directly call methods on a server application on a different machine, making it easier for you to create distributed applications and services.
 
 With endpoints and service syntax changes, gRPC endpoint and service are changed as follows:
@@ -1028,7 +1038,7 @@ service jmsListener on consumerEndpoint {
     resource function onMessage(jms:QueueReceiverCaller consumer, jms:Message message) {
     }
 }
-      
+
 ```
 
 # Tooling
@@ -1100,7 +1110,7 @@ Table values are not iterable using foreach statement.
 ### Error
 
 Detail value of an error is not frozen.
-The runtime implementation doesn’t enforce the "detail" value of an error to be a subtype of map<anydata|error>.
+The runtime implementation doesn’t enforce the "detail" value of an error to be a subtype of `map<anydata|error>`.
 
 ### XML
 
@@ -1108,7 +1118,7 @@ In an XML sequence, a character set is treated as a single string. However, in t
 
 ### Object
 
-Error handling in the object initialization method is not supported yet. Only nil returning `__init` methods are allowed. 
+Error handling in the object initialization method is not supported yet. Only nil returning `__init` methods are allowed.
 
 This prevents using "check" expression inside the object initialization function.
 
@@ -1140,7 +1150,7 @@ Falling off an end of a function body will not implicitly return () if the funct
 
 ## Expressions
 
-In this release, `const` support is only added for `boolean` literals, `int` literals, floating point literals, and `string` literals. 
+In this release, `const` support is only added for `boolean` literals, `int` literals, floating point literals, and `string` literals.
 
 The current implementation uses different interpolation syntax `{{expr}}` instead of `${expr}` in string templates. Decimal division and remainder operations panic if the second operand is `0.0;`.
 
@@ -1151,4 +1161,5 @@ Iiterator, unfrozenClone, and stackTrace built-in methods are not supported yet.
 Error binding pattern is not supported in this release.
 
 # Getting Started
+
 You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit the [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
