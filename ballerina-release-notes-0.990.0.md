@@ -77,8 +77,6 @@ type Person object {
 
 ```
 
-For more information, refer to the [object constructor redesign section](#Object).
-
 - An object method can be defined outside of the object definition given that it is not an abstract object and the object method is declared inside the object definition. The qualified name of the method defined outside is composed of the object type name and the method name. The previous syntax was `object-type-name::method-name` and the new syntax is `object-type-name.method-name`.
 
 - Endpoints and services are the key abstractions in Ballerina that bring network programming to a higher level of abstraction when compared to traditional languages. There are two kinds of endpoints: listener endpoints and client endpoints.  We have changed the listener (inbound) endpoint variable definition syntax. Here is the old syntax.
