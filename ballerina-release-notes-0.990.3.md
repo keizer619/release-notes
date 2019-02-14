@@ -9,12 +9,13 @@ type Person record {
     string name;
     string...;
 };
-Constrained JSON is no longer supported. The stamp() or convert() methods can be used instead depending on the requirement.
+Constrained JSON is no longer supported. The `stamp()` or `convert()` methods can be used instead depending on the requirement.
 Binary integer literals are no longer supported.
 Use of `var` in the left hand side, with iterable operations ending with `map()` or `filter()` operations is disallowed.
-int[] numbers = [-5, -3, 2, 7, 12];
 
 ```ballerina
+int[] numbers = [-5, -3, 2, 7, 12];
+
 // The following now results in a compilation error.
 var filtered = numbers.filter(function (int i) returns boolean {
     return i >= 0;
@@ -25,13 +26,13 @@ var filtered = numbers.filter(function (int i) returns boolean {
 
 ## Language & Runtime
 
-In Ballerina, floating point types (`float` and `decimal`) adheres to the IEEE754-2008 standard. Hence, floating point types accommodate NaN and Infinity concepts. Now, along with the ‘float’ type, ‘decimal’ type also supports NaN and Infinity concepts.
+In Ballerina, floating point types (`float` and `decimal`) adheres to the IEEE754-2008 standard. Hence, floating point types accommodate NaN and Infinity concepts. Now, along with the `float` type, `decimal` type also supports NaN and Infinity concepts.
 
 Dividing a number by zero will no longer result in a panic situation. Rather, it will result in infinity(+/-) for all non-zero real numbers and NaN. Now, in addition to this, the `decimal` type supports three built-in functions namely `isNaN()`, `isInfinite()`, and `inFinite()` to check whether a given number is NaN, Infinity, or a finite number.
 
 ## Standard Library
 
-- Now, the type ‘time:Time’, which represents an instance of time with the associated timezone is a ‘record type’ (not an ‘object type’). Member functions of the previous “time:Time” object are now provided as utility functions.
+- Now, the type `time:Time`, which represents an instance of time with the associated timezone is a `record type` (not an `object type`). Member functions of the previous `time:Time` object are now provided as utility functions.
 - Support for using the `optional` configuration for client authentication in SSL.
 - The SimpleDurableTopicSubscriber, SimpleQueueReceiver, SimpleQueueSender, SimpleTopicPublisher, and SimpleTopicSubscriber were removed from the JMS API. The initialization API of the TopicPublisher, TopicSubscriber, DurableTopicSubscriber, QueueReceiver, and QueueSender has been modified to support all `Simple` use cases as well.
 - Support on WebSub Hub persistence.
@@ -43,7 +44,7 @@ Dividing a number by zero will no longer result in a panic situation. Rather, it
 - Ballerina `encoding` standard library provides functions to perform the following:
   - Encode `byte[]` (byte arrays) to `string` using different encoding algorithms.
   - Decode `string` values into `byte[]` (byte array) using different decoding algorithms.
-  - The `byteArrayToString` function that can be used to encode byte[] into a `string` using a selected character encoding.
+  - The `byteArrayToString` function that can be used to encode `byte[]` into a `string` using a selected character encoding.
 
 ## IDEs & Language Server
 
