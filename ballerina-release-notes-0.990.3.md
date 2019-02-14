@@ -5,10 +5,14 @@ Ballerina 0.990.3 is a release iteration done based on the 0.990 language specif
 # Compatibility and Support
 
 The record `rest-fields` descriptor should now be followed by a semi colon.
+
+```ballerina
 type Person record {
     string name;
     string...;
 };
+```
+
 Constrained JSON is no longer supported. The `stamp()` or `convert()` methods can be used instead depending on the requirement.
 Binary integer literals are no longer supported.
 Use of `var` in the left hand side, with iterable operations ending with `map()` or `filter()` operations is disallowed.
