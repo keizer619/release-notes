@@ -38,7 +38,7 @@ Dividing a number by zero will no longer result in a panic situation. Rather, it
 
 - Now, the type `time:Time`, which represents an instance of time with the associated timezone is a `record type` (not an `object type`). Member functions of the previous `time:Time` object are now provided as utility functions.
 - Support for using the `optional` configuration for client authentication in SSL.
-- The SimpleDurableTopicSubscriber, SimpleQueueReceiver, SimpleQueueSender, SimpleTopicPublisher, and SimpleTopicSubscriber were removed from the JMS API. The initialization API of the TopicPublisher, TopicSubscriber, DurableTopicSubscriber, QueueReceiver, and QueueSender has been modified to support all `Simple` use cases as well.
+- The SimpleDurableTopicSubscriber, SimpleQueueReceiver, SimpleQueueSender, SimpleTopicPublisher, and SimpleTopicSubscriber were removed from the JMS API. The initialization API of the TopicPublisher, TopicSubscriber, DurableTopicSubscriber, QueueReceiver, and QueueSender has been modified to support all simple use cases as well.
 - Support on WebSub Hub persistence.
 - Basic auth support for WebSub Hub.
 - Ballerina `crypto` standard library is reorganized to enhance the extensibility of the library and to increase reusability across other standard libraries.
