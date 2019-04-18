@@ -189,7 +189,7 @@ io:println(yValue);
 - Introduced NATS connector.
 - Introduced Artemis connector.
 - Introduced RabbitMQ connector.
-- Improvement to h2/mysql/jdbc database clients to share a single, global connection pool for interacting with the same database with same connection properties. The option to use an unshared or a locally shared custom pool is provided.
+- Improved h2/mysql/jdbc database clients to share a single, global connection pool for interacting with the same database with same connection properties. The option to use an unshared or a locally shared custom pool is provided.
 - Introduced OAuth2 password grant type and client credentials grant type along with the direct token mode for outbound authentication.
 - Added support for password hashing techniques for basic auth authentication.
 - Introduced filepath module with a set of utility functions to manipulate the file path in a way that is compatible with the target operating system.
