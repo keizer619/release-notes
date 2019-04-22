@@ -202,21 +202,21 @@ function cleanupError(error e) {
 ```ballerina
 function startTimer() {
 	task:TimerConfiguration timerConfiguration = {
-interval: 1000,
-initialDelay: 500 
-}
-task:Scheduler timer = new(timerConfguration);
-var attachResult = timer.attach(timerService);
-If (attachResult is error) {
-	// handle error
-} else {
-var startResult = timer.start();
-If (startResult is error) {
-	// handle error
-} else {
-	// successfully started timer
-}
-}
+        interval: 1000,
+        initialDelay: 500
+    }
+    task:Scheduler timer = new(timerConfguration);
+    var attachResult = timer.attach(timerService);
+    if (attachResult is error) {
+        // handle error
+    } else {
+        var startResult = timer.start();
+        if (startResult is error) {
+            // handle error
+        } else {
+            // successfully started timer
+        }
+    }
 }
 
 Service timerService = service {
@@ -238,7 +238,7 @@ listener task:Listener timer = new(timerConfiguration);
 Service timerService on timer {
 	resource function onTrigger() {
 		// onTrigger function
-}
+    }
 }
 ```
 
@@ -250,12 +250,11 @@ Service timerService on timer {
 ```ballerina
 function startAppointment() {
 	((function) returns error?) onTriggerFunction = cleanup;
-function (error) onErrorFunction = cleanupError;
-appointment1 = new task:Appointment(onTriggerFunction, 
-onErrorFunction, "0/2 * * * * ?");
-	appointment.schedule();
-	
-}
+    function (error) onErrorFunction = cleanupError;
+    appointment1 = new task:Appointment(onTriggerFunction, onErrorFunction, "0/2 * * * * ?");
+        appointment.schedule();
+
+    }
 
 function cleanup() returns error? {
 	// onTrigger function
@@ -263,19 +262,19 @@ function cleanup() returns error? {
 
 function cleanupError(error e) {
 	// handle error
-} 
+}
 ```
 
 *New Syntax*
 ```ballerina
 task:AppointmentData appointmentData = {
-seconds: "0/2",
-minutes: "*",
-hours: "*",
-daysOfMonth: "?",
-months: "*",
-daysOfWeek: "*",
-year: "*"
+    seconds: "0/2",
+    minutes: "*",
+    hours: "*",
+    daysOfMonth: "?",
+    months: "*",
+    daysOfWeek: "*",
+    year: "*"
 };
 
 task:AppointmentConfiguration appointmentConfiguration = {
@@ -295,21 +294,21 @@ OR
 
 ```ballerina
 function startAppointment() {
-task:AppointmentConfiguration appointmentConfiguration = {
-		appointmentDetails: “0/2 * * * * ?”
-};
-task:Scheduler appointment = new(appointmentConfiguration);
-var attachResult = appointment.attach(appointmentService);
-if (attachResult is error) {
-	// handle error
-} else {
-	var startResult = appointment.start();
-	if (startResult is error) {
-		// handle error
-	} else {
-		// successfully started the appointment
-}
-}
+    task:AppointmentConfiguration appointmentConfiguration = {
+            appointmentDetails: “0/2 * * * * ?”
+    };
+    task:Scheduler appointment = new(appointmentConfiguration);
+    var attachResult = appointment.attach(appointmentService);
+    if (attachResult is error) {
+        // handle error
+    } else {
+        var startResult = appointment.start();
+        if (startResult is error) {
+            // handle error
+        } else {
+            // successfully started the appointment
+        }
+    }
 }
 
 service appointmentService = service {
