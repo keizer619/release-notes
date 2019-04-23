@@ -413,10 +413,10 @@ See Ballerina [performance test results](https://github.com/ballerina-platform/b
 
 
 # Bug Fixes
-See [Github milestone issues](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.991.0+is%3Aclosed) to view bug fixes.
+See [Github milestone issues](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A0.991.0+is%3Aclosed+label%3AType%2FBug) to view bug fixes.
 
 
 # Getting Started
-You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. 
+You can download the Ballerina distributions, try samples, and read the documentation at [https://ballerina.io](https://ballerina.io). You can also visit [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started.
 
 We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
