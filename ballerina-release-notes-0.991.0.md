@@ -198,7 +198,7 @@ function cleanupError(error e) {
 *New Syntax*
 ```ballerina
 function startTimer() {
-	task:TimerConfiguration timerConfiguration = {
+    task:TimerConfiguration timerConfiguration = {
         interval: 1000,
         initialDelay: 500
     }
@@ -217,9 +217,9 @@ function startTimer() {
 }
 
 Service timerService = service {
-	resource function onTrigger() {
-		// onTrigger function
-	}
+    resource function onTrigger() {
+        // onTrigger function
+    }
 }
 
 ```
@@ -233,8 +233,8 @@ task:TimerConfiguration timerConfiguration = {
 };
 listener task:Listener timer = new(timerConfiguration);
 Service timerService on timer {
-	resource function onTrigger() {
-		// onTrigger function
+    resource function onTrigger() {
+        // onTrigger function
     }
 }
 ```
@@ -246,19 +246,18 @@ Service timerService on timer {
 
 ```ballerina
 function startAppointment() {
-	((function) returns error?) onTriggerFunction = cleanup;
+    ((function) returns error?) onTriggerFunction = cleanup;
     function (error) onErrorFunction = cleanupError;
     appointment = new task:Appointment(onTriggerFunction, onErrorFunction, "0/2 * * * * ?");
     appointment.schedule();
-
 }
 
 function cleanup() returns error? {
-	// onTrigger function
+    // onTrigger function
 }
 
 function cleanupError(error e) {
-	// handle error
+    // handle error
 }
 ```
 
@@ -275,15 +274,15 @@ task:AppointmentData appointmentData = {
 };
 
 task:AppointmentConfiguration appointmentConfiguration = {
-	appointmentDetails: appointmentData
+    appointmentDetails: appointmentData
 };
 
 listener task:Listener appointment = new(appointmentConfiguration);
 
 service appointmentService on appointment {
-	resource function onTrigger() {
-		// onTriggerFunction
-	}
+    resource function onTrigger() {
+        // onTriggerFunction
+    }
 }
 
 ```
@@ -292,7 +291,7 @@ OR
 ```ballerina
 function startAppointment() {
     task:AppointmentConfiguration appointmentConfiguration = {
-            appointmentDetails: “0/2 * * * * ?”
+        appointmentDetails: “0/2 * * * * ?”
     };
     task:Scheduler appointment = new(appointmentConfiguration);
     var attachResult = appointment.attach(appointmentService);
@@ -309,9 +308,9 @@ function startAppointment() {
 }
 
 service appointmentService = service {
-	resource function onTrigger() {
-		// onTrigger function
-	}
+    resource function onTrigger() {
+        // onTrigger function
+    }
 }
 ```
 
