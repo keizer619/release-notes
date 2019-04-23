@@ -166,7 +166,7 @@ string input = "Hello Ballerina";
 byte[] inputArr = input.toByteArray("UTF-8");
 byte[] output = crypto:hashMd5(inputArr);
 ```
-
+## GRPC Library Changes
 Ballerina gRPC client initialization in the generated code is changed. Generated file(*.pb.bal) from previous versions of Ballerina distributions will not be worked with this release. Regenerate the client stub using proto to Ballerina tool and replace the previously generated file with the new one.
 
 ## Task Library Changes
