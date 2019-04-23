@@ -176,7 +176,7 @@ Tasks now can be defined as a service and as an object. Both the previously exis
 
 ### Timer
 Timer was previously created by providing `onTrigger` and `onError` functions along with the `interval` and `delay` parameters. Now `interval` and `delay` parameters are provided through a `task:TimerConfiguration` record type, while `onTrigger`  function should be implemented as a resource function inside the attaching service. 
-Service can be created on top of a `task:Listener` or can be manuallt attached to a `task:Scheduler` object. 
+Service can be created on top of a `task:Listener` or can be manually attached to a `task:Scheduler` object. 
 
 *Previous Syntax*
 ```ballerina
@@ -242,7 +242,7 @@ Service timerService on timer {
 
 ### Appointment
 `task:Appointment` functionality can be implemented using `task:Listener` and the `task:Scheduler` objects. Previously the `cronExpression` used for the appointment given as a parameter, along with the `onTrigger` and `onError` functions. Now the `cronExpression` should be provided using `appointmentDetails` field inside the  `task:AppointmentConfiguration` record type. Alternatively, `task:AppointmentData` record can also be provided as the `appointmentDetails` field (see below examples).
-`onTrigger` function should be implemented inside a service, and the service can be created on top a `task:Listener` or the service can be attached to a `task:Scheduler` object.
+`onTrigger` function should be implemented inside a service, and the service can be created on top a `task:Listener` or the service can be attached to a `task:Scheduler` object, manually.
 
 *Previous Syntax*
 
