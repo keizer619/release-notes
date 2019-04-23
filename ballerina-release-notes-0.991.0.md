@@ -389,7 +389,7 @@ io:println(yValue);
 - Introduced an "encoding" API to perform byte[] to string conversions using different encoding mechanisms.
 - Introduced RSA and AES encryption/decryption capabilities to the crypto API.
 - Introduced RSA signing operations to the crypto API.
-- Improved to h2/mysql/jdbc database clients to share a single, global connection pool for interacting with the same database with same connection properties. The option to use an unshared or a locally shared custom pool is provided.
+- Improved h2/mysql/jdbc database clients to share a single, global connection pool for interacting with the same database with same connection properties. The option to use an unshared or a locally shared custom pool is provided.
 - Introduced a shared global connection pool for HTTP client connectors. Per-client pools are also possible with `http:PoolConfiguration`.
 - Improved the HTTP/2 client connection pool to distribute the request load among I/O threads properly.
 
