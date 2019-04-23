@@ -180,19 +180,18 @@ Timer was created by providing `onTrigger` and `onError` functions along with th
 *Previous Syntax*
 ```ballerina
 function startTimer() {
-	((function) returns error?) onTriggerFunction = cleanup;
-function (error) onErrorFunction = cleanupError;
-timer = new task:Timer(onTriggerFunction, onErrorFunction, 1000,
-delay = 500);
-	timer.start();
+    ((function) returns error?) onTriggerFunction = cleanup;
+    function (error) onErrorFunction = cleanupError;
+    timer = new task:Timer(onTriggerFunction, onErrorFunction, 1000, delay = 500);
+    timer.start();
 }
 
 function cleanup() returns error? {
-	// onTriggerFunction
+    // onTriggerFunction
 }
 
 function cleanupError(error e) {
-	// handle error
+    // handle error
 }
 ```
 
@@ -249,10 +248,10 @@ Service timerService on timer {
 function startAppointment() {
 	((function) returns error?) onTriggerFunction = cleanup;
     function (error) onErrorFunction = cleanupError;
-    appointment1 = new task:Appointment(onTriggerFunction, onErrorFunction, "0/2 * * * * ?");
-        appointment.schedule();
+    appointment = new task:Appointment(onTriggerFunction, onErrorFunction, "0/2 * * * * ?");
+    appointment.schedule();
 
-    }
+}
 
 function cleanup() returns error? {
 	// onTrigger function
