@@ -170,7 +170,7 @@ byte[] output = crypto:hashMd5(inputArr);
 Ballerina gRPC client initialization in the generated code is changed. Generated file(*.pb.bal) from previous versions of Ballerina distributions will not be worked with this release. Regenerate the client stub using proto to Ballerina tool and replace the previously generated file with the new one.
 
 ## Task Library Changes
-> Redesigned the Task library to function as a service. The previous task implementation of `task:Timer` and `task:Appointment` will be deferred and new `task:Listener` and `task:Scheduler` objects are introduced to create task timers and appointments.
+Redesigned the Task library to function as a service. The previous task implementation of `task:Timer` and `task:Appointment` will be deferred and new `task:Listener` and `task:Scheduler` objects are introduced to create task timers and appointments.
 
 Tasks now can be defined as a service and as an object. Both the previously existed Timer and Appointment functionalities can be used by new Listener and/or Scheduler.
 
