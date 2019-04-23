@@ -2,13 +2,12 @@
 Ballerina 0.991.0 consists of improvements to the language syntax and semantics based on the language specification and new features and improvements to the standard library modules, extensions, and tooling.
 
 
-# Highlights 
+# Highlights
 
-- Improved Error handling with new checkpanic expression. Now error values can no longer be ignored using "_".   
-- Improved type checking with union type. 
-- Improved syntax for the closed record, closed arrays, and string/XML interpolation, etc.
-- Additionally, this release includes several fixes to address Ballerina language specification deviations from Ballerina 0.990 specification.
-
+- Improved error handling with new checkpanic expression. Now, error values cannot be ignored using "_".
+- Improved type checking with the union type.
+- Improved syntax for the closed record, closed arrays, and string/XML interpolation etc.
+- Additionally, this release includes several fixes to address Ballerina language specification deviations from the Ballerina 0.990 specification.
 
 # Breaking Language Changes
 
@@ -32,7 +31,7 @@ type Person record {|
 ```
 
 
-- The syntax for destructure binding pattern for closed records was also updated to use the {| and |} delimiters. 
+- The syntax for destructure binding pattern for closed records was also updated to use the {| and |} delimiters.
 
 *Previous syntax*
 ```ballerina
@@ -56,7 +55,7 @@ string[!...] array = ["a", "b", "c"];
 ```ballerina
 string[*] array = ["a", "b", "c"];
 ```
-		
+
 - It is now mandatory for list element types to have an implicit initial value. Where a type `T` does not have an implicit initial value, a `T?[]` could be used.
 
 - Use of the `null` literal is now restricted to JSON contexts.
@@ -90,7 +89,7 @@ xml x = xml `<Person name=${name}>${content}</Person>`;
 
 - Interpolating XML elements and attribute names are no longer supported.
 
-- The XML attribute expression now directly returns the attributes of a singleton `xml` element as a  `map<string>` or `()` if the operand is not a singleton `xml`. 
+- The XML attribute expression now directly returns the attributes of a singleton `xml` element as a  `map<string>` or `()` if the operand is not a singleton `xml`.
 
 *Previous syntax*
 ```ballerina
@@ -103,7 +102,7 @@ map<string>? attributeMap = x1@;
 
 - Error values can no longer be ignored using “_”.  If the result of an expression is an `error` type or is a union that contains an `error` type, the result cannot be ignored using “_”. This is to enforce the user to handle all possible errors.
 
-- The capability to consider (run) any public function as an entry point to a Ballerina program was removed. 
+- The capability to consider (run) any public function as an entry point to a Ballerina program was removed.
 
 - The types of the parameters and the return type of the `main` function were restricted to subtypes of `anydata` and `error?` respectively.
 
@@ -117,7 +116,7 @@ If `value` belongs to `Foo`, casting will be successful and `value` will be assi
 
 - The default record rest field type was changed to `anydata|error` from `anydata`.
 
-- `anydata` was updated to include structures of pure values (values whose types are subtypes of `anydata|error`). `anydata` is now the union of the following: 
+- `anydata` was updated to include structures of pure values (values whose types are subtypes of `anydata|error`). `anydata` is now the union of the following:
 
 ```ballerina
 () | boolean | int | float | decimal | string | (anydata|error)[] | map<anydata|error> | xml | table
@@ -176,14 +175,14 @@ Ballerina gRPC client initialization in the generated code is changed. Generated
 Tasks now can be defined as a service and as an object. Both the previously existed Timer and Appointment functionalities can be used by new Listener and/or Scheduler.
 
 ### Timer
-Timer was created by providing `onTrigger` and `onError` functions along with the `interval` and `delay` parameters. Now `interval` and `delay` parameters are provided through a `task:TimerConfiguration` record type, while `onTrigger`  function should be implemented as a resource function inside the attaching service. 
+Timer was created by providing `onTrigger` and `onError` functions along with the `interval` and `delay` parameters. Now `interval` and `delay` parameters are provided through a `task:TimerConfiguration` record type, while `onTrigger`  function should be implemented as a resource function inside the attaching service.
 
 *Previous Syntax*
 ```ballerina
 function startTimer() {
 	((function) returns error?) onTriggerFunction = cleanup;
 function (error) onErrorFunction = cleanupError;
-timer = new task:Timer(onTriggerFunction, onErrorFunction, 1000, 
+timer = new task:Timer(onTriggerFunction, onErrorFunction, 1000,
 delay = 500);
 	timer.start();
 }
@@ -398,7 +397,8 @@ io:println(yValue);
 ## IDEs & Language Server
 - The Language Server Extension API to contribute custom completions.
 - Improvements to the Go-To definition, Find all references and Rename features.
-- Diagram view function collapsing capability. This feature allows you to expand functions in a sequence diagram to view its internal logic. 
+- Diagram view function collapsing capability. This feature allows you to expand functions in a sequence diagram to view its internal logic.
+
 ### IDEA Plugin
 - Improved performance, stability, and reduced plugin size with “Lsp4IntelliJ” language client support.
 - Ballerina language server-based code formatting.
