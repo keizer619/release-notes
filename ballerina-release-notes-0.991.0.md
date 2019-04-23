@@ -3,7 +3,6 @@ Ballerina 0.991.0 consists of improvements to the language syntax and semantics 
 
 
 # Highlights 
-[Key highlights of Ballerina language included into this release]
 
 - Improved Error handling with new checkpanic expression. Now error values can no longer be ignored using "_".   
 - Improved type checking with union type. 
