@@ -417,6 +417,6 @@ See [Github milestone issues](https://github.com/ballerina-platform/ballerina-la
 
 
 # Getting Started
-You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit [Quick Tour] (https://ballerina.io/learn/quick-tour/) to get started. 
+You can download the Ballerina distributions, try samples, and read the documentation at https://ballerina.io. You can also visit [Quick Tour](https://ballerina.io/learn/quick-tour/) to get started. 
 
 We encourage you to report issues, improvements, and suggestions at the [Ballerina Github Repository](https://github.com/ballerina-platform/ballerina-lang).
