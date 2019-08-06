@@ -1,3 +1,14 @@
+# Overview of Ballerina 1.0.0 Alpha
+Ballerina 1.0.0 Alpha is here! It is a massive milestone before our official 1.0.0 release, so we want as many of you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev) or [Github](https://github.com/ballerina-platform/ballerina-lang).
+Ballerina 1.0.0 Alpha consists of improvements to the language syntax and semantics based on the stable language specification version 2019R2 and new features and enhancements to the standard library modules, and developer tooling.
+
+# Highlights
+- Based on a stable language specification: 2019R2
+- Introduces a brand new Ballerina compiler back-end that targets the JVM
+- Significant performance improvements over the previous Ballerina runtime (BVM)
+- Java interoperability (allows you to call Java code from Ballerina)
+- Major redesign of Ballerina developer tools
+
 # Breaking Changes
 
 ## Breaking Language Changes
