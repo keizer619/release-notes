@@ -336,7 +336,7 @@ var untaintedValue = <@untainted> taintedValue;
   - `ballerina/lang.future` for basic type `future`
   - `ballerina/lang.int` for basic type `int`
   - `ballerina/lang.map` for basic type mapping
-  - `ballerina/lang.object` for basic type object
+  - `ballerina/lang.object` for basic type `object`
   - `ballerina/lang.stream` for basic type `stream`
   - `ballerina/lang.string` for basic type `string`
   - `ballerina/lang.table` for basic type `table`
@@ -442,7 +442,7 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 
 - Revamped NATS connector to support both NATS and Streaming Servers.
 - Introduce StdLib module wise errors as a replacement for the builtin error. 
-- Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
+- Eg: Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
 - Introduce capability to engage custom providers and handlers for inbound/outbound authentication
 - Introduce OAuth2 inbound authentication
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
