@@ -439,22 +439,22 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 
 ## Standard Library
 
-Revamped NATS connector to support both NATS and Streaming Servers.
-Introduce StdLib module wise errors as a replacement for the builtin error. 
-Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
-Introduce capability to engage custom providers and handlers for inbound/outbound authentication
-Introduce OAuth2 inbound authentication
-Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
-Improve LDAP APIs by decoupling usage with auth provider
-Introduce support for consumer services with data binding, queue-groups, different start position types etc.
-Introduce prior knowledge support to the HTTP/2 client
-Add flow control support to HTTP/2 client and server
-Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]` and records.
-Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ broker semantics transaction model.
-Introduce XSL transformation support
-Databinding, transaction, SSL and OnError resource support for ActiveMQ Artemis connector
-Revamp of the Message object in the JMS connector
-Introduce "system" APIs to perform system bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
+- Revamped NATS connector to support both NATS and Streaming Servers.
+- Introduce StdLib module wise errors as a replacement for the builtin error. 
+- Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
+- Introduce capability to engage custom providers and handlers for inbound/outbound authentication
+- Introduce OAuth2 inbound authentication
+- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
+- Improve LDAP APIs by decoupling usage with auth provider
+- Introduce support for consumer services with data binding, queue-groups, different start position types etc.
+- Introduce prior knowledge support to the HTTP/2 client
+- Add flow control support to HTTP/2 client and server
+- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]` and records.
+- Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
+- Introduce XSL transformation support
+- Databinding, transaction, SSL and OnError resource support for ActiveMQ Artemis connector
+- Revamp of the Message object in the JMS connector
+- Introduce "system" APIs to perform system bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
 
 H2 and MySQL database client modules have been discontinued. JDBC client module can be used to interact with relational databases.
 
@@ -462,16 +462,16 @@ H2 and MySQL database client modules have been discontinued. JDBC client module 
 
 ### IntelliJ IDEA Plugin
 
-Introduce Ballerina home auto detection capability.
-Introduce Ballerina sequence diagram view.
-Revamp debugger using DAP(Debugger Adapter Protocol) client.
-Introduce in-place renaming support.
-Add language server based signature help.
+- Introduce Ballerina home auto detection capability.
+- Introduce Ballerina sequence diagram view.
+- Revamp debugger using DAP(Debugger Adapter Protocol) client.
+- Introduce in-place renaming support.
+- Add language server based signature help.
 
 ### Tooling
 
-Ballerina Formatter: Ballerina source formatting CLI tool.
-OpenAPI to Ballerina generator CLI tool.
-Ballerina to OpenAPI generator CLI tool.
-OpenAPI validator compiler plugin.
-Introduce Debug Adapter Protocol implementation.
+- Ballerina Formatter: Ballerina source formatting CLI tool.
+- OpenAPI to Ballerina generator CLI tool.
+- Ballerina to OpenAPI generator CLI tool.
+- OpenAPI validator compiler plugin.
+- Introduce Debug Adapter Protocol implementation.
