@@ -4,9 +4,9 @@
 
 ### Builtin library
 
-The `builtin` module has been removed. Some of the functionalities provided by the builtin library is now provided  by the newly added lang library.
+The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided  by the newly-added `lang` library.
 
-- The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of type `anydata` and it creates and returns a clone of the value that has been made immutable (for non-simple basic types).
+- The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
 Previous Syntax
 
@@ -20,7 +20,7 @@ New Syntax
 map<string> m2 = m.cloneReadOnly();
 ```
 
-- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
+- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
 
 Previous Syntax
 
@@ -36,8 +36,8 @@ json j = { name : "tom", age: 2};
 Person|error p = Person.constructFrom(j);
 ```
 
-- The following behaviours which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
-- Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float` and `lang.decimal` modules have a `fromString()` function which accepts a string literal and parses it.
+- The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
+- Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
 
 Previous Syntax
 
@@ -53,7 +53,7 @@ import ballerina/lang.’int; // Need to import `lang.int`
 int x = ‘int:fromString(“100”);
 ```
 
-- When invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now the `lang.value` module provides a `toString()` function which returns a human-readable string representation of a value.
+- Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
 
 Previous Syntax
 
@@ -73,7 +73,7 @@ string str = person.toString();
 
 ### Maps and Records
 
-- The semantics of the `{`, `}` delimiters and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type that only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type which additionally allows pure type fields apart from the fields described. i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
+- The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows pure type fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
 
 Previous Syntax
 
@@ -91,7 +91,7 @@ type Bar record {
    int...;
 };
 
-// Closed record which only allows a `string` field named `a`.
+// Closed record, which only allows a `string` field named `a`.
 type Baz record {|
    string a;
 |};
@@ -114,14 +114,14 @@ type Bar record {|
   int...;
 |};
 
-// Closed record which only allows a `string` field named `a`.
+// Closed record, which only allows a `string` field named `a`.
 type Baz record {|
   string a;
 |};
 ```
 
-- The default record rest field type has been changed to `anydata` from `anydata|error`.
-- The syntax to specify expressions as keys in the mapping constructor has changed. Expressions need to be enclosed in `[]` (e.g., `[expr]`).
+- The default `record rest` field type has been changed to `anydata` from `anydata|error`.
+- The syntax to specify expressions as keys in the mapping constructor has changed. Now, expressions need to be enclosed in `[]` (e.g., `[expr]`).
 
 Previous Syntax
 
@@ -135,7 +135,7 @@ New Syntax
 map<string> m = { [getString()]: "value" };
 ```
 
-- String literals can now be used as keys in the mapping constructor for a record. The key for a rest field should be either a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
+- String literals can now be used as keys in the mapping constructor for a record. The key for a `rest` field should be either a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
 
 Previous Syntax
 
@@ -187,7 +187,7 @@ foreach [string, int] [k, v] in m.entries() {
 
 ### Arrays and Tuples
 
-- The requirement on array element types to have an implicit initial value to allow declaring variable-length arrays has been removed. Instead, when a value is being added to the array at runtime, and the index is greater than the length of the list and the element type does not have a filler value, it would result in a panic.  
+- The requirement for array element types to have an implicit initial value to allow declaring variable-length arrays has been removed. Instead, when a value is being added to the array at runtime, the index is greater than the length of the list, and the element type does not have a filler value, it would result in a panic.  
 
 Previous Syntax
 
@@ -217,7 +217,7 @@ New Syntax
 [int, string] t = [1, "hello world"];
 ```
 
-- Tuple types now support rest descriptors. Therefore, following syntax is valid now.
+- Tuple types now support rest descriptors. Therefore, the following syntax is valid now.
 
 ```ballerina
 [int, string, boolean...] t = [1, "hello world", true, true];
@@ -226,7 +226,7 @@ New Syntax
 
 ### Objects
 
-- Object outside method definitions are no longer allowed. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
+- Objects outside method definitions are no longer allowed. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
 
 ```ballerina
 type Foo object {
@@ -243,7 +243,7 @@ function Foo.printCode() {
 ### Functions and Methods
 
 - Arguments for required parameters of a function can now also be passed as named arguments, while arguments for defaultable parameters can be passed as positional arguments. To avoid ambiguity, all named arguments need to be specified after the positional arguments.
-- Parameters of a function can now be marked `public`, and only arguments to such parameters can be passed by name when invoking a function from an imported module. These arguments can still be passed as positional arguments.
+- Parameters of a function can now be marked `public` and only arguments can be passed by the name to such parameters when invoking a function from an imported module. These arguments can still be passed as positional arguments.
 
 ### Error Type and Constructor
 
@@ -290,10 +290,10 @@ annotation Foo annot on service;
 ### Expressions
 
 - Integer range expressions now return objects belonging to the iterable abstract object type instead of lists (arrays).
-- Field access for records, objects and json has changed. Field access can be used to access the fields of an object or required fields of a record. Field access on a lax (`json|map<json>`) typed variable now returns `json|error`. The field access operator does not lift nil now. 
+- Field access for records, objects, and JSON has changed. Field access can be used to access the fields of an object or required fields of a record. Field access on a lax-typed variable (`json|map<json>`) now returns `json|error`. The field access operator does not lift nil now. 
 - Member access is allowed with lists and subtypes of optional mappings. Nil lifting is supported in the latter case. 
 - The error lifting operator (`!`) has been removed. Error lifting now happens only with field or optional field access for lax types.
-- Calls with `start` are now considered actions, and as a result are not allowed within expressions.
+- Calls with `start` are now considered as actions. As a result, they are not allowed within expressions.
 - Delimited identifier syntax has been changed.
 
 ```ballerina
@@ -326,7 +326,7 @@ var untaintedValue = <@untainted> taintedValue;
 
 ## Language
 
-- A set of modules which contain the functions associated with the basic types. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. Following is the list of lang library modules.
+- A set of modules, which contain the functions associated with the basic types. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of the lang library modules.
 
   - `ballerina/lang.value`
   - `ballerina/lang.array` for basic type list
@@ -335,15 +335,15 @@ var untaintedValue = <@untainted> taintedValue;
   - `ballerina/lang.float` for basic type `float`
   - `ballerina/lang.future` for basic type `future`
   - `ballerina/lang.int` for basic type `int`
-  - `ballerina/lang.map` for basic type mapping
-  - `ballerina/lang.object` for basic type object
+  - `ballerina/lang.map` for basic type `mapping`
+  - `ballerina/lang.object` for basic type `object`
   - `ballerina/lang.stream` for basic type `stream`
   - `ballerina/lang.string` for basic type `string`
   - `ballerina/lang.table` for basic type `table`
   - `ballerina/lang.typedesc` for basic type `typedesc`
   - `ballerina/lang.xml` for basic type `xml`
 
-- The basic type `handle` has been added. A handle value is a reference to storage managed externally to a Ballerina program. Handle values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
+- The basic type `handle` has been added. A `handle` value is a reference to storage of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
 
 - The error reason is now optional if the reason can be inferred based on the contextually expected type.
 
@@ -376,12 +376,12 @@ Foo? fooAnnot = t.@annot;
 
 - Expressions are now allowed as default values for function parameters.
 
-- The concept of lax typing has been introduced, allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime, resulting in error returns at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax. 
+- The concept of lax typing has been introduced allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime,resulting in error returns at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax. 
 - An optional field access operator `?.` has been introduced to access possibly undefined mapping members. Optional field access on lax types may return `error`, if applied to a non-mapping value.
 
 ## Runtime
 
-We are introducing a brand new implementation (jBallerina) of the Ballerina language spec that targets the JVM. The jBallerina compiler produces an executable jar file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, we are deprecating and removing our previous Ballerina runtime implementation (BVM). The jBallerina comes with significant performance improvements over the BVM.
+We are introducing a brand new implementation (jBallerina) of the Ballerina language spec that targets the JVM. The jBallerina compiler produces an executable JAR file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, we are deprecating and removing our previous Ballerina runtime implementation (BVM). The jBallerina comes with significant performance improvements over the BVM.
 
 ### Java Interoperability
 
@@ -396,8 +396,8 @@ project-name/
 - Ballerina.toml
 - src/
 -- mymodule/
---- Module.md  	<- module level documentation
---- main.bal   	<- Contains default main method.
+--- Module.md  	<- module-level documentation
+--- main.bal   	<- Contains the default main method.
 --- resources/ 	<- resources for the module (available at runtime)
 --- tests/     	<- tests for this module (e.g. unit tests)
 ---- testmain.bal  <- test file for main
@@ -413,25 +413,25 @@ project-name/
 
 ```
 
-- To push to staging central please set the following env variable with alpha release. (https://staging-central.ballerina.io)
+- To push to staging central, set the following env variable with the alpha release. (https://staging-central.ballerina.io)
 
 ```ballerina
 export BALLERINA_DEV_STAGE_CENTRAL=true
 ```
 
-- To create a new project with a hello world use *new* command to initialize a new directory
+- To create a new project with a hello world, use the *new* command. This initializsa a new directory.
 ```$ ballerina new <project-name>```
 
-- To create a module use *create* command inside the project
+- To create a module, use the *create* command inside the project.
 ```$ ballerina create <modulename> [-t main|service]```
 
-- If you are building a library use *compile* command to generate a balo to push to central
+- If you are building a library, use the *compile* command. This generates a BALO to push to central.
 ```$ ballerina compile```
 
-- To create an executable use the *build* command
+- To create an executable, use the *build* command.
 ```$ ballerina build```
 
-- To run the executable use *run* command
+- To run the executable, use the *run* command.
 ```$ ballerina run mymodule-executable.jar```
 
 ### Ballerina Central
@@ -440,21 +440,21 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 
 ## Standard Library
 
-- Revamped NATS connector to support both NATS and Streaming Servers.
-- Introduce StdLib module wise errors as a replacement for the builtin error. 
-  Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
+- Revamped the NATS connector to support both NATS and Streaming Servers.
+- Introduce the StdLib module-wise errors as a replacement for the builtin error. 
+  E.g., Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
 - Introduce capability to engage custom providers and handlers for inbound/outbound authentication
 - Introduce OAuth2 inbound authentication
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
-- Improve LDAP APIs by decoupling usage with auth provider
-- Introduce support for consumer services with data binding, queue-groups, different start position types etc.
+- Improve LDAP APIs by decoupling usage with an auth provider
+- Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
 - Introduce prior knowledge support to the HTTP/2 client
 - Add flow control support to HTTP/2 client and server
-- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]` and records.
+- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
 - Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
 - Introduce XSL transformation support
-- Introduce "system" APIs to perform system bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-- H2 and MySQL database client modules have been discontinued. JDBC client module can be used to interact with relational databases.
+- Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
+- H2 and MySQL database client modules have been discontinued. The JDBC client module can be used to interact with relational databases.
 
 ## IDEs & Language Server
 
@@ -462,9 +462,9 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 
 - Introduce Ballerina home auto detection capability.
 - Introduce Ballerina sequence diagram view.
-- Revamp debugger using DAP(Debugger Adapter Protocol) client.
+- Revamp the debugger using a DAP (Debugger Adapter Protocol) client.
 - Introduce in-place renaming support.
-- Add language server based signature help.
+- Add language-server-based signature help.
 
 ### Tooling
 
