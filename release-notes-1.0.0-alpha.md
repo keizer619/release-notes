@@ -442,7 +442,7 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 
 - Revamped NATS connector to support both NATS and Streaming Servers.
 - Introduce StdLib module wise errors as a replacement for the builtin error. 
-- Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
+  Eg: Ballerina HTTP Error types include http:ClientError, http:ListenerError, http:ClientAuthError etc.
 - Introduce capability to engage custom providers and handlers for inbound/outbound authentication
 - Introduce OAuth2 inbound authentication
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
@@ -453,8 +453,6 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]` and records.
 - Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
 - Introduce XSL transformation support
-- Databinding, transaction, SSL and OnError resource support for ActiveMQ Artemis connector
-- Revamp of the Message object in the JMS connector
 - Introduce "system" APIs to perform system bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
 - H2 and MySQL database client modules have been discontinued. JDBC client module can be used to interact with relational databases.
 
