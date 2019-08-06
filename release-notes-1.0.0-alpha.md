@@ -7,6 +7,7 @@ Ballerina 1.0.0 Alpha consists of improvements to the language syntax and semant
 - Introduces a brand new Ballerina compiler back-end that targets the JVM
 - Significant performance improvements over the previous Ballerina runtime (BVM)
 - Java interoperability (allows you to call Java code from Ballerina)
+- Major redesign of Ballerina developer tools
 
 # Breaking Changes
 
