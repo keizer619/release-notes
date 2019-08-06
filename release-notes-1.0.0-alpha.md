@@ -326,25 +326,26 @@ var untaintedValue = <@untainted> taintedValue;
 
 ## Language
 
-- A set of modules which contain the functions associated with the basic types. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. Following is the list of lang library modules. 
--- `ballerina/lang.value`
--- `ballerina/lang.array` for basic type list
--- `ballerina/lang.decimal` for basic type `decimal`
--- `ballerina/lang.error` for basic type `error`
--- `ballerina/lang.float` for basic type `float`
--- `ballerina/lang.future` for basic type `future`
--- `ballerina/lang.int` for basic type `int`
--- `ballerina/lang.map` for basic type mapping
--- `ballerina/lang.object` for basic type object
--- `ballerina/lang.stream` for basic type `stream`
--- `ballerina/lang.string` for basic type `string`
--- `ballerina/lang.table` for basic type `table`
--- `ballerina/lang.typedesc` for basic type `typedesc`
--- `ballerina/lang.xml` for basic type `xml`
+- A set of modules which contain the functions associated with the basic types. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. Following is the list of lang library modules.
+
+  - `ballerina/lang.value`
+  - `ballerina/lang.array` for basic type list
+  - `ballerina/lang.decimal` for basic type `decimal`
+  - `ballerina/lang.error` for basic type `error`
+  - `ballerina/lang.float` for basic type `float`
+  - `ballerina/lang.future` for basic type `future`
+  - `ballerina/lang.int` for basic type `int`
+  - `ballerina/lang.map` for basic type mapping
+  - `ballerina/lang.object` for basic type object
+  - `ballerina/lang.stream` for basic type `stream`
+  - `ballerina/lang.string` for basic type `string`
+  - `ballerina/lang.table` for basic type `table`
+  - `ballerina/lang.typedesc` for basic type `typedesc`
+  - `ballerina/lang.xml` for basic type `xml`
 
 - The basic type `handle` has been added. A handle value is a reference to storage managed externally to a Ballerina program. Handle values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
 
-- The error reason is now optional if the reason can be inferred based on the contextually expected type.	 
+- The error reason is now optional if the reason can be inferred based on the contextually expected type.
 
 ```ballerina
 type Detail record {
@@ -455,8 +456,7 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Databinding, transaction, SSL and OnError resource support for ActiveMQ Artemis connector
 - Revamp of the Message object in the JMS connector
 - Introduce "system" APIs to perform system bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-
-H2 and MySQL database client modules have been discontinued. JDBC client module can be used to interact with relational databases.
+- H2 and MySQL database client modules have been discontinued. JDBC client module can be used to interact with relational databases.
 
 ## IDEs & Language Server
 
