@@ -479,18 +479,19 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Revamped the NATS connector to support both NATS and Streaming Servers.
 - Introduce the StdLib module-wise errors as a replacement for the builtin error. 
   E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
-- Introduce capability to engage custom providers and handlers for inbound/outbound authentication
-- Introduce OAuth2 inbound authentication
-- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
-- Improve LDAP APIs by decoupling usage with an auth provider
-- Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
-- Introduce prior knowledge support to the HTTP/2 client
+- Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
+- Introduce OAuth2 inbound authentication.
+- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
+- Introduce prior knowledge support to the HTTP/2 client.
 - Add flow control support to HTTP/2 client and server
-- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
-- Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
-- Introduce XSL transformation support
-- Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-- H2 and MySQL database client modules and `sql` module have been discontinued. The JDBC client module can be used to interact with relational databases.
+- Introduce XSL transformation support.
+- H2 and MySQL database client modules and sql module have been discontinued. The JDBC client module can be used to interact with relational databases.
+- Update ByteChannel read API to return only `byte[]|io:Error`. Removed previously  return read byte length. `io:EofError` will returns at the end of the channel read.
+- Introduce out of the box support for messaging with Kafka.
+- RabbitMQ, JMS, Artemis, WebSub and LDAP modules are available through Ballerina Central.
+- APIs to perform file system operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc are moved to the File module.
+- Most of the APIs of Encoding module were removed since they are now supported via langlib.
+- Three new utility modules introduced for manipulate built-in `string`, `json` and `xml` types.
 
 ## IDEs & Language Server
 
