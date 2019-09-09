@@ -5,13 +5,8 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 # Highlights
 
-<<<<<<< HEAD
-- Based on a stable language specification: 2019R3
-- Introduces a brand new Ballerina compiler back-end, which targets the JVM
-=======
 - Based on a stable language specification: 2019R2
 - Introduces a brand new Ballerina compiler back-end that targets the JVM
->>>>>>> 48ebfa7b8a38ed33d87cf95a92ec31949880f477
 - Significant performance improvements over the previous Ballerina runtime (BVM)
 - Java interoperability (allows you to call Java code from Ballerina)
 - Major redesign of Ballerina developer tools
@@ -22,9 +17,6 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ### Builtin library
 
-<<<<<<< HEAD
-The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided by the newly-added `lang` library.
-=======
 The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library are now provided  by the newly-added `lang` library.
 >>>>>>> 48ebfa7b8a38ed33d87cf95a92ec31949880f477
 
