@@ -510,14 +510,12 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - OpenAPI validator compiler plugin.
 - Introduce Debug Adapter Protocol implementation.
 
-## Ballerina 2019R3 Specification Deviations
+## JBallerina 1.0 - 2019R3 Specification Deviations
 
 ### Lexical structure
-
 - `QuotedIdentifier` supports only alphanumeric characters and "." [#18720](https://github.com/ballerina-platform/ballerina-lang/issues/18720).
 
 ### Values, Types and Variables.
-
 - Limited Singleton type support [#13410](https://github.com/ballerina-platform/ballerina-lang/issues/13410).
 - Limited constant support [#13944](https://github.com/ballerina-platform/ballerina-lang/issues/13944).
 - `0.` syntax is not supported for floating point literals [#13168](https://github.com/ballerina-platform/ballerina-lang/issues/13168).
@@ -580,5 +578,5 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - The lang.map module functions which modify the value are disallowed on records [#18873](https://github.com/ballerina-platform/ballerina-lang/issues/18873).
 - The lang.array module functions which modify the value are disallowed on tuples [#18874](https://github.com/ballerina-platform/ballerina-lang/issues/18874).
 
-## Preview Features
+### Preview Features
 - XML access expressions are not defined in the spec. [#18875](https://github.com/ballerina-platform/ballerina-lang/issues/18875).
