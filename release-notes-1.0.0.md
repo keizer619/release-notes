@@ -32,7 +32,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
   - `ballerina/lang.typedesc` for basic type `typedesc`
   - `ballerina/lang.xml` for basic type `xml`
 
-- The basic type `handle` has been added. A `handle` value is a reference to storage of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
+- The basic type `handle` has been added. A `handle` value is a reference to storage area of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
 
 - The error reason is now optional if the reason can be inferred based on the contextually-expected type.
 
@@ -89,7 +89,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
    --- main.bal   	<- Contains the default main method.
    --- resources/ 	<- resources for the module (available at runtime)
    --- tests/     	<- tests for this module (e.g. unit tests)
-   ---- testmain.bal  <- test file for main
+   ---- main_test.bal  <- test file for main
    ---- resources/	<- resources for these tests
    - target/     	<- directory for compile/build output
    -- bin/       	<- Executables will be created here
@@ -121,7 +121,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 ### Ballerina Central
 
-- Supports pushing of Ballerina modules with native Java libraries.
+- Supports pushing of Ballerina modules with embedded, dependent native Java libraries.
 
 ## Standard Library
 
@@ -209,9 +209,9 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
       New Syntax
 
       ```ballerina
-      import ballerina/lang.’int; // Need to import `lang.int`
+      import ballerina/lang.int; // Need to import `lang.int`
 
-      int x = ‘int:fromString(“100”);
+      int x = int:fromString("100");
       ```
 
    - Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
@@ -234,7 +234,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
 ### Maps and Records
 
-- The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows pure type fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
+- The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a closed record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows pure type fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
 
    Previous Syntax
 
@@ -386,7 +386,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
 ### Objects
 
-- Objects outside method definitions are no longer allowed. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
+- Outside method definitions are no longer allowed for objects. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
 
    ```ballerina
    type Foo object {
@@ -451,8 +451,8 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 ### Expressions
 
 - Integer range expressions now return objects belonging to the iterable abstract object type instead of lists (arrays).
-- Field access for records, objects, and JSON has changed. Field access can be used to access the fields of an object or required fields of a record. Field access on a lax-typed variable (`json|map<json>`) now returns `json|error`. The field access operator does not lift nil now. 
-- Member access is allowed with lists and subtypes of optional mappings. Nil lifting is supported in the latter case. 
+- Field access for records, objects, and JSON has changed. Field access can be used to access the fields of an object or required fields of a record. Field access on a lax-typed variable (`json|map<json>`) now returns `json|error`. The field access operator does not lift nil now.
+- Member access is allowed with lists and subtypes of optional mappings. Nil lifting is supported in the latter case.
 - The error lifting operator (`!`) has been removed. Error lifting now happens only with field or optional field access for lax types.
 - Calls with `start` are now considered as actions. As a result, they are not allowed within expressions.
 - Delimited identifier syntax has been changed.
@@ -471,7 +471,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
    string 'identifier\ two = "identifier two";
    ```
 
-- The `untaint` unary operator has been replaced by an annotation to mark a value as trusted.	 
+- The `untaint` unary operator has been replaced by an annotation to mark a value as trusted.
 
    Previous Syntax
 
