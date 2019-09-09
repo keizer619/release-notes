@@ -149,8 +149,6 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - Introduce Ballerina home auto detection capability.
 - Introduce Ballerina sequence diagram view.
 - Revamp the debugger using a DAP (Debugger Adapter Protocol) client.
-- Introduce in-place renaming support.
-- Add language-server-based signature help.
 
 ### Tooling
 
