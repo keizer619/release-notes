@@ -1,6 +1,6 @@
 # Overview of Ballerina 1.0.0
 
-Ballerina 1.0.0 is here! We would like you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev), or [Github](https://github.com/ballerina-platform/ballerina-lang).
+Ballerina 1.0.0 is here! We would like you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev), [Twitter](https://twitter.com/ballerinalang), or [Github](https://github.com/ballerina-platform/ballerina-lang).
 Ballerina 1.0.0 consists of improvements to the language syntax and semantics based on the stable language specification version 2019R3 and new features and enhancements to the standard library modules and developer tooling.
 
 # Highlights
@@ -10,6 +10,160 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 - Significant performance improvements over the previous Ballerina runtime (BVM)
 - Java interoperability (allows you to call Java code from Ballerina)
 - Major redesign of Ballerina developer tools
+
+# What's new in Ballerina 1.0.0
+
+## Language
+
+- A set of modules, which contain functions associated with the basic types have been introduced. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of lang library modules.
+
+  - `ballerina/lang.value`
+  - `ballerina/lang.array` for basic type list
+  - `ballerina/lang.decimal` for basic type `decimal`
+  - `ballerina/lang.error` for basic type `error`
+  - `ballerina/lang.float` for basic type `float`
+  - `ballerina/lang.future` for basic type `future`
+  - `ballerina/lang.int` for basic type `int`
+  - `ballerina/lang.map` for basic type `mapping`
+  - `ballerina/lang.object` for basic type `object`
+  - `ballerina/lang.stream` for basic type `stream`
+  - `ballerina/lang.string` for basic type `string`
+  - `ballerina/lang.table` for basic type `table`
+  - `ballerina/lang.typedesc` for basic type `typedesc`
+  - `ballerina/lang.xml` for basic type `xml`
+
+- The basic type `handle` has been added. A `handle` value is a reference to storage of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
+
+- The error reason is now optional if the reason can be inferred based on the contextually-expected type.
+
+   ```ballerina
+   type Detail record {
+      int code;
+   };
+
+   const FOO = "foo";
+
+   type FooError error<FOO, Detail>;
+
+   FooError e1 = error(FOO, code = 3456);
+   FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
+   ```
+
+- A unary operator `typeof` has been introduced to retrieve a typedesc value for the runtime type of a value.
+
+   ```ballerina
+   typedesc t = typeof valueExpr;
+   ```
+
+- A binary operator `.@` has been introduced to access annotation values at runtime.
+
+   ```ballerina
+   annotation Foo annot on service;
+   typedesc t = typeof serviceValue;
+   Foo? fooAnnot = t.@annot;
+   ```
+
+- Expressions are now allowed as default values for function parameters.
+
+- The concept of lax typing has been introduced allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime returning errors at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax.
+- An optional field access operator `?.` has been introduced to access possibly-undefined mapping members. Optional field access on lax types may return `error` if applied to a non-mapping value.
+
+## Runtime
+
+This release introduces a brand new implementation (jBallerina) of the Ballerina language spec, which targets the JVM. The jBallerina compiler produces an executable JAR file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, the previous Ballerina runtime implementation (BVM) will be deprecated and removed. jBallerina comes with significant performance improvements over the BVM.
+
+### Java Interoperability
+
+Java interoperability is a key feature in jBallerina that allows you to call Java code from Ballerina. It also enables you to embrace the capabilities of Ballerina for new projects while utilizing existing Java libraries that you or your organization invested in for years.
+
+## Project Structure & Build Tools
+
+- Ballerina project structure should match the following.
+
+   ```
+   project-name/
+   - Ballerina.toml
+   - src/
+   -- mymodule/
+   --- Module.md  	<- module-level documentation
+   --- main.bal   	<- Contains the default main method.
+   --- resources/ 	<- resources for the module (available at runtime)
+   --- tests/     	<- tests for this module (e.g. unit tests)
+   ---- testmain.bal  <- test file for main
+   ---- resources/	<- resources for these tests
+   - target/     	<- directory for compile/build output
+   -- bin/       	<- Executables will be created here
+   -- balo/      	<- .balo files one per built module
+   --- mymodule.balo  <- balo object of module1
+   -- caches/      	<- BIR, JAR cache directory
+
+   ```
+
+- To create a new project with a hello world, use the *new* command. This initializes a new directory.
+   ```
+   $ ballerina new <project-name>
+   ```
+
+- To add a module, use the *add* command inside the project.
+   ```
+   $ ballerina add <modulename> [-t main|service]
+   ```
+
+- If you are building a library, use the *compile* command. This generates a BALO to push to central.
+   ```
+   $ ballerina compile
+   ```
+
+- To create an executable, use the *build* command.
+   ```
+   $ ballerina build
+   ```
+
+- To run the executable, use the *run* command.
+   ```
+   $ ballerina run mymodule.jar
+   ```
+
+### Ballerina Central
+
+- Supports pushing of Ballerina modules with native Java libraries.
+
+## Standard Library
+
+- Revamp the NATS connector to support both NATS and Streaming Servers.
+- Introduce the standard library module-wise errors as a replacement for the builtin `error`.
+  E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
+- Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
+- Introduce OAuth2 inbound authentication.
+- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
+- Introduce prior knowledge support to the HTTP/2 client.
+- Add flow control support to HTTP/2 client and server.
+- Introduce XSL transformation support.
+- `h2` and `mysql` database client modules and the `sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
+- The ByteChannel read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
+- Introduce out of the box support for messaging with Kafka.
+- RabbitMQ, JMS, Artemis, WebSub and LDAP modules are available through Ballerina Central.
+- APIs to perform file system operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc are moved to the File module.
+- Most of the APIs of the `encoding` module were removed since they are now supported via langlib.
+- Three new utility modules were introduced to manipulate built-in `string`, `json` and `xml` types.
+
+## IDEs & Language Server
+
+### IntelliJ IDEA Plugin
+
+- Introduce Ballerina home auto detection capability.
+- Introduce Ballerina sequence diagram view.
+- Revamp the debugger using a DAP (Debugger Adapter Protocol) client.
+- Introduce in-place renaming support.
+- Add language-server-based signature help.
+
+### Tooling
+
+- Ballerina Formatter: Ballerina source formatting CLI tool.
+- OpenAPI to Ballerina generator CLI tool.
+- Ballerina to OpenAPI generator CLI tool.
+- OpenAPI validator compiler plugin.
+- Introduce Debug Adapter Protocol implementation.
 
 # Breaking Changes
 
@@ -359,170 +513,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
    string s = string `Value: ${i}`;
    ```
 
-
-# What's new in Ballerina 1.0.0
-
-## Language
-
-- A set of modules, which contain the functions associated with the basic types. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of the lang library modules.
-
-  - `ballerina/lang.value`
-  - `ballerina/lang.array` for basic type list
-  - `ballerina/lang.decimal` for basic type `decimal`
-  - `ballerina/lang.error` for basic type `error`
-  - `ballerina/lang.float` for basic type `float`
-  - `ballerina/lang.future` for basic type `future`
-  - `ballerina/lang.int` for basic type `int`
-  - `ballerina/lang.map` for basic type `mapping`
-  - `ballerina/lang.object` for basic type `object`
-  - `ballerina/lang.stream` for basic type `stream`
-  - `ballerina/lang.string` for basic type `string`
-  - `ballerina/lang.table` for basic type `table`
-  - `ballerina/lang.typedesc` for basic type `typedesc`
-  - `ballerina/lang.xml` for basic type `xml`
-
-- The basic type `handle` has been added. A `handle` value is a reference to storage of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
-
-- The error reason is now optional if the reason can be inferred based on the contextually-expected type.
-
-   ```ballerina
-   type Detail record {
-      int code;
-   };
-
-   const FOO = "foo";
-
-   type FooError error<FOO, Detail>;
-
-   FooError e1 = error(FOO, code = 3456);
-   FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
-   ```
-
-- A unary operator `typeof` has been introduced to retrieve a typedesc value for the runtime type of a value.
-
-   ```ballerina
-   typedesc t = typeof valueExpr;
-   ```
-
-- A binary operator `.@` has been introduced to access annotation values at runtime.	 
-
-   ```ballerina
-   annotation Foo annot on service;
-   typedesc t = typeof serviceValue;
-   Foo? fooAnnot = t.@annot;
-   ```
-
-- Expressions are now allowed as default values for function parameters.
-
-- The concept of lax typing has been introduced allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime returning errors at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax. 
-- An optional field access operator `?.` has been introduced to access possibly-undefined mapping members. Optional field access on lax types may return `error` if applied to a non-mapping value.
-
-## Runtime
-
-This release introduces a brand new implementation (jBallerina) of the Ballerina language spec, which targets the JVM. The jBallerina compiler produces an executable JAR file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, the previous Ballerina runtime implementation (BVM) will be deprecated and removed. jBallerina comes with significant performance improvements over the BVM.
-
-### Java Interoperability
-
-Java interoperability is a key feature in jBallerina that allows you to call Java code from Ballerina. It also enables you to embrace the capabilities of Ballerina for new projects while utilizing existing Java libraries that you or your organization invested in for years.
-
-## Project Structure & Build Tools
-
-- Ballerina project structure should match the following.
-
-   ```
-   project-name/
-   - Ballerina.toml
-   - src/
-   -- mymodule/
-   --- Module.md  	<- module-level documentation
-   --- main.bal   	<- Contains the default main method.
-   --- resources/ 	<- resources for the module (available at runtime)
-   --- tests/     	<- tests for this module (e.g. unit tests)
-   ---- testmain.bal  <- test file for main
-   ---- resources/	<- resources for these tests
-   - tests/       	<- integration tests
-   -- integration.bal <- integration test file
-   -- resources/  	<- integration test resources
-   - target/     	<- directory for compile/build output
-   -- bin/       	<- Executables will be created here
-   -- balo/      	<- .balo files one per built module
-   --- mymodule.balo  <- balo object of module1
-   -- cache      	<- BIR, JAR cache directory
-
-   ```
-
-- To push to the [Staging Central](https://staging-central.ballerina.io), set the following environment variable with the release. 
-
-   ```
-   $ export BALLERINA_DEV_STAGE_CENTRAL=true
-   ```
-   
-- To create a new project with a hello world, use the *new* command. This initializsa a new directory.
-   ```
-   $ ballerina new <project-name>
-   ```
-
-- To create a module, use the *create* command inside the project.
-   ```
-   $ ballerina create <modulename> [-t main|service]
-   ```
-
-- If you are building a library, use the *compile* command. This generates a BALO to push to central.
-   ```
-   $ ballerina compile
-   ```
-
-- To create an executable, use the *build* command.
-   ```
-   $ ballerina build
-   ```
-
-- To run the executable, use the *run* command.
-   ```
-   $ ballerina run mymodule-executable.jar
-   ```
-
-### Ballerina Central
-
-- Supports pushing of Ballerina modules with native Java libraries.
-
-## Standard Library
-
-- Revamped the NATS connector to support both NATS and Streaming Servers.
-- Introduce the StdLib module-wise errors as a replacement for the builtin error. 
-  E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
-- Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
-- Introduce OAuth2 inbound authentication.
-- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
-- Improve LDAP APIs by decoupling usage with an auth provider.
-- Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
-- Introduce prior knowledge support for the HTTP/2 client.
-- Add flow control support to HTTP/2 client and server.
-- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
-- Transaction support in RabbitMQ broker and Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
-- Introduce XSL transformation support.
-- Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-- H2 and MySQL database client modules and `sql` module have been discontinued. The `ballerinax/java.jdbc` module can be used to interact with relational databases.
-
-## IDEs & Language Server
-
-### IntelliJ IDEA Plugin
-
-- Introduce Ballerina home auto detection capability.
-- Introduce Ballerina sequence diagram view.
-- Revamp the debugger using a DAP (Debugger Adapter Protocol) client.
-- Introduce in-place renaming support.
-- Add language-server-based signature help.
-
-### Tooling
-
-- Ballerina Formatter: Ballerina source formatting CLI tool.
-- OpenAPI to Ballerina generator CLI tool.
-- Ballerina to OpenAPI generator CLI tool.
-- OpenAPI validator compiler plugin.
-- Introduce Debug Adapter Protocol implementation.
-
-## JBallerina 1.0 - 2019R3 Specification Deviations
+# JBallerina 1.0 - 2019R3 Specification Deviations
 
 ### Lexical structure
 - `QuotedIdentifier` supports only alphanumeric characters and "." [#18720](https://github.com/ballerina-platform/ballerina-lang/issues/18720).
