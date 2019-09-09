@@ -5,7 +5,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 # Highlights
 
 - Based on a stable language specification: 2019R3
-- Introduces a brand new Ballerina compiler back-end that targets the JVM
+- Introduces a brand new Ballerina compiler back-end, which targets the JVM
 - Significant performance improvements over the previous Ballerina runtime (BVM)
 - Java interoperability (allows you to call Java code from Ballerina)
 - Major redesign of Ballerina developer tools
@@ -16,7 +16,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ### Builtin library
 
-The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided  by the newly-added `lang` library.
+The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided by the newly-added `lang` library.
 
 - The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
