@@ -1,10 +1,10 @@
 # Overview of Ballerina 1.0.0
 Ballerina 1.0.0 is here! It is a massive milestone before our official 1.0.0 release, so we want as many of you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev) or [Github](https://github.com/ballerina-platform/ballerina-lang).
-Ballerina 1.0.0 consists of improvements to the language syntax and semantics based on the stable language specification version 2019R2 and new features and enhancements to the standard library modules, and developer tooling.
+Ballerina 1.0.0 consists of improvements to the language syntax and semantics based on the stable language specification version 2019R3 and new features and enhancements to the standard library modules, and developer tooling.
 
 # Highlights
 
-- Based on a stable language specification: 2019R2
+- Based on a stable language specification: 2019R3
 - Introduces a brand new Ballerina compiler back-end that targets the JVM
 - Significant performance improvements over the previous Ballerina runtime (BVM)
 - Java interoperability (allows you to call Java code from Ballerina)
@@ -479,18 +479,18 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Revamped the NATS connector to support both NATS and Streaming Servers.
 - Introduce the StdLib module-wise errors as a replacement for the builtin error. 
   E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
-- Introduce capability to engage custom providers and handlers for inbound/outbound authentication
-- Introduce OAuth2 inbound authentication
-- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.)
-- Improve LDAP APIs by decoupling usage with an auth provider
+- Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
+- Introduce OAuth2 inbound authentication.
+- Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
+- Improve LDAP APIs by decoupling usage with an auth provider.
 - Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
-- Introduce prior knowledge support to the HTTP/2 client
-- Add flow control support to HTTP/2 client and server
+- Introduce prior knowledge support to the HTTP/2 client.
+- Add flow control support to HTTP/2 client and server.
 - Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
 - Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
-- Introduce XSL transformation support
+- Introduce XSL transformation support.
 - Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-- H2 and MySQL database client modules and `sql` module have been discontinued. The JDBC client module can be used to interact with relational databases.
+- H2 and MySQL database client modules and `sql` module have been discontinued. The `ballerinax/java.jdbc` module can be used to interact with relational databases.
 
 ## IDEs & Language Server
 
