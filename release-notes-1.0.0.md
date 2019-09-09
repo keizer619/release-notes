@@ -528,7 +528,6 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Defaultable and rest parameters are not supported with function pointers [#10639](https://github.com/ballerina-platform/ballerina-lang/issues/10639).
 - Filler values for finite types are not supported [#13612](https://github.com/ballerina-platform/ballerina-lang/issues/13612).
 - Object initialization does not follow the initialization protocol outlined in the spec [#15240](https://github.com/ballerina-platform/ballerina-lang/issues/15240).
-- Object initialization does not follow the initialization protocol outlined in the spec [#15240](https://github.com/ballerina-platform/ballerina-lang/issues/15240).
 - Object __init() allows using self other than to access/modify a field when there are potentially uninitialized fields [#17917](https://github.com/ballerina-platform/ballerina-lang/issues/17917).
 - Default values of fields and default values of defaultable function parameters of abstract objects are not available when referencing the objects in other objects [#18405](https://github.com/ballerina-platform/ballerina-lang/issues/18405).
 - Constraints are mandatory for future, stream and typedesc [#17922](https://github.com/ballerina-platform/ballerina-lang/issues/17922).
@@ -580,3 +579,7 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - The lang.xml module contains functions not defined in the specification [#18870](https://github.com/ballerina-platform/ballerina-lang/issues/18870).
 - The lang.map module functions which modify the value are disallowed on records [#18873](https://github.com/ballerina-platform/ballerina-lang/issues/18873).
 - The lang.array module functions which modify the value are disallowed on tuples [#18874](https://github.com/ballerina-platform/ballerina-lang/issues/18874).
+
+## Preview Features
+
+- XML access expressions are not defined in the spec. [#18875](https://github.com/ballerina-platform/ballerina-lang/issues/18875).
