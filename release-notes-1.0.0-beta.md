@@ -334,6 +334,30 @@ New Syntax
 var untaintedValue = <@untainted> taintedValue;
 ```
 
+- Concatenation with the + operator is no longer allowed between `string` values and values of other basic types. The `.toString()` method can be used on any variable to retrieve the `string` representation prior to concatenating. Alternatively, the string template expression can also be used.
+
+Previously Valid Syntax
+
+```ballerina
+int i = 1;
+string s = "Value: " + i;
+```
+
+Alternative I
+
+```ballerina
+int i = 1;
+string s = "Value: " + i.toString();
+```
+
+Alternative II
+
+```ballerina
+int i = 1;
+string s = string `Value: ${i}`;
+```
+
+
 # What's new in Ballerina 1.0.0-beta
 
 ## Language
