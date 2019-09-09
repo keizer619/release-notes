@@ -99,12 +99,6 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
    ```
 
-- To push to the [Staging Central](https://staging-central.ballerina.io), set the following environment variable with the release.
-
-   ```
-   $ export BALLERINA_DEV_STAGE_CENTRAL=true
-   ```
-
 - To create a new project with a hello world, use the *new* command. This initializes a new directory.
    ```
    $ ballerina new <project-name>
@@ -112,7 +106,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 - To add a module, use the *add* command inside the project.
    ```
-   $ ballerina create <modulename> [-t main|service]
+   $ ballerina add <modulename> [-t main|service]
    ```
 
 - If you are building a library, use the *compile* command. This generates a BALO to push to central.
@@ -136,21 +130,22 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 ## Standard Library
 
-- Revamped the NATS connector to support both NATS and Streaming Servers.
-- Introduce the StdLib module-wise errors as a replacement for the builtin error.
+- Revamp the NATS connector to support both NATS and Streaming Servers.
+- Introduce the standard library module-wise errors as a replacement for the builtin `error`.
   E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
 - Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
 - Introduce OAuth2 inbound authentication.
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
-- Improve LDAP APIs by decoupling usage with an auth provider.
-- Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
-- Introduce prior knowledge support for the HTTP/2 client.
+- Introduce prior knowledge support to the HTTP/2 client.
 - Add flow control support to HTTP/2 client and server.
-- Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
-- Transaction support in RabbitMQ broker and Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
 - Introduce XSL transformation support.
-- Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
-- H2 and MySQL database client modules and `sql` module have been discontinued. The `ballerinax/java.jdbc` module can be used to interact with relational databases.
+- `h2` and `mysql` database client modules and the `sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
+- The ByteChannel read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
+- Introduce out of the box support for messaging with Kafka.
+- RabbitMQ, JMS, Artemis, WebSub and LDAP modules are available through Ballerina Central.
+- APIs to perform file system operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc are moved to the File module.
+- Most of the APIs of the `encoding` module were removed since they are now supported via langlib.
+- Three new utility modules were introduced to manipulate built-in `string`, `json` and `xml` types.
 
 ## IDEs & Language Server
 
