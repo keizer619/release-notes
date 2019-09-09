@@ -138,7 +138,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
 - Introduce prior knowledge support to the HTTP/2 client.
 - Add flow control support to HTTP/2 client and server.
-- Introduce XSL transformation support.
+- Introduce XSLT transformation support.
 - `h2` and `mysql` database client modules and the `sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
 - The ByteChannel read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
 - Introduce out of the box support for messaging with Kafka.
