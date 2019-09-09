@@ -15,7 +15,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ## Language
 
-- A set of modules, which contain functions associated with the basic types have been introduced. These modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of lang library modules.
+- A set of modules, which contain functions associated with the basic types have been introduced. Collectively, these modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of lang library modules.
 
   - `ballerina/lang.value`
   - `ballerina/lang.array` for basic type list
@@ -24,7 +24,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
   - `ballerina/lang.float` for basic type `float`
   - `ballerina/lang.future` for basic type `future`
   - `ballerina/lang.int` for basic type `int`
-  - `ballerina/lang.map` for basic type `mapping`
+  - `ballerina/lang.map` for basic type mapping
   - `ballerina/lang.object` for basic type `object`
   - `ballerina/lang.stream` for basic type `stream`
   - `ballerina/lang.string` for basic type `string`
@@ -127,19 +127,19 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 - Revamp the NATS connector to support both NATS and Streaming Servers.
 - Introduce the standard library module-wise errors as a replacement for the builtin `error`.
-  E.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
+  e.g., Ballerina HTTP Error types include `http:ClientError`, `http:ListenerError`, `http:ClientAuthError` etc.
 - Introduce capability to engage custom providers and handlers for inbound/outbound authentication.
 - Introduce OAuth2 inbound authentication.
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
 - Introduce prior knowledge support to the HTTP/2 client.
 - Add flow control support to HTTP/2 client and server.
 - Introduce XSLT transformation support.
-- `h2` and `mysql` database client modules and the `sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
-- The ByteChannel read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
+- `ballerina/h2` and `ballerina/mysql` database client modules and the `ballerina/sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
+- The `ByteChannel` read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
 - Introduce out of the box support for messaging with Kafka.
 - RabbitMQ, JMS, Artemis, WebSub and LDAP modules are available through Ballerina Central.
-- APIs to perform file system operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc are moved to the File module.
-- Most of the APIs of the `encoding` module were removed since they are now supported via langlib.
+- APIs for performing file system operations such as creating files, creating directories, moving directories, renaming files, fetching file metadata, copying files etc. are now available through the `ballerina/file` module.
+- Most of the APIs of the `ballerina/encoding` module were removed since they are now supported via the lang library.
 - Three new utility modules were introduced to manipulate built-in `string`, `json` and `xml` types.
 
 ## IDEs & Language Server
@@ -160,7 +160,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - OpenAPI validator compiler plugin.
 - Introduce Debug Adapter Protocol implementation.
 
-# Breaking Changes
+# Breaking Changes from 0.991.0
 
 ## Breaking Language Changes
 
@@ -187,14 +187,14 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
    Previous Syntax
 
    ```ballerina
-   json j = { name : "tom", age: 2};
+   json j = {name:"tom", age:2};
    Person|error p = Person.convert(j);
    ```
 
    New Syntax
 
    ```ballerina
-   json j = { name : "tom", age: 2};
+   json j = {name:"tom", age:2};
    Person|error p = Person.constructFrom(j);
    ```
 - The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
@@ -214,7 +214,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
       int x = 'int:fromString("100");
       ```
 
-   - Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
+   - Previously, when invoked on the `string` type descriptor, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
 
       Previous Syntax
 
@@ -265,19 +265,19 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
    // Open record with a field `a`. It additionally allows
    // `anydata` fields.
    type Foo record {
-   string a;
+      string a;
    };
 
    // Open record with a field `a`. It additionally allows
    // only `int` fields.
    type Bar record {|
-   string a;
-   int...;
+      string a;
+      int...;
    |};
 
    // Closed record, which only allows a `string` field named `a`.
-   type Baz record {|
-   string a;
+      type Baz record {|
+      string a;
    |};
    ```
 
