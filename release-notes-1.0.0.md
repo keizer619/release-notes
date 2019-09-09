@@ -18,13 +18,13 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 - A set of modules, which contain functions associated with the basic types have been introduced. Collectively, these modules are referred to as the lang library. Each basic type has a corresponding lang library module. Additionally, there is also the `lang.value` module, which holds functions common for all the types. The following is the list of lang library modules.
 
   - `ballerina/lang.value`
-  - `ballerina/lang.array` for basic type list
+  - `ballerina/lang.array` for list types
   - `ballerina/lang.decimal` for basic type `decimal`
   - `ballerina/lang.error` for basic type `error`
   - `ballerina/lang.float` for basic type `float`
   - `ballerina/lang.future` for basic type `future`
   - `ballerina/lang.int` for basic type `int`
-  - `ballerina/lang.map` for basic type mapping
+  - `ballerina/lang.map` for mapping types
   - `ballerina/lang.object` for basic type `object`
   - `ballerina/lang.stream` for basic type `stream`
   - `ballerina/lang.string` for basic type `string`
@@ -135,7 +135,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - Add flow control support to HTTP/2 client and server.
 - Introduce XSLT transformation support.
 - `ballerina/h2` and `ballerina/mysql` database client modules and the `ballerina/sql` module have been discontinued. The `ballerinax/java.jdbc` client module can be used to interact with relational databases.
-- The `ByteChannel` read API was updated to return only `byte[]|io:Error`, removing the previously returned read byte length.
+- The byte channel read API was updated to return only `byte[]|io:Error`.
 - Introduce out of the box support for messaging with Kafka.
 - RabbitMQ, JMS, Artemis, WebSub and LDAP modules are available through Ballerina Central.
 - APIs for performing file system operations such as creating files, creating directories, moving directories, renaming files, fetching file metadata, copying files etc. are now available through the `ballerina/file` module.
