@@ -203,15 +203,15 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
       Previous Syntax
 
       ```ballerina
-      int|error x = int.convert(“100”);
+      int|error x = int.convert("100");
       ```
 
       New Syntax
 
       ```ballerina
-      import ballerina/lang.int; // Need to import `lang.int`
+      import ballerina/lang.'int; // Need to import `lang.int`
 
-      int x = int:fromString("100");
+      int x = 'int:fromString("100");
       ```
 
    - Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
@@ -219,14 +219,14 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
       Previous Syntax
 
       ```ballerina
-      json person = {“name”:”John”, “age”:25};
+      json person = {"name":"John", "age":25};
       string|error str = string.convert(person);
       ```
 
       New Syntax
 
       ```ballerina
-      json person = {“name”:”John”, “age”:25};
+      json person = {"name":"John", "age":25};
       string str = person.toString();
       ```
 
