@@ -100,24 +100,27 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
    ```
 
 - To create a new project with a hello world, use the *new* command. This initializes a new directory.
-   ```
-   $ ballerina new <project-name>
-   ```
+
+```
+$ ballerina new <project-name>
+```
 
 - To add a module, use the *add* command inside the project.
-   ```
-   $ ballerina add <modulename> [-t main|service]
-   ```
+
+```
+$ ballerina add <modulename> [-t main|service]
+```
 
 - To create an executable, use the *build* command.
-   ```
-   $ ballerina build
-   ```
+
+```
+$ ballerina build
+```
 
 - To run the executable, use the *run* command.
-   ```
-   $ ballerina run mymodule.jar
-   ```
+```
+$ ballerina run mymodule.jar
+```
 
 ### Ballerina Central
 
@@ -195,38 +198,39 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
    json j = {name:"tom", age:2};
    Person|error p = Person.constructFrom(j);
    ```
+
 - The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
    - Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
 
       Previous Syntax
 
-      ```ballerina
-      int|error x = int.convert("100");
-      ```
+```ballerina
+int|error x = int.convert("100");
+```
 
       New Syntax
 
-      ```ballerina
-      import ballerina/lang.'int; // Need to import `lang.int`
+```ballerina
+import ballerina/lang.'int; // Need to import `lang.int`
 
-      int x = 'int:fromString("100");
-      ```
+int x = 'int:fromString("100");
+```
 
    - Previously, when invoked on the `string` type descriptor, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
 
       Previous Syntax
 
-      ```ballerina
-      json person = {"name":"John", "age":25};
-      string|error str = string.convert(person);
-      ```
+```ballerina
+json person = {"name":"John", "age":25};
+string|error str = string.convert(person);
+```
 
-      New Syntax
+   New Syntax
 
-      ```ballerina
-      json person = {"name":"John", "age":25};
-      string str = person.toString();
-      ```
+```ballerina
+json person = {"name":"John", "age":25};
+string str = person.toString();
+```
 
 - The `stamp()` method has been removed.
 
@@ -236,112 +240,113 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
    Previous Syntax
 
-   ```ballerina
-   // Open record with a field `a`. It additionally allows
-   // `anydata|error` fields.
-   type Foo record {
-      string a;
-   };
+```ballerina
+// Open record with a field `a`. It additionally allows
+// `anydata|error` fields.
+type Foo record {
+   string a;
+};
 
-   // Open record with a field `a`. It additionally allows
-   // `int` fields.
-   type Bar record {
-      string a;
-      int...;
-   };
+// Open record with a field `a`. It additionally allows
+// `int` fields.
+type Bar record {
+   string a;
+   int...;
+};
 
-   // Closed record, which only allows a `string` field named `a`.
-   type Baz record {|
-      string a;
-   |};
+// Closed record, which only allows a `string` field named `a`.
+type Baz record {|
+   string a;
+|};
 
-   ```
+```
 
    New Syntax
 
-   ```ballerina
-   // Open record with a field `a`. It additionally allows
-   // `anydata` fields.
-   type Foo record {
-      string a;
-   };
+```ballerina
+// Open record with a field `a`. It additionally allows
+// `anydata` fields.
+type Foo record {
+   string a;
+};
 
-   // Open record with a field `a`. It additionally allows
-   // only `int` fields.
-   type Bar record {|
-      string a;
-      int...;
-   |};
+// Open record with a field `a`. It additionally allows
+// only `int` fields.
+type Bar record {|
+   string a;
+   int...;
+|};
 
-   // Closed record, which only allows a `string` field named `a`.
-      type Baz record {|
-      string a;
-   |};
-   ```
+// Closed record, which only allows a `string` field named `a`.
+   type Baz record {|
+   string a;
+|};
+```
 
 - The default record rest field type has been changed to `anydata` from `anydata|error`.
 - The syntax to specify expressions as keys in the mapping constructor has changed. Now, expressions need to be enclosed in `[]` (e.g., `[expr]`).
 
    Previous Syntax
 
-   ```ballerina
-   map<string> m = { getString(): "value" };
-   ```
+```ballerina
+map<string> m = { getString(): "value" };
+```
 
    New Syntax
 
-   ```ballerina
-   map<string> m = { [getString()]: "value" };
-   ```
+```ballerina
+map<string> m = { [getString()]: "value" };
+```
+
 - String literals can now be used as keys in the mapping constructor for a record. The key for a `rest` field should either be a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
 
    Previous Syntax
 
-   ```ballerina
-   type Foo record {
-      string bar;
-      int...;
-   };
+```ballerina
+type Foo record {
+   string bar;
+   int...;
+};
 
-   Foo f = { bar: "test string", qux: 1 }; // `qux` is a rest field
-   ```
+Foo f = { bar: "test string", qux: 1 }; // `qux` is a rest field
+```
 
    New Syntax
 
-   ```ballerina
-   type Foo record {|
-      string bar;
-      int...;
-   |};
+```ballerina
+type Foo record {|
+   string bar;
+   int...;
+|};
 
-   Foo f = { bar: "test string", "qux": 1 }; // `qux` is a rest field
-   ```
+Foo f = { bar: "test string", "qux": 1 }; // `qux` is a rest field
+```
 
 - Mapping values are now iterable as sequences of their members (values) instead of sequences of key-value pairs. A lang library function `entries()` is available to retrieve an array of key-value pairs for a mapping value.
 
    Previous Syntax
 
-   ```ballerina
-   foreach (string, int) (k, v) in m {
-      io:println("Key:   ", k);
-      io:println("Value: ", v);
-   }
-   ```
+```ballerina
+foreach (string, int) (k, v) in m {
+   io:println("Key:   ", k);
+   io:println("Value: ", v);
+}
+```
 
    New Syntax
 
-   ```ballerina
-   // Iterating values.
-   foreach int v in m {
-      io:println("Value: ", v);
-   }
+```ballerina
+// Iterating values.
+foreach int v in m {
+   io:println("Value: ", v);
+}
 
-   // Iterating entries.
-   foreach [string, int] [k, v] in m.entries() {
-      io:println("Key:   ", k);
-      io:println("Value: ", v);
-   }
-   ```
+// Iterating entries.
+foreach [string, int] [k, v] in m.entries() {
+   io:println("Key:   ", k);
+   io:println("Value: ", v);
+}
+```
 
 ### Arrays and Tuples
 
@@ -349,54 +354,54 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
    Previous Syntax
 
-   ```ballerina
-   (int|string)[] arr = []; // Fails at compile time.
-   arr[1] = 1;
-   ```
+```ballerina
+(int|string)[] arr = []; // Fails at compile time.
+arr[1] = 1;
+```
 
    New Syntax
 
-   ```ballerina
-   (int|string)[] arr = [];
-   arr[1] = 1; // Fails at runtime.
-   ```
+```ballerina
+(int|string)[] arr = [];
+arr[1] = 1; // Fails at runtime.
+```
 
 - Tuple types now use brackets instead of parentheses. 
 
    Previous Syntax
 
-   ```ballerina
-   (int, string) t = (1, "hello world");
-   ```
+```ballerina
+(int, string) t = (1, "hello world");
+```
 
    New Syntax
 
-   ```ballerina
-   [int, string] t = [1, "hello world"];
-   ```
+```ballerina
+[int, string] t = [1, "hello world"];
+```
 
 - Tuple types now support rest descriptors. Therefore, the following syntax is valid now.
 
-   ```ballerina
-   [int, string, boolean...] t = [1, "hello world", true, true];
-   [int...] t3 = [1, 2];
-   ```
+```ballerina
+[int, string, boolean...] t = [1, "hello world", true, true];
+[int...] t3 = [1, 2];
+```
 
 ### Objects
 
 - Outside method definitions are no longer allowed for objects. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
 
-   ```ballerina
-   type Foo object {
-      int code = 0;
+```ballerina
+type Foo object {
+   int code = 0;
 
-      function printCode();
-   };
+   function printCode();
+};
 
-   function Foo.printCode() {
-      // print code
-   }
-   ```
+function Foo.printCode() {
+   // print code
+}
+```
 
 ### Functions and Methods
 
@@ -407,28 +412,28 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
 - The error detail type must now belong to the `detail` type defined in the error lang library.
 
-   ```ballerina
-   public type Detail record {|
-      string message?;
-      error cause?;
-      (anydata|error)...;
-   |};
-   ```
+```ballerina
+public type Detail record {|
+   string message?;
+   error cause?;
+   (anydata|error)...;
+|};
+```
 
 - The error constructor now accepts `detail` fields as individual named arguments as opposed to accepting a single mapping as the `detail` argument.	 
 
    Previous Syntax
 
-   ```ballerina
-   Detail detail = { message: "error message", code: 1100 };
-   error e = error("error reason", detail);
-   ```
+```ballerina
+Detail detail = { message: "error message", code: 1100 };
+error e = error("error reason", detail);
+```
 
    New Syntax
 
-   ```ballerina
-   error e = error("error reason", message = "error message", code = 1100);
-   ```
+```ballerina
+error e = error("error reason", message = "error message", code = 1100);
+```
 
 ### Annotations
 
@@ -436,15 +441,15 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
    Previous Syntax
 
-   ```ballerina
-   annotation<service> annot Foo;
-   ```
+```ballerina
+annotation<service> annot Foo;
+```
 
    New Syntax
 
-   ```ballerina
-   annotation Foo annot on service;
-   ```
+```ballerina
+annotation Foo annot on service;
+```
 
 ### Expressions
 
@@ -457,61 +462,63 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 
    Previous Syntax
 
-   ```ballerina
-   string ^"1" = "identifier one";
-   string ^"identifier two" = "identifier two";
-   ```
+```ballerina
+string ^"1" = "identifier one";
+string ^"identifier two" = "identifier two";
+```
 
    New Syntax
 
-   ```ballerina
-   string '1 = "identifier one";
-   string 'identifier\ two = "identifier two";
-   ```
+```ballerina
+string '1 = "identifier one";
+string 'identifier\ two = "identifier two";
+```
 
 - The `untaint` unary operator has been replaced by an annotation to mark a value as trusted.
 
    Previous Syntax
 
-   ```ballerina
-   var untaintedValue = untaint taintedValue;
-   ```
+```ballerina
+var untaintedValue = untaint taintedValue;
+```
 
    New Syntax
 
-   ```ballerina
-   var untaintedValue = <@untainted> taintedValue;
-   ```
+```ballerina
+var untaintedValue = <@untainted> taintedValue;
+```
 
 - Concatenation with the + operator is no longer allowed between `string` values and values of other basic types. The `.toString()` method can be used on any variable to retrieve the `string` representation prior to concatenating. Alternatively, the string template expression can also be used.
 
    Previously Syntax
 
-   ```ballerina
-   int i = 1;
-   string s = "Value: " + i;
-   ```
+```ballerina
+int i = 1;
+string s = "Value: " + i;
+```
 
    Alternative I
 
-   ```ballerina
-   int i = 1;
-   string s = "Value: " + i.toString();
-   ```
+```ballerina
+int i = 1;
+string s = "Value: " + i.toString();
+```
 
    Alternative II
 
-   ```ballerina
-   int i = 1;
-   string s = string `Value: ${i}`;
-   ```
+```ballerina
+int i = 1;
+string s = string `Value: ${i}`;
+```
 
 # JBallerina 1.0 - 2019R3 Specification Deviations
 
 ### Lexical structure
+
 - `QuotedIdentifier` supports only alphanumeric characters and "." [#18720](https://github.com/ballerina-platform/ballerina-lang/issues/18720).
 
 ### Values, Types and Variables.
+
 - Limited Singleton type support [#13410](https://github.com/ballerina-platform/ballerina-lang/issues/13410).
 - Limited constant support [#13944](https://github.com/ballerina-platform/ballerina-lang/issues/13944).
 - `0.` syntax is not supported for floating point literals [#13168](https://github.com/ballerina-platform/ballerina-lang/issues/13168).
@@ -529,6 +536,7 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 - Type narrowing does not happen with equality checks [#18167](https://github.com/ballerina-platform/ballerina-lang/issues/18167).
 
 ### Expressions
+
 - Reference equality checks produce incorrect results for float NaN/NaN and -0.0/+0.0 [#11913](https://github.com/ballerina-platform/ballerina-lang/issues/11913).
 - Constants cannot be used to specify the length of a fixed length array [#13162](https://github.com/ballerina-platform/ballerina-lang/issues/13162).
 - Incorrect type inferring for int-literals/floating-point-literals used in equality expressions [#13904](https://github.com/ballerina-platform/ballerina-lang/issues/13904).
@@ -555,18 +563,22 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 - Asynchronous send is not an action (currently a statement) [#18639](https://github.com/ballerina-platform/ballerina-lang/issues/18639).
 
 ### Module-Level Declarations
+
 - Versioned imports are not supported [#4087](https://github.com/ballerina-platform/ballerina-lang/issues/4087).
 - Listener declarations without the type-descriptors are not supported [#18200](https://github.com/ballerina-platform/ballerina-lang/issues/18200).
 
 ### Module and Program Execution
+
 - A program exits even when there are listeners started (currently looks for services) [#18601](https://github.com/ballerina-platform/ballerina-lang/issues/18601).
 
 ### Metadata
+
 - Annotation types (mapping types) are not restricted to `anydata` and thus, non-constant annotation values are not constructed as readonly values [#15533](https://github.com/ballerina-platform/ballerina-lang/issues/15533).
 - Annotation attachment is not supported for anonymous function expressions, local variable declaration statements and local type definition statements [#18207](https://github.com/ballerina-platform/ballerina-lang/issues/18207).
 - An annotation is not available to to indicate that a newly created strand should be in a separate thread from the current strand [#18001](https://github.com/ballerina-platform/ballerina-lang/issues/18001).
 
 ### Lang Library
+
 - Creating an immutable clone of a container does not narrow its inherent type to a type that consists of just its current shape [#13189](https://github.com/ballerina-platform/ballerina-lang/issues/13189).
 - Use of stack-like methods and queue-like methods on fixed-length arrays/tuples is not  checked at compile time [#18662](https://github.com/ballerina-platform/ballerina-lang/issues/18662).
 - The lang.table module contains functions not defined in the specification [#18869](https://github.com/ballerina-platform/ballerina-lang/issues/18869).
@@ -575,4 +587,5 @@ The `ballerina/builtin` module has been removed. Some of the functionalities pro
 - The lang.array module functions which modify the value are disallowed on tuples [#18874](https://github.com/ballerina-platform/ballerina-lang/issues/18874).
 
 ### Preview Features
+
 - XML access expressions are not defined in the spec. [#18875](https://github.com/ballerina-platform/ballerina-lang/issues/18875).
