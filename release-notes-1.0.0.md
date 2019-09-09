@@ -522,3 +522,74 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - Ballerina to OpenAPI generator CLI tool.
 - OpenAPI validator compiler plugin.
 - Introduce Debug Adapter Protocol implementation.
+
+## JBallerina 1.0 - 2019R3 Specification Deviations
+
+### Lexical structure
+- `QuotedIdentifier` supports only alphanumeric characters and "." [#18720](https://github.com/ballerina-platform/ballerina-lang/issues/18720).
+
+### Values, Types and Variables.
+- Limited Singleton type support [#13410](https://github.com/ballerina-platform/ballerina-lang/issues/13410).
+- Limited constant support [#13944](https://github.com/ballerina-platform/ballerina-lang/issues/13944).
+- `0.` syntax is not supported for floating point literals [#13168](https://github.com/ballerina-platform/ballerina-lang/issues/13168).
+- Cannot use a byte in an int context even though byte is a subtype of int [#14366](https://github.com/ballerina-platform/ballerina-lang/issues/14366).
+- Hex floating point literals are allowed for Decimal values [#14775](https://github.com/ballerina-platform/ballerina-lang/issues/14775).
+- `StringNumericEscape` is not supported [#13180](https://github.com/ballerina-platform/ballerina-lang/issues/13180).
+- Direct table type descriptor is not implemented [#13170](https://github.com/ballerina-platform/ballerina-lang/issues/13170).
+- Defaultable and rest parameters are not supported with function pointers [#10639](https://github.com/ballerina-platform/ballerina-lang/issues/10639).
+- Filler values for finite types are not supported [#13612](https://github.com/ballerina-platform/ballerina-lang/issues/13612).
+- Object initialization does not follow the initialization protocol outlined in the spec [#15240](https://github.com/ballerina-platform/ballerina-lang/issues/15240).
+- Object __init() allows using self other than to access/modify a field when there are potentially uninitialized fields [#17917](https://github.com/ballerina-platform/ballerina-lang/issues/17917).
+- Default values of fields and default values of defaultable function parameters of abstract objects are not available when referencing the objects in other objects [#18405](https://github.com/ballerina-platform/ballerina-lang/issues/18405).
+- Constraints are mandatory for future, stream and typedesc [#17922](https://github.com/ballerina-platform/ballerina-lang/issues/17922).
+- Inferred error type (`error<*>`) is not allowed [#18007](https://github.com/ballerina-platform/ballerina-lang/issues/18007).
+- Type narrowing does not happen with equality checks [#18167](https://github.com/ballerina-platform/ballerina-lang/issues/18167).
+
+### Expressions
+- Reference equality checks produce incorrect results for float NaN/NaN and -0.0/+0.0 [#11913](https://github.com/ballerina-platform/ballerina-lang/issues/11913).
+- Constants cannot be used to specify the length of a fixed length array [#13162](https://github.com/ballerina-platform/ballerina-lang/issues/13162).
+- Incorrect type inferring for int-literals/floating-point-literals used in equality expressions [#13904](https://github.com/ballerina-platform/ballerina-lang/issues/13904).
+- Numeric conversion does not happen when casting to a finite type [#14373](https://github.com/ballerina-platform/ballerina-lang/issues/14373).
+- The `typedesc` returned by `typeof` is not in line with the spec [#15278](https://github.com/ballerina-platform/ballerina-lang/issues/15278).
+- Compilation fails for valid a mapping constructor when there is no contextually expected type [#17186](https://github.com/ballerina-platform/ballerina-lang/issues/17186).
+- Optional field access is not allowed on a union of record and map [#17942](https://github.com/ballerina-platform/ballerina-lang/issues/17942).
+- The rest arg is restricted to the rest parameter [#17943](https://github.com/ballerina-platform/ballerina-lang/issues/17943).
+- Integer division does not panic on overflow [#17969](https://github.com/ballerina-platform/ballerina-lang/issues/17969).
+- Certain floating point numerical comparisons with `NaN` return incorrect results [#17977](https://github.com/ballerina-platform/ballerina-lang/issues/17977).
+- Reference equality checks produce incorrect results for equal decimal values with different precision [#17984](https://github.com/ballerina-platform/ballerina-lang/issues/17984).
+- Interpolation should not be allowed in the value of a namespace attribute [#18938](https://github.com/ballerina-platform/ballerina-lang/issues/18938).
+
+### Actions and Statements
+- Local type definition statements are not supported [#17946](https://github.com/ballerina-platform/ballerina-lang/issues/17946).
+- Multiple receive action is not supported [#18163](https://github.com/ballerina-platform/ballerina-lang/issues/18163).
+- Final local variable declarations without an init expression are not supported [#15044](https://github.com/ballerina-platform/ballerina-lang/issues/15044).
+- Match pattern lists with multiple match patterns (OR) are not supported for structured patterns [#13949](https://github.com/ballerina-platform/ballerina-lang/issues/13949).
+- Partial support for list, mapping and error match patterns [#15962](https://github.com/ballerina-platform/ballerina-lang/issues/15962).
+- Compatible map to record assignment is not allowed [#17202](https://github.com/ballerina-platform/ballerina-lang/issues/17202).
+- List binding patterns don’t work with arrays [#17927](https://github.com/ballerina-platform/ballerina-lang/issues/17927).
+- Not all actions are allowed to be nested inside other actions [#17993](https://github.com/ballerina-platform/ballerina-lang/issues/17993).
+- Inferred type for final variables declared with `var` is not the precise type [#18166](https://github.com/ballerina-platform/ballerina-lang/issues/18166).
+- Asynchronous send is not an action (currently a statement) [#18639](https://github.com/ballerina-platform/ballerina-lang/issues/18639).
+
+### Module-Level Declarations
+- Versioned imports are not supported [#4087](https://github.com/ballerina-platform/ballerina-lang/issues/4087).
+- Listener declarations without the type-descriptors are not supported [#18200](https://github.com/ballerina-platform/ballerina-lang/issues/18200).
+
+### Module and Program Execution
+- A program exits even when there are listeners started (currently looks for services) [#18601](https://github.com/ballerina-platform/ballerina-lang/issues/18601).
+
+### Metadata
+- Annotation types (mapping types) are not restricted to `anydata` and thus, non-constant annotation values are not constructed as readonly values [#15533](https://github.com/ballerina-platform/ballerina-lang/issues/15533).
+- Annotation attachment is not supported for anonymous function expressions, local variable declaration statements and local type definition statements [#18207](https://github.com/ballerina-platform/ballerina-lang/issues/18207).
+- An annotation is not available to to indicate that a newly created strand should be in a separate thread from the current strand [#18001](https://github.com/ballerina-platform/ballerina-lang/issues/18001).
+
+### Lang Library
+- Creating an immutable clone of a container does not narrow its inherent type to a type that consists of just its current shape [#13189](https://github.com/ballerina-platform/ballerina-lang/issues/13189).
+- Use of stack-like methods and queue-like methods on fixed-length arrays/tuples is not  checked at compile time [#18662](https://github.com/ballerina-platform/ballerina-lang/issues/18662).
+- The lang.table module contains functions not defined in the specification [#18869](https://github.com/ballerina-platform/ballerina-lang/issues/18869).
+- The lang.xml module contains functions not defined in the specification [#18870](https://github.com/ballerina-platform/ballerina-lang/issues/18870).
+- The lang.map module functions which modify the value are disallowed on records [#18873](https://github.com/ballerina-platform/ballerina-lang/issues/18873).
+- The lang.array module functions which modify the value are disallowed on tuples [#18874](https://github.com/ballerina-platform/ballerina-lang/issues/18874).
+
+### Preview Features
+- XML access expressions are not defined in the spec. [#18875](https://github.com/ballerina-platform/ballerina-lang/issues/18875).
