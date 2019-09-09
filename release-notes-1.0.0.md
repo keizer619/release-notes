@@ -564,7 +564,7 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Versioned imports are not supported [#4087](https://github.com/ballerina-platform/ballerina-lang/issues/4087).
 - Listener declarations without the type-descriptors are not supported [#18200](https://github.com/ballerina-platform/ballerina-lang/issues/18200).
 
-### Module and program execution
+### Module and Program Execution
 - A program exits even when there are listeners started (currently looks for services) [#18601](https://github.com/ballerina-platform/ballerina-lang/issues/18601).
 
 ### Metadata
