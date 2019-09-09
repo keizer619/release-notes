@@ -16,70 +16,70 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ### Builtin library
 
-The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided  by the newly-added `lang` library.
+The `ballerina/builtin` module has been removed. Some of the functionalities provided by the `ballerina/builtin` library is now provided  by the newly-added lang library.
 
 - The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-map<string> m2 = m.freeze();  
-```
+   ```ballerina
+   map<string> m2 = m.freeze();  
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-map<string> m2 = m.cloneReadOnly();
-```
+   ```ballerina
+   map<string> m2 = m.cloneReadOnly();
+   ```
 
 - The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-json j = { name : "tom", age: 2};
-Person|error p = Person.convert(j);
-```
+   ```ballerina
+   json j = { name : "tom", age: 2};
+   Person|error p = Person.convert(j);
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-json j = { name : "tom", age: 2};
-Person|error p = Person.constructFrom(j);
-```
+   ```ballerina
+   json j = { name : "tom", age: 2};
+   Person|error p = Person.constructFrom(j);
+   ```
 
 - The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
-- Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
+   - Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
 
-Previous Syntax
+      Previous Syntax
 
-```ballerina
-int|error x = int.convert(“100”);
-```
+      ```ballerina
+      int|error x = int.convert(“100”);
+      ```
 
-New Syntax
+      New Syntax
 
-```ballerina
-import ballerina/lang.’int; // Need to import `lang.int`
+      ```ballerina
+      import ballerina/lang.’int; // Need to import `lang.int`
 
-int x = ‘int:fromString(“100”);
-```
+      int x = ‘int:fromString(“100”);
+      ```
 
-- Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
+   - Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
 
-Previous Syntax
+      Previous Syntax
 
-```ballerina
-json person = {“name”:”John”, “age”:25};
-string|error str = string.convert(person);
-```
+      ```ballerina
+      json person = {“name”:”John”, “age”:25};
+      string|error str = string.convert(person);
+      ```
 
-New Syntax
+      New Syntax
 
-```ballerina
-json person = {“name”:”John”, “age”:25};
-string str = person.toString();
-```
+      ```ballerina
+      json person = {“name”:”John”, “age”:25};
+      string str = person.toString();
+      ```
 
 - The `stamp()` method has been removed.
 
@@ -87,170 +87,170 @@ string str = person.toString();
 
 - The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows pure type fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-// Open record with a field `a`. It additionally allows
-// `anydata|error` fields.
-type Foo record {
+   ```ballerina
+   // Open record with a field `a`. It additionally allows
+   // `anydata|error` fields.
+   type Foo record {
+      string a;
+   };
+
+   // Open record with a field `a`. It additionally allows
+   // `int` fields.
+   type Bar record {
+      string a;
+      int...;
+   };
+
+   // Closed record, which only allows a `string` field named `a`.
+   type Baz record {|
+      string a;
+   |};
+
+   ```
+
+   New Syntax
+
+   ```ballerina
+   // Open record with a field `a`. It additionally allows
+   // `anydata` fields.
+   type Foo record {
    string a;
-};
+   };
 
-// Open record with a field `a`. It additionally allows
-// `int` fields.
-type Bar record {
+   // Open record with a field `a`. It additionally allows
+   // only `int` fields.
+   type Bar record {|
    string a;
    int...;
-};
+   |};
 
-// Closed record, which only allows a `string` field named `a`.
-type Baz record {|
+   // Closed record, which only allows a `string` field named `a`.
+   type Baz record {|
    string a;
-|};
+   |};
+   ```
 
-```
-
-New Syntax
-
-```ballerina
-// Open record with a field `a`. It additionally allows
-// `anydata` fields.
-type Foo record {
-  string a;
-};
-
-// Open record with a field `a`. It additionally allows
-// only `int` fields.
-type Bar record {|
-  string a;
-  int...;
-|};
-
-// Closed record, which only allows a `string` field named `a`.
-type Baz record {|
-  string a;
-|};
-```
-
-- The default `record rest` field type has been changed to `anydata` from `anydata|error`.
+- The default record rest field type has been changed to `anydata` from `anydata|error`.
 - The syntax to specify expressions as keys in the mapping constructor has changed. Now, expressions need to be enclosed in `[]` (e.g., `[expr]`).
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-map<string> m = { getString(): "value" };
-```
+   ```ballerina
+   map<string> m = { getString(): "value" };
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-map<string> m = { [getString()]: "value" };
-```
+   ```ballerina
+   map<string> m = { [getString()]: "value" };
+   ```
 
-- String literals can now be used as keys in the mapping constructor for a record. The key for a `rest` field should be either a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
+- String literals can now be used as keys in the mapping constructor for a record. The key for a rest field should be either a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-type Foo record {
-   string bar;
-   int...;
-};
+   ```ballerina
+   type Foo record {
+      string bar;
+      int...;
+   };
 
-Foo f = { bar: "test string", qux: 1 }; // `qux` is a rest field
-```
+   Foo f = { bar: "test string", qux: 1 }; // `qux` is a rest field
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-type Foo record {|
-   string bar;
-   int...;
-|};
+   ```ballerina
+   type Foo record {|
+      string bar;
+      int...;
+   |};
 
-Foo f = { bar: "test string", "qux": 1 }; // `qux` is a rest field
-```
+   Foo f = { bar: "test string", "qux": 1 }; // `qux` is a rest field
+   ```
 
 - Mapping values are now iterable as sequences of their members (values) instead of sequences of key-value pairs. A lang library function `entries()` is available to retrieve an array of key-value pairs for a mapping value.
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-foreach (string, int) (k, v) in m {
-   io:println("Key:   ", k);
-   io:println("Value: ", v);
-}
-```
+   ```ballerina
+   foreach (string, int) (k, v) in m {
+      io:println("Key:   ", k);
+      io:println("Value: ", v);
+   }
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-// Iterating values.
-foreach int v in m {
-   io:println("Value: ", v);
-}
+   ```ballerina
+   // Iterating values.
+   foreach int v in m {
+      io:println("Value: ", v);
+   }
 
-// Iterating entries.
-foreach [string, int] [k, v] in m.entries() {
-   io:println("Key:   ", k);
-   io:println("Value: ", v);
-}
-```
+   // Iterating entries.
+   foreach [string, int] [k, v] in m.entries() {
+      io:println("Key:   ", k);
+      io:println("Value: ", v);
+   }
+   ```
 
 ### Arrays and Tuples
 
 - The requirement for array element types to have an implicit initial value to allow declaring variable-length arrays has been removed. Instead, when a value is being added to the array at runtime, the index is greater than the length of the list, and the element type does not have a filler value, it would result in a panic.  
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-(int|string)[] arr = []; // Fails at compile time.
-arr[1] = 1;
-```
+   ```ballerina
+   (int|string)[] arr = []; // Fails at compile time.
+   arr[1] = 1;
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-(int|string)[] arr = [];
-arr[1] = 1; // Fails at runtime.
-```
+   ```ballerina
+   (int|string)[] arr = [];
+   arr[1] = 1; // Fails at runtime.
+   ```
 
 - Tuple types now use brackets instead of parentheses. 
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-(int, string) t = (1, "hello world");
-```
+   ```ballerina
+   (int, string) t = (1, "hello world");
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-[int, string] t = [1, "hello world"];
-```
+   ```ballerina
+   [int, string] t = [1, "hello world"];
+   ```
 
 - Tuple types now support rest descriptors. Therefore, the following syntax is valid now.
 
-```ballerina
-[int, string, boolean...] t = [1, "hello world", true, true];
-[int...] t3 = [1, 2];
-```
+   ```ballerina
+   [int, string, boolean...] t = [1, "hello world", true, true];
+   [int...] t3 = [1, 2];
+   ```
 
 ### Objects
 
 - Objects outside method definitions are no longer allowed. All object function definitions need to be specified within the object itself. The following syntax is invalid now.
 
-```ballerina
-type Foo object {
-   int code = 0;
+   ```ballerina
+   type Foo object {
+      int code = 0;
 
-   function printCode();
-};
+      function printCode();
+   };
 
-function Foo.printCode() {
-   // print code
-}
-```
+   function Foo.printCode() {
+      // print code
+   }
+   ```
 
 ### Functions and Methods
 
@@ -261,43 +261,44 @@ function Foo.printCode() {
 
 - The error detail type must now belong to the detail type defined in the error lang library.
 
-```ballerina
-public type Detail record {|
-   string message?;
-   error cause?;
-   (anydata|error)...;
-|};
-```
+   ```ballerina
+   public type Detail record {|
+      string message?;
+      error cause?;
+      (anydata|error)...;
+   |};
+   ```
 
 - The error constructor now accepts detail fields as individual named arguments as opposed to accepting a single mapping as the `detail` argument.	 
-Previous Syntax
 
-```ballerina
-Detail detail = { message: "error message", code: 1100 };
-error e = error("error reason", detail);
-```
+   Previous Syntax
 
-New Syntax
+   ```ballerina
+   Detail detail = { message: "error message", code: 1100 };
+   error e = error("error reason", detail);
+   ```
 
-```ballerina
-error e = error("error reason", message = "error message", code = 1100);
-```
+   New Syntax
+
+   ```ballerina
+   error e = error("error reason", message = "error message", code = 1100);
+   ```
 
 ### Annotations
 
 - Annotation declaration syntax and attachment points have been revised. Annotations can now be declared to be available only at compile time (source only annotations) or at both compile-time and runtime.
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-annotation<service> annot Foo;
-```
+   ```ballerina
+   annotation<service> annot Foo;
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-annotation Foo annot on service;
-```
+   ```ballerina
+   annotation Foo annot on service;
+   ```
 
 ### Expressions
 
@@ -308,54 +309,56 @@ annotation Foo annot on service;
 - Calls with `start` are now considered as actions. As a result, they are not allowed within expressions.
 - Delimited identifier syntax has been changed.
 
-```ballerina
-string ^"1" = "identifier one";
-string ^"identifier two" = "identifier two";
-```
+   Previous Syntax
 
-New Syntax
+   ```ballerina
+   string ^"1" = "identifier one";
+   string ^"identifier two" = "identifier two";
+   ```
 
-```ballerina
-string '1 = "identifier one";
-string 'identifier\ two = "identifier two";
-```
+   New Syntax
+
+   ```ballerina
+   string '1 = "identifier one";
+   string 'identifier\ two = "identifier two";
+   ```
 
 - The `untaint` unary operator has been replaced by an annotation to mark a value as trusted.	 
 
-Previous Syntax
+   Previous Syntax
 
-```ballerina
-var untaintedValue = untaint taintedValue;
-```
+   ```ballerina
+   var untaintedValue = untaint taintedValue;
+   ```
 
-New Syntax
+   New Syntax
 
-```ballerina
-var untaintedValue = <@untainted> taintedValue;
-```
+   ```ballerina
+   var untaintedValue = <@untainted> taintedValue;
+   ```
 
 - Concatenation with the + operator is no longer allowed between `string` values and values of other basic types. The `.toString()` method can be used on any variable to retrieve the `string` representation prior to concatenating. Alternatively, the string template expression can also be used.
 
-Previously Valid Syntax
+   Previously Syntax
 
-```ballerina
-int i = 1;
-string s = "Value: " + i;
-```
+   ```ballerina
+   int i = 1;
+   string s = "Value: " + i;
+   ```
 
-Alternative I
+   Alternative I
 
-```ballerina
-int i = 1;
-string s = "Value: " + i.toString();
-```
+   ```ballerina
+   int i = 1;
+   string s = "Value: " + i.toString();
+   ```
 
-Alternative II
+   Alternative II
 
-```ballerina
-int i = 1;
-string s = string `Value: ${i}`;
-```
+   ```ballerina
+   int i = 1;
+   string s = string `Value: ${i}`;
+   ```
 
 
 # What's new in Ballerina 1.0.0
@@ -383,32 +386,32 @@ string s = string `Value: ${i}`;
 
 - The error reason is now optional if the reason can be inferred based on the contextually expected type.
 
-```ballerina
-type Detail record {
-   int code;
-};
+   ```ballerina
+   type Detail record {
+      int code;
+   };
 
-const FOO = "foo";
+   const FOO = "foo";
 
-type FooError error<FOO, Detail>;
+   type FooError error<FOO, Detail>;
 
-FooError e1 = error(FOO, code = 3456);
-FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
-```
+   FooError e1 = error(FOO, code = 3456);
+   FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
+   ```
 
 - A unary operator `typeof` has been introduced to retrieve a typedesc value for the runtime type of a value.
 
-```ballerina
-typedesc t = typeof valueExpr;
-```
+   ```ballerina
+   typedesc t = typeof valueExpr;
+   ```
 
 - A binary operator `.@` has been introduced to access annotation values at runtime.	 
 
-```ballerina
-annotation Foo annot on service;
-typedesc t = typeof serviceValue;
-Foo? fooAnnot = t.@annot;
-```
+   ```ballerina
+   annotation Foo annot on service;
+   typedesc t = typeof serviceValue;
+   Foo? fooAnnot = t.@annot;
+   ```
 
 - Expressions are now allowed as default values for function parameters.
 
@@ -427,48 +430,58 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 - Ballerina project structure should match the following.
 
-```
-project-name/
-- Ballerina.toml
-- src/
--- mymodule/
---- Module.md  	<- module-level documentation
---- main.bal   	<- Contains the default main method.
---- resources/ 	<- resources for the module (available at runtime)
---- tests/     	<- tests for this module (e.g. unit tests)
----- testmain.bal  <- test file for main
----- resources/	<- resources for these tests
-- tests/       	<- integration tests
--- integration.bal <- integration test file
--- resources/  	<- integration test resources
-- target/     	<- directory for compile/build output
--- bin/       	<- Executables will be created here
--- balo/      	<- .balo files one per built module
---- mymodule.balo  <- balo object of module1
--- cache      	<- BIR, JAR cache directory
+   ```
+   project-name/
+   - Ballerina.toml
+   - src/
+   -- mymodule/
+   --- Module.md  	<- module-level documentation
+   --- main.bal   	<- Contains the default main method.
+   --- resources/ 	<- resources for the module (available at runtime)
+   --- tests/     	<- tests for this module (e.g. unit tests)
+   ---- testmain.bal  <- test file for main
+   ---- resources/	<- resources for these tests
+   - tests/       	<- integration tests
+   -- integration.bal <- integration test file
+   -- resources/  	<- integration test resources
+   - target/     	<- directory for compile/build output
+   -- bin/       	<- Executables will be created here
+   -- balo/      	<- .balo files one per built module
+   --- mymodule.balo  <- balo object of module1
+   -- cache      	<- BIR, JAR cache directory
 
-```
+   ```
 
 - To push to staging central, set the following env variable with the release. (https://staging-central.ballerina.io)
 
-```ballerina
-export BALLERINA_DEV_STAGE_CENTRAL=true
-```
+   ```
+   $ export BALLERINA_DEV_STAGE_CENTRAL=true
+   ```
 
 - To create a new project with a hello world, use the *new* command. This initializsa a new directory.
-```$ ballerina new <project-name>```
+   ```
+   $ ballerina new <project-name>
+   ```
 
 - To create a module, use the *create* command inside the project.
-```$ ballerina create <modulename> [-t main|service]```
+   ```
+   $ ballerina create <modulename> [-t main|service]
+   ```
 
 - If you are building a library, use the *compile* command. This generates a BALO to push to central.
-```$ ballerina compile```
+   ```
+   $ ballerina compile
+   ```
 
 - To create an executable, use the *build* command.
-```$ ballerina build```
+   ```
+   $ ballerina build
+   ```
 
 - To run the executable, use the *run* command.
-```$ ballerina run mymodule-executable.jar```
+   ```
+   $ ballerina run mymodule-executable.jar
+   ```
 
 ### Ballerina Central
 
