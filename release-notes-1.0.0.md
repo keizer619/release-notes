@@ -1,6 +1,6 @@
 # Overview of Ballerina 1.0.0
 
-Ballerina 1.0.0 is here! We would like you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev), or [Github](https://github.com/ballerina-platform/ballerina-lang).
+Ballerina 1.0.0 is here! We would like you to try it out and give us feedback via our [Slack channel](https://ballerina-platform.slack.com/), [Google Group](https://groups.google.com/forum/#!forum/ballerina-dev), [Twitter](https://twitter.com/ballerinalang), or [Github](https://github.com/ballerina-platform/ballerina-lang).
 Ballerina 1.0.0 consists of improvements to the language syntax and semantics based on the stable language specification version 2019R3 and new features and enhancements to the standard library modules and developer tooling.
 
 # Highlights
