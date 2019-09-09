@@ -17,7 +17,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ### Builtin library
 
-The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided  by the newly-added `lang` library.
+The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided by the newly-added `lang` library.
 
 - The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
@@ -33,7 +33,7 @@ New Syntax
 map<string> m2 = m.cloneReadOnly();
 ```
 
-- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
+- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata` value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
 
 Previous Syntax
 
@@ -49,7 +49,7 @@ json j = { name : "tom", age: 2};
 Person|error p = Person.constructFrom(j);
 ```
 
-- The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
+- The following behaviours, which were previously associated with the `convert()` method are now provided by the lang library functions of the relevant types.
 - Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
 
 Previous Syntax
