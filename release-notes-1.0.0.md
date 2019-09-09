@@ -109,11 +109,6 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
    $ ballerina add <modulename> [-t main|service]
    ```
 
-- If you are building a library, use the *compile* command. This generates a BALO to push to central.
-   ```
-   $ ballerina compile
-   ```
-
 - To create an executable, use the *build* command.
    ```
    $ ballerina build
