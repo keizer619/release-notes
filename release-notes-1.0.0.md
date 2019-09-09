@@ -18,7 +18,6 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 ### Builtin library
 
 The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library are now provided  by the newly-added `lang` library.
->>>>>>> 48ebfa7b8a38ed33d87cf95a92ec31949880f477
 
 - The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
