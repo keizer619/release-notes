@@ -36,24 +36,24 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 - The error reason is now optional if the reason can be inferred based on the contextually-expected type.
 
-   ```ballerina
-   type Detail record {
-      int code;
-   };
+```ballerina
+type Detail record {
+   int code;
+};
 
-   const FOO = "foo";
+const FOO = "foo";
 
-   type FooError error<FOO, Detail>;
+type FooError error<FOO, Detail>;
 
-   FooError e1 = error(FOO, code = 3456);
-   FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
-   ```
+FooError e1 = error(FOO, code = 3456);
+FooError e2 = error(code = 3456); // Also valid now, reason is set as "foo"
+```
 
 - A unary operator `typeof` has been introduced to retrieve a typedesc value for the runtime type of a value.
 
-   ```ballerina
-   typedesc t = typeof valueExpr;
-   ```
+```ballerina
+typedesc t = typeof valueExpr;
+```
 
 - A binary operator `.@` has been introduced to access annotation values at runtime.
 
@@ -80,24 +80,24 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 
 - Ballerina project structure should match the following.
 
-   ```
-   project-name/
-   - Ballerina.toml
-   - src/
-   -- mymodule/
-   --- Module.md  	<- module-level documentation
-   --- main.bal   	<- Contains the default main method.
-   --- resources/ 	<- resources for the module (available at runtime)
-   --- tests/     	<- tests for this module (e.g. unit tests)
-   ---- main_test.bal  <- test file for main
-   ---- resources/	<- resources for these tests
-   - target/     	<- directory for compile/build output
-   -- bin/       	<- Executables will be created here
-   -- balo/      	<- .balo files one per built module
-   --- mymodule.balo  <- balo object of module1
-   -- caches/      	<- BIR, JAR cache directory
+```
+project-name/
+- Ballerina.toml
+- src/
+-- mymodule/
+--- Module.md  	<- module-level documentation
+--- main.bal   	<- Contains the default main method.
+--- resources/ 	<- resources for the module (available at runtime)
+--- tests/     	<- tests for this module (e.g. unit tests)
+---- main_test.bal  <- test file for main
+---- resources/	<- resources for these tests
+- target/     	<- directory for compile/build output
+-- bin/       	<- Executables will be created here
+-- balo/      	<- .balo files one per built module
+--- mymodule.balo  <- balo object of module1
+-- caches/      	<- BIR, JAR cache directory
 
-   ```
+```
 
 - To create a new project with a hello world, use the *new* command. This initializes a new directory.
 
