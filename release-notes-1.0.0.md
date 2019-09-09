@@ -500,7 +500,7 @@ Java interoperability is a key feature in jBallerina that allows you to call Jav
 - Add flow control support to HTTP/2 client and server.
 - Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
 - Transaction support in RabbitMQ broker and Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
-- Introduce XSL transformation support.
+- Introduce XSLT transformation support.
 - Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
 - H2 and MySQL database client modules and `sql` module have been discontinued. The `ballerinax/java.jdbc` module can be used to interact with relational databases.
 
