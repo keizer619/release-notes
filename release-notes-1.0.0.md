@@ -16,7 +16,7 @@ Ballerina 1.0.0 consists of improvements to the language syntax and semantics ba
 
 ### Builtin library
 
-The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library are now provided  by the newly-added `lang` library.
+The `builtin` module has been removed. Some of the functionalities provided by the `builtin` library is now provided  by the newly-added `lang` library.
 
 - The `freeze()` builtin method has been replaced with the `cloneReadOnly()` lang library function. `cloneReadOnly()` can be called only on variables of the type `anydata`. It creates and returns a clone of the value that has been made immutable (for non-simple basic types).
 
@@ -32,36 +32,37 @@ New Syntax
 map<string> m2 = m.cloneReadOnly();
 ```
 
-- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
+- The `convert()` builtin method has been replaced with the `constructFrom()` lang library function. `constructFrom()` can only be called on a type descriptor `T` where the `T` is a subtype of `anydata`. It accepts an `anydata`  value as an argument and returns a value of the type `T` constructed using a deep copy of the provided argument. If the construction fails, it returns an error.
 
 Previous Syntax
 
 ```ballerina
-json j = { name : "tom", age: 2 };
+json j = { name : "tom", age: 2};
 Person|error p = Person.convert(j);
 ```
 
 New Syntax
 
 ```ballerina
-json j = { name : "tom", age: 2 };
+json j = { name : "tom", age: 2};
 Person|error p = Person.constructFrom(j);
 ```
 
-- Previously, `convert()` was used to parse string literals to numeric types. Now, the `lang.int`, `lang.float`, and `lang.decimal` lang library modules have a `fromString()` function, which accepts a string literal and parses it.
+- The following behaviours, which were previously associated with the `convert()` method is now provided by the lang library functions of the relevant types.
+- Previously, `convert()` was used to parse string literals. Now, the `lang.int`, `lang.float`, and `lang.decimal` modules have a `fromString()` function, which accepts a string literal and parses it.
 
 Previous Syntax
 
 ```ballerina
-int|error x = int.convert("100");
+int|error x = int.convert(“100”);
 ```
 
 New Syntax
 
 ```ballerina
-import ballerina/lang.'int; // Need to import `lang.int`
+import ballerina/lang.’int; // Need to import `lang.int`
 
-int x = 'int:fromString("100");
+int x = ‘int:fromString(“100”);
 ```
 
 - Previously, when invoked on the `string` typedesc, `convert()` returned a string representation of the value. Now, the `lang.value` module provides a `toString()` function, which returns a human-readable string representation of a value.
@@ -69,14 +70,14 @@ int x = 'int:fromString("100");
 Previous Syntax
 
 ```ballerina
-json person = { "name": "John", "age": 25 };
+json person = {“name”:”John”, “age”:25};
 string|error str = string.convert(person);
 ```
 
 New Syntax
 
 ```ballerina
-json person = { "name": "John", "age": 25 };
+json person = {“name”:”John”, “age”:25};
 string str = person.toString();
 ```
 
@@ -84,7 +85,7 @@ string str = person.toString();
 
 ### Maps and Records
 
-- The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows `anydata`-typed fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
+- The semantics of the `{`, `}` and `{|`, `|}` delimiters have changed. A record type descriptor written using the `{|` and `|}` delimiters defines a record type, which only accepts mapping values with the same fields as the ones described. A record type descriptor written using the `{` and `}` delimiters define a record type, which additionally allows pure type fields apart from the described fields, i.e., `record {}` is equivalent to `record {| anydata…; |}`. 
 
 Previous Syntax
 
