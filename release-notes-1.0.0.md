@@ -148,7 +148,7 @@ New Syntax
 map<string> m = { [getString()]: "value" };
 ```
 
-- String literals can now be used as keys in the mapping constructor for a record. The key for a `rest` field should be either a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
+- String literals can now be used as keys in the mapping constructor for a record. The key for a `rest` field should either be a string literal or an expression in the mapping constructor (i.e., cannot be an identifier). 
 
 Previous Syntax
 
@@ -255,12 +255,12 @@ function Foo.printCode() {
 
 ### Functions and Methods
 
-- Arguments for required parameters of a function can now also be passed as named arguments, while arguments for defaultable parameters can be passed as positional arguments. To avoid ambiguity, all named arguments need to be specified after the positional arguments.
+- Now, arguments for required parameters of a function can also be passed as named arguments, while arguments for defaultable parameters can be passed as positional arguments. To avoid ambiguities, all named arguments need to be specified after the positional arguments.
 - Parameters of a function can now be marked `public` and only arguments can be passed by the name to such parameters when invoking a function from an imported module. These arguments can still be passed as positional arguments.
 
 ### Error Type and Constructor
 
-- The error detail type must now belong to the detail type defined in the error lang library.
+- The error detail type must now belong to the `detail` type defined in the error lang library.
 
 ```ballerina
 public type Detail record {|
@@ -270,7 +270,7 @@ public type Detail record {|
 |};
 ```
 
-- The error constructor now accepts detail fields as individual named arguments as opposed to accepting a single mapping as the `detail` argument.	 
+- The error constructor now accepts `detail` fields as individual named arguments as opposed to accepting a single mapping as the `detail` argument.	 
 Previous Syntax
 
 ```ballerina
@@ -382,7 +382,7 @@ string s = string `Value: ${i}`;
 
 - The basic type `handle` has been added. A `handle` value is a reference to storage of a Ballerina program that is managed externally. `Handle` values are useful only in conjunction with functions that have external function bodies; in particular, a new handle value can be created only by a function with an external function body.
 
-- The error reason is now optional if the reason can be inferred based on the contextually expected type.
+- The error reason is now optional if the reason can be inferred based on the contextually-expected type.
 
 ```ballerina
 type Detail record {
@@ -413,16 +413,16 @@ Foo? fooAnnot = t.@annot;
 
 - Expressions are now allowed as default values for function parameters.
 
-- The concept of lax typing has been introduced allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime,resulting in error returns at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax. 
-- An optional field access operator `?.` has been introduced to access possibly undefined mapping members. Optional field access on lax types may return `error`, if applied to a non-mapping value.
+- The concept of lax typing has been introduced allowing less stricter static typing for types identified as lax. With lax typing, some of the static typing checks are moved to the runtime returning errors at runtime instead. With this release, `json` and `map<T>` where `T` is lax are considered as lax. 
+- An optional field access operator `?.` has been introduced to access possibly-undefined mapping members. Optional field access on lax types may return `error` if applied to a non-mapping value.
 
 ## Runtime
 
-We are introducing a brand new implementation (jBallerina) of the Ballerina language spec that targets the JVM. The jBallerina compiler produces an executable JAR file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, we are deprecating and removing our previous Ballerina runtime implementation (BVM). The jBallerina comes with significant performance improvements over the BVM.
+This release introduces a brand new implementation (jBallerina) of the Ballerina language spec, which targets the JVM. The jBallerina compiler produces an executable JAR file for a Ballerina program by directly transforming Ballerina sources to Java bytecode. With jBallerina, the previous Ballerina runtime implementation (BVM) will be deprecated and removed. jBallerina comes with significant performance improvements over the BVM.
 
 ### Java Interoperability
 
-Java interoperability is a key feature in jBallerina that allows you to call Java code from Ballerina. It also enables you to embrace the capabilities of Ballerina for new projects while utilizing existing Java libraries that you or your company invested in for years.
+Java interoperability is a key feature in jBallerina that allows you to call Java code from Ballerina. It also enables you to embrace the capabilities of Ballerina for new projects while utilizing existing Java libraries that you or your organization invested in for years.
 
 ## Project Structure & Build Tools
 
@@ -434,41 +434,41 @@ project-name/
 - src/
 -- mymodule/
 --- Module.md  	<- module-level documentation
---- main.bal   	<- Contains the default main method.
+--- main.bal   	<- contains the default main method.
 --- resources/ 	<- resources for the module (available at runtime)
---- tests/     	<- tests for this module (e.g. unit tests)
+--- tests/     	<- tests for this module (e.g., unit tests)
 ---- testmain.bal  <- test file for main
 ---- resources/	<- resources for these tests
 - tests/       	<- integration tests
 -- integration.bal <- integration test file
 -- resources/  	<- integration test resources
 - target/     	<- directory for compile/build output
--- bin/       	<- Executables will be created here
+-- bin/       	<- executables will be created here
 -- balo/      	<- .balo files one per built module
---- mymodule.balo  <- balo object of module1
+--- mymodule.balo  <- .balo object of module1
 -- cache      	<- BIR, JAR cache directory
 
 ```
 
-- To push to staging central, set the following env variable with the release. (https://staging-central.ballerina.io)
+- To push to the [Staging Central](https://staging-central.ballerina.io), set the following environment variable with the release. 
 
 ```ballerina
 export BALLERINA_DEV_STAGE_CENTRAL=true
 ```
 
-- To create a new project with a hello world, use the *new* command. This initializsa a new directory.
+- To create a new project with a hello world code, use the *new* command. This initializsa a new directory.
 ```$ ballerina new <project-name>```
 
-- To create a module, use the *create* command inside the project.
+- To create a module, execute the *create* command from inside the project.
 ```$ ballerina create <modulename> [-t main|service]```
 
-- If you are building a library, use the *compile* command. This generates a BALO to push to central.
+- If you are building a library, execute the *compile* command. This generates a BALO to push to Central.
 ```$ ballerina compile```
 
-- To create an executable, use the *build* command.
+- To create an executable, execute the *build* command.
 ```$ ballerina build```
 
-- To run the executable, use the *run* command.
+- To run the executable, execute the *run* command.
 ```$ ballerina run mymodule-executable.jar```
 
 ### Ballerina Central
@@ -485,10 +485,10 @@ export BALLERINA_DEV_STAGE_CENTRAL=true
 - Introduce own modules for different authentication mechanisms (JWT, LDAP, OAuth2 etc.).
 - Improve LDAP APIs by decoupling usage with an auth provider.
 - Introduce support for consumer services with data binding, queue-groups, different starting position types etc.
-- Introduce prior knowledge support to the HTTP/2 client.
+- Introduce prior knowledge support for the HTTP/2 client.
 - Add flow control support to HTTP/2 client and server.
 - Data binding support for RabbitMQ connector. The supported types include `int`, `float`, `string`, `json`, `xml`, `byte[]`, and `records`.
-- Transaction support in RabbitMQ broker and added Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
+- Transaction support in RabbitMQ broker and Ballerina local transaction support for the module. Ballerina RabbitMQ local transactions follow the RabbitMQ  broker semantics transaction model.
 - Introduce XSL transformation support.
 - Introduce "system" APIs to perform system-bound file operations such as create file, create directory, move directory, rename file, get file metadata, copy file etc.
 - H2 and MySQL database client modules and `sql` module have been discontinued. The `ballerinax/java.jdbc` module can be used to interact with relational databases.
