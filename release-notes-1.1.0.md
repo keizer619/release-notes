@@ -4,12 +4,12 @@ Ballerina 1.1.0 is the year end release which has significant improvements  to t
 
 # Highlights
 
-* Ballerina tool
+* Enhanced `ballerina` CLI tool to keep your Ballerina installation up to date
 * Improved runtime performance
 * Improved support for Java interoperability
 * Optimized compiler for better IDE experience
 * Based on a stable language specification: 2019R3
-* Includes a number of important bug fixes.
+* Includes a number of important bug fixes
 
 # What's new in Ballerina 1.1.0
 
