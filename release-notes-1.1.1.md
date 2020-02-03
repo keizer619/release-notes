@@ -5,17 +5,18 @@ and [improvements](https://github.com/ballerina-platform/ballerina-lang/issues?u
 
 You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to update to JBallerina 1.1.1 by executing the respective command from the below list.
 
-<table border=1>
-<tr>
+<table>
+<tr border=1>
 <th> Installed version </th>
 <th> Current active version </th>
 <th> Command </th>
-<tr>
+</tr>
+<tr border=1>
 <td>  jBallerina-1.1.0 </td>
 <td>  jBallerina-1.1.0 </td>
 <td> `ballerina dist update` </td>
 </tr>
-<tr>
+<tr border=1>
 <td>  jBallerina-1.1.0 </td>
 <td>  versions below jballerina-1.1.0 </td>
 <td> `ballerina dist pull jballerina-1.1.1` </td>
