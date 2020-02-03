@@ -1,29 +1,16 @@
-# Overview of Ballerina 1.1.1
+# Overview of jBallerina 1.1.1
 
 Ballerina 1.1.1 is a patch release iteration of its previous 1.1.0 release, which introduces the below functionalities. Also, this release addresses a few [bug fixes](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+label%3AType%2FBug+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+)
 and [improvements](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+label%3AType%2FImprovement+). 
 
 You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to update to Ballerina 1.1.1 by executing the respective command from the below list.
 
-<table>
-<tr border=1>
-<th> Installed version </th>
-<th> Current active version </th>
-<th> Command </th>
-</tr>
-<tr border=1>
-<td>  jBallerina-1.1.0 </td>
-<td>  jBallerina-1.1.0 </td>
-<td> `ballerina dist update` </td>
-</tr>
-<tr border=1>
-<td>  jBallerina-1.1.0 </td>
-<td>  versions below jBallerina-1.1.0 </td>
-<td> `ballerina dist pull jballerina-1.1.1` </td>
-</tr>
-</table>
+**Installed version**|**Current active version**|**Command**
+:-----:|:-----:|:-----:
+jBallerina-1.1.0|jBallerina-1.1.0|`ballerina dist update`
+jBallerina-1.1.0|versions below jBallerina-1.1.0|`ballerina dist pull jballerina-1.1.1`
 
-If you have not installed jBallerina or if you have installed a version prior to 1.1.0, then [download the installers](ballerina.io/downloads/) to install.
+If you have not installed jBallerina or if you have installed a version prior to 1.1.0, then [download the installers](https://ballerina.io/downloads/) to install.
 
 > **Note:** However, if you installed jBallerina via the installers when you have jBallerina 1.1.0 installed, execute the following command to activate it: `ballerina dist use jballerina-1.1.1`
 
