@@ -25,7 +25,7 @@ You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to u
 
 If you have not installed jBallerina or if you have installed a version prior to 1.1.0, then [download the installers](ballerina.io/downloads/) to install.
 
-> **Note** However, if you installed jBallerina via the installers when you have jBallerina 1.1.0 installed, execute the following command to activate it: `ballerina dist use jballerina-1.1.1`
+> **Note:** However, if you installed jBallerina via the installers when you have jBallerina 1.1.0 installed, execute the following command to activate it: `ballerina dist use jballerina-1.1.1`
 
 ## Standard Library
 
