@@ -18,7 +18,7 @@ You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to u
 </tr>
 <tr border=1>
 <td>  jBallerina-1.1.0 </td>
-<td>  versions below jballerina-1.1.0 </td>
+<td>  versions below jBallerina-1.1.0 </td>
 <td> `ballerina dist pull jballerina-1.1.1` </td>
 </tr>
 </table>
