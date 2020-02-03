@@ -3,7 +3,7 @@
 Ballerina 1.1.1 is a patch release iteration of its previous 1.1.0 release, which introduces the below functionalities. Also, this release addresses a few [bug fixes](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+label%3AType%2FBug+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+)
 and [improvements](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+label%3AType%2FImprovement+). 
 
-You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to update to JBallerina 1.1.1 by executing the respective command from the below list.
+You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to update to Ballerina 1.1.1 by executing the respective command from the below list.
 
 <table>
 <tr border=1>
