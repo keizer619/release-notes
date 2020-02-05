@@ -3,16 +3,23 @@
 Ballerina 1.1.1 is a patch release iteration of its previous 1.1.0 release, which introduces the below functionalities. Also, this release addresses a few [bug fixes](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+label%3AType%2FBug+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+)
 and [improvements](https://github.com/ballerina-platform/ballerina-lang/issues?utf8=✓&q=is%3Aissue+milestone%3A%22Ballerina+1.1.1%22+is%3Aclosed+label%3AType%2FImprovement+). 
 
-You can use the inbuilt updating capability (introduced in Ballerina 1.1.0) to update to Ballerina 1.1.1 by executing the respective command from the below list.
+You can use the inbuilt updating capability (introduced in jBallerina 1.1.0) to update to jBallerina 1.1.1 as follows.
 
-**Installed version**|**Current active version**|**Command**
-:-----:|:-----:|:-----:
-jBallerina-1.1.0|jBallerina-1.1.0|`ballerina dist update`
-jBallerina-1.1.0|versions below jBallerina-1.1.0|`ballerina dist pull jballerina-1.1.1`
+### For existing users:
 
-If you have not installed jBallerina or if you have installed a version prior to 1.1.0, then [download the installers](https://ballerina.io/downloads/) to install.
+If you are already **using jBallerina version 1.1.0**, you can directly update your distribution to jBallerina 1.1.1 by executing the below command:
 
-> **Note:** However, if you installed jBallerina via the installers when you have jBallerina 1.1.0 installed, execute the following command to activate it: `ballerina dist use jballerina-1.1.1`
+> `ballerina dist update`
+
+However, you need to execute the below commands if you have installed:
+
+- jBallerina 1.1.0 but switched to use a previous version: `ballerina dist pull jballerina-1.1.1`
+- jBallerina 1.1.1 via the installers: `ballerina dist use jballerina-1.1.1`
+- a jBallerina version below 1.1.0: install via the [installers](https://ballerina.io/downloads/)
+
+### For new users:
+
+If you have not installed jBallerina, then download the [installers](https://ballerina.io/downloads/) to install.
 
 ## Standard Library
 
