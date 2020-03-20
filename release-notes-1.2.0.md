@@ -16,7 +16,7 @@ JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 - Support to mock functions when writing tests
 - Test and code coverage report
 - Java binding generator tool
-- Ag number of important bug fixes
+- Several critical bug fixes
 
 # What's new in JBallerina 1.2.0?
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
