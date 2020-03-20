@@ -402,6 +402,7 @@ A major revamp of our strand scheduler was done in this release to address the s
 
 #### Cookie support
 
+A new cookie API has been introduced for easily handling HTTP cookies. It provides the following features:
 - Enable the server to read cookies from the request and write cookies to the response (in "Set-Cookie" header).
 - Enable configuring the client to enable/disable cookies, enable/disable persistent cookies, and whether to block/unblock third-party cookies.
 - Add persistent cookies support and add support to plug custom persistent storages.  
