@@ -86,7 +86,7 @@ xml rectangles = x/*.<rectangle>;
 
 #### XML attribute access
 
- ```ballerina
+```ballerina
 xmlns "www.ballerina.io/ns" as ns;
 xml val = xml `<element type="fixed" ns:count="2></element>`;
 string|error 'type = val.'type;
