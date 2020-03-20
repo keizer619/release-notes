@@ -365,7 +365,7 @@ As per the Ballerina language specification, new strands should belong to the sa
 - Strands belonging to a particular thread are cooperatively multitasked.
 - All the strands created in a particular execution of a Ballerina program will be executed sequentially by a single thread. 
 
-In some situations, it would be desirable to assign strands to different threads. You can change this behaviour with an annotation but such an annotation was not available in Ballerina releases prior to 1.2.0. This has been a major spec deviation. 
+In some situations, it would be desirable to assign strands to different threads. You can change this behavior with an annotation but such an annotation was not available in Ballerina releases prior to 1.2.0. This has been a major spec deviation. 
 
 A major revamp of our strand scheduler was done in this release to address the spec deviation. 
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
