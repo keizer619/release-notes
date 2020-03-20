@@ -381,7 +381,7 @@ The above-mentioned lang library modules have been enhanced by adding new API el
 
 ### Compilation time improvement
 
-Major improvements to the compilation (code-generation) time are implemented. The compiler backend, which generates the Java bytecode for Ballerina programs is now rewritten to improve the overall compilation time. This change has specifically reduced the total time it takes for Java bytecode generation.
+The compiler backend, which generates the Java bytecode for Ballerina programs was rewritten to reduce the time taken for Java bytecode generation. This resulted in a significant reduction in overall compilation time.
 
 ### The `@strand` annotation
 
