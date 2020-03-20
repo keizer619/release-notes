@@ -7,7 +7,6 @@ JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 - Redesigned XML, Stream and Query support
 - Based on a stable language specification: 2020R1
 - Significant reduction in overall compilation time
-- Includes a number of important bug fixes
 - Added cookies and trailer support in HTTP
 - Revamped Cache module
 - Redesigned oneof field and map field support in gRPC and Added client retry support for gRPC blocking unary calls
@@ -17,6 +16,7 @@ JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 - Support to mock functions when writing tests
 - Test and code coverage report
 - Java binding generator tool
+- Ag number of important bug fixes
 
 # What's new in JBallerina 1.2.0?
 
