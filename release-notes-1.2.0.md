@@ -343,12 +343,12 @@ The above-mentioned lang library modules have been enhanced by adding new API el
 ### Backward incompatible improvements and bug fixes
 - Listener variables are now final.
 - The syntax for Unicode escapes in strings has changed from `\u[CodePoint]` to `\u{CodePoint}` so as to align with ECMAScript. Although this is an incompatible change, the previous syntax was not implemented.
-- The semantics of the `lock` statement has been changed. Now it acquires a single, program-wide, recursive mutex before executing a lock statement, and releases the mutex after completing the execution of the lock statement.
-- When a list constructor or a mapping constructor is used without a contextually expected type, we now infer a tuple or a record type rather than an array or a map type.
-- The syntax `x@` for accessing the attributes of an XML element has been removed.
-- Member value assignment for a dynamic list now adds filler values if the required members are not already filled and the relevant member type has a filler value.
+- The semantics of the `lock` statement has been changed. Now, it acquires a single, program-wide, recursive mutex before executing a lock statement and releases the mutex after completing the execution of the lock statement.
+- When a list constructor or a mapping constructor is used without a contextually-expected type, now a tuple or a record type is inferred rather than an array or a map type.
+- The `x@` syntax  for accessing the attributes of an XML element has been removed.
+- Now, member value assignment for a dynamic list adds filler values if the required members are not already filled and the relevant member type has a filler value.
 - Functions with the same name were previously allowed in both the module and the module's tests. This is now disallowed and results in a compilation error.
-- Out of range index access of `xml` sequences now result in empty sequences rather than a panic. Using the `xml:get()` langlib method with an out of range index results in a panic.
+- Now, out of range index access of `xml` sequences result in empty sequences rather than a panic. Using the `xml:get()` langlib method with an out of range index results in a panic.
 
 ## Runtime
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
