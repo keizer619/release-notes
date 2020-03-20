@@ -138,7 +138,7 @@ The stream type provides methods (more precisely functions in the `lang.stream` 
 - reduce
 - iterator
 
-The `map` and `filter` methods return streams and work lazily. Iterable basic types would have a `toStream()` method to convert to a stream; these should handle mutation similarly to iterators; as of now, it supports only for arrays.
+The `map()` and `filter()` methods return streams and work lazily. Iterable basic types would have a `toStream()` method to convert to a stream; these should handle mutation similarly to iterators; as of now, it supports only for arrays.
 
 ```ballerina
 Person[] personList = getPersonList();
@@ -733,7 +733,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 This section highlights key language changes since JBallerina 1.1.0. Some of these changes are backward-incompatible. 
 
 A complete list of language issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+label%3AArea%2FLanguage+is%3Aclosed).
-
 
 
 
