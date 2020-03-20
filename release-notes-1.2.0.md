@@ -373,7 +373,7 @@ A major revamp of our strand scheduler was done in this release to address the s
 Add support to create, read, update, and delete trailing headers in the response message. All existing header functions are changed to accept a finite-typed variable. The default value is set as `leading`, which means by default, those functions apply to leading headers. In order to apply trailer headers, you need to set the position as trailing as shown below.
 
 ```ballerina
-		string trailerHeader = response.getHeader("foo", position = "trailing");
+string trailerHeader = response.getHeader("foo", position = "trailing");
 ```
 #### Cache support
 
@@ -733,7 +733,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 This section highlights key language changes since JBallerina 1.1.0. Some of these changes are backward-incompatible. 
 
 A complete list of language issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+label%3AArea%2FLanguage+is%3Aclosed).
-
 
 
 
