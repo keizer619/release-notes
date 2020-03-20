@@ -9,10 +9,10 @@ JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 - Significant reduction in overall compilation time
 - Added cookies and trailer support in HTTP
 - Revamped Cache module
-- Redesigned oneof field and map field support in gRPC and Added client retry support for gRPC blocking unary calls
+- Redesigned oneof field and map field support in gRPC and added client retry support for gRPC blocking unary calls
 - Added custom serializer/deserializer and Avro support in the Kafka connector 
 - Deprecated previous JDBC connector and introduced new Database connectors which are now in a preview state
-- Introduced new client connectors (email, slack and azure time-series)
+- Introduced new client connectors (email, Slack, and Azure time-series)
 - Support to mock functions when writing tests
 - Test and code coverage report
 - Java binding generator tool
