@@ -585,7 +585,7 @@ Support for setting an Environment Variable to the Docker image.
 @docker:Config {
 	env:{
    		testVar1: "value1",
-   	testVar2: "value2"
+   	   	testVar2: "value2"
 	}
 }
 ```
