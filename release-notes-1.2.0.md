@@ -60,11 +60,11 @@ XML filter expression allows filtering an XML sequence by an element name.
 
 ```ballerina
 xml x = xml `<root>
-<rectangle length="5" width="10"/>
-<rectangle length="5" width="5"/>
-<circle radius="2"/>
-<square side="6"/>
-</root>`;
+                <rectangle length="5" width="10"/>
+                <rectangle length="5" width="5"/>
+                <circle radius="2"/>
+                <square side="6"/>
+            </root>`;
 
 xml rectangles = x/*.<rectangle>;
 ```
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
