@@ -663,7 +663,7 @@ service helloWorld on helloWorldEP {
 }
 ```
 
-### Knative
+### Knative Annotations
 
 A new `@knative:Service` annotation is introduced. It allows you to generate Knative Service artifacts for Knative.
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
