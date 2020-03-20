@@ -14,7 +14,6 @@ JBallerina 1.2.0 is the first major Q1 release of 2020 and it includes a new set
 - Added custom serializer/deserializer and Avro support in the Kafka connector. 
 - Deprecated previous JDBC connector and introduced new Database connectors which are now in a preview state.
 - Introduced new client connectors (email, slack and azure time-series).
-- Changed organization names of all supported connectors.
 - Support to mock functions when writing tests
 - Test and code coverage report
 - Java binding generator tool
@@ -734,7 +733,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 This section highlights key language changes since JBallerina 1.1.0. Some of these changes are backward-incompatible. 
 
 A complete list of language issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+label%3AArea%2FLanguage+is%3Aclosed).
-
 
 
 
