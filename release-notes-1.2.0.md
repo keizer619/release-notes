@@ -36,10 +36,10 @@ XML step expressions allow to query the children of an XML element or children o
 
 ```ballerina
 xml x = xml `<root>
-<person><name><fname>Kamal</fname><lname>Gunae</lname></name></person>
-<person><name><fname>Nimal</fname><lname>Jayee</lname></name></person>
-<person><name><fname>Sunil</fname><lname>Kumarae</lname></name></person>
-</root>`;
+                <person><name><fname>John</fname><lname>Doe</lname></name></person>
+                <person><name><fname>Jane</fname><lname>Doe</lname></name></person>
+                <person><name><fname>Bob</fname><lname>Bernard</lname></name></person>
+            </root>`;
 
 // Select all children items of `x`.
 xml allChildren = x/*;
@@ -742,5 +742,4 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
