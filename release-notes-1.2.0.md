@@ -92,7 +92,7 @@ string|error? nonExOptional = val?.nonExsistent; // result in nil
 
 A query expression provides a language-integrated query feature using SQL-like syntax. 
 
-In its most basic form, a query expression consists of four kinds of clauses: from, let, where, and select. The first clause must be a from clause and the last clause must be a select. The result of the query expression is a list. In this basic form, a query expression is just a list comprehension.
+In its most basic form, a query expression consists of four kinds of clauses: `from`, `let`, `where`, and `select`. The first clause must be a `from` clause and the last clause must be a `select` clause. The result of the query expression is a list. In this basic form, a query expression is just a list comprehension.
 
 The from clause works similarly to a foreach statement. It creates an iterator from an iterable value and then binds variables to each value returned by the iterator. The where clause is a boolean expression, which can refer to variables bound by the from clause; when the where expression evaluates to false, the iteration skips following clauses. The let clause binds variables. The select clause is evaluated for each iteration; the result of the query expression is a list whose members are the result of the select clause. 
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
