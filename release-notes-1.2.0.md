@@ -320,6 +320,8 @@ public function main() {
    }
 ```
 
+The functions `appendChildren()` and `removeChildren()` have been removed.
+
 #### The `lang.boolean` module
 
 The newly-added lang library module for the `boolean` basic type contains a function for parsing `string` values to `boolean` values. It accepts `”true”` or `”false”` in any combination of lower/upper case as well as `”1”` and `”0”`, which evaluates to `true` and `false` respectively. An error is returned for any other `string` value.
