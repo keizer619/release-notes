@@ -163,7 +163,7 @@ function toEmployee(Person p, string pos) returns Employee => {
 
 ### Let expressions
 
-A `let` expression allows you to bind variables and evaluate an expression with those variables in the scope.
+This release introduces let expression. It takes the form `let T B = E1 in E2`, where `E1` is evaluated resulting in a value `v`. The typed binding pattern `T B` is matched to `v`, causing assignments to the variables occurring in `B`. Then `E2` is evaluated with those variables in scope; the resulting value is the result of the let expression.
 
 ```ballerina
 const int globalVar = 2;
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
