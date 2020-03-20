@@ -737,10 +737,9 @@ You can go to [The Standard library](https://ballerina.io/v1-2/learn/api-docs/ba
 
 Now, you do not need to restart the IDE make the user configurations effective.
 
-# Detailed list of changes from 1.1.0 to 1.2.0
+# List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
