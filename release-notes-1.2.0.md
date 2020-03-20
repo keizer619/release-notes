@@ -22,7 +22,7 @@ JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 
 ## Language
 
-The language implementation is based on the stable language specification version 2020R1. This implementation introduces a new set of features aimed at making integration further easier for the user. In addition to that, the XML and Lock implementations are out in their preview/experimental status.
+The language implementation is based on the stable language specification version 2020R1. This implementation introduces a new set of features aimed at making integration further easier for the user. In addition to that, the XML and Lock implementations are out of their preview/experimental status.
 
 In addition to new features, this release also includes critical bug fixes and fixes done to align the implementation with the language specification. Some of these changes are backward incompatible. For a complete list of changes done since 1.1.0, see the `Language changes since JBallerina 1.1.0` section.
 
@@ -733,7 +733,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 This section highlights key language changes since JBallerina 1.1.0. Some of these changes are backward-incompatible. 
 
 A complete list of language issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+label%3AArea%2FLanguage+is%3Aclosed).
-
 
 
 
