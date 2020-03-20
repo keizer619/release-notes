@@ -150,7 +150,6 @@ stream<Person> personStream = personList.toStream();
 stream<Person> filteredPersonStream = personStream.filter(function (Person person) returns boolean {
    return person.age > 100 && person.name != "James";
 });
-
 ```
 
 ### Expression-bodied functions
@@ -743,7 +742,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
