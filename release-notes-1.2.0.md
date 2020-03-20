@@ -159,10 +159,8 @@ The stream type provides methods (more precisely functions in the `lang.stream` 
 The `map()` and `filter()` methods return streams and work lazily. Iterable basic types would have a `toStream()` method to convert to a stream; these should handle mutation similarly to iterators; as of now, it supports only for arrays.
 
 ```ballerina
-Person[] personList = getPersonList();
-
-stream<Person> personStream = personList.toStream();
-stream<Person> filteredPersonStream = personStream.filter(function (Person person) returns boolean {
+stream<Person, error> personStream = getPersonStream();
+stream<Person, error> filteredPersonStream = personStream.filter(function (Person person) returns boolean {
    return person.age > 100 && person.name != "James";
 });
 ```
