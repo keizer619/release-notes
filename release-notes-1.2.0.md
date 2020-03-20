@@ -1,6 +1,6 @@
 # Overview of jBallerina 1.2.0
 
-JBallerina 1.2.0 is the first major Q1 release of 2020 and it includes a new set of features and significant improvements to the compiler, runtime, standard library and developer tooling. It is based on Stable Language Spec version 2020R1.
+JBallerina 1.2.0 is the first major release of 2020 and it includes a new set of features and significant improvements to the compiler, runtime, standard library, and developer tooling. It is based on the 2020R1 version of the Language Specification.
 
 # Highlights
 
