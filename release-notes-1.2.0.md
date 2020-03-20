@@ -78,7 +78,7 @@ string|error 'type = val.'type;
 string|error count = val.ns:count;
 ```
 
-XML attribute access is now lax typed. This means that compile-time type checking is relaxed and moved to runtime. Accessing a non-existent attribute or field access expression on a non xml-element item will result in an error being returned. If optional field access syntax is used, then nil will be returned instead of error when the field is not available. Attributes with namespace prefix are accessed using the `value.prefix:attrName` syntax where the XML prefix must be declared in the scope.
+XML attribute access is now lax typed. This means that compile-time type checking is relaxed and moved to runtime. Accessing a non-existent attribute or using field access expression on a non-XML element item will result in an error being returned. If optional field access syntax is used, then nil will be returned instead of an error when the field is not available. Attributes with namespace prefix are accessed using the `value.prefix:attrName` syntax where the XML prefix must be declared in the scope.
 
 ```ballerina
 xml val = xml `<element type="fixed"></element>`;
@@ -733,7 +733,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 This section highlights key language changes since JBallerina 1.1.0. Some of these changes are backward-incompatible. 
 
 A complete list of language issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+label%3AArea%2FLanguage+is%3Aclosed).
-
 
 
 
