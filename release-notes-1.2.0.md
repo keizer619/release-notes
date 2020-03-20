@@ -56,9 +56,6 @@ xml x = xml `<root>
                  </person>
              </root>`;
 
-// Select all children items of `x`.
-xml allChildren = x/*;
-
 // Select all children items, which are XML elements.
 xml allElementChildren = x/<*>;
 
@@ -69,6 +66,9 @@ xml fnameItems = x/<person>/<name>/<fname>;
 
 // Select all descendants, which match element name `fname`.
 xml fnameDescendents = x/**/<fname>;
+
+// Select all children items of `x`.
+xml allChildren = x/*;
 ```
 
 XML filter expression allows filtering an XML sequence by an element name.
