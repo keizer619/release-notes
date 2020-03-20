@@ -346,7 +346,7 @@ The above-mentioned lang library modules have been enhanced by adding new API el
 - The semantics of the `lock` statement has been changed. Now it acquires a single, program-wide, recursive mutex before executing a lock statement, and releases the mutex after completing the execution of the lock statement.
 - When a list constructor or a mapping constructor is used without a contextually expected type, we now infer a tuple or a record type rather than an array or a map type.
 - The syntax `x@` for accessing the attributes of an XML element has been removed.
-- lvalue accesses of dynamic lists does a filling read.
+- Member value assignment for a dynamic list now adds filler values if the required members are not already filled and the relevant member type has a filler value.
 - Functions with the same name were previously allowed in both the module and the module's tests. Now the same gives a compilation error.
 - Out of index access of `xml` sequences now result in empty sequences rather than a panic. To achieve panic behavior the `xml:get()` langlib function can be used.
 
@@ -740,7 +740,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # Detailed list of changes from 1.1.0 to 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
