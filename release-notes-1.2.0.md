@@ -18,13 +18,13 @@ jBallerina 1.2.0 is the first major release of 2020 and it includes a new set of
 - New tool to generate Ballerina bindings for Java APIs
 - Several critical bug fixes
 
-# What's new in JBallerina 1.2.0?
+# What's new in jBallerina 1.2.0?
 
 ## Language
 
 The language implementation is based on the stable language specification version 2020R1. This implementation introduces a new set of features aimed at making integration further easier for the user. In addition to that, the XML and Lock implementations are out of their preview/experimental status.
 
-In addition to new features, this release also includes critical bug fixes and fixes done to align the implementation with the language specification. Some of these changes are backward incompatible. For a complete list of changes done since 1.1.0, see the `Language changes since JBallerina 1.1.0` section.
+In addition to new features, this release also includes critical bug fixes and fixes done to align the implementation with the language specification. Some of these changes are backward incompatible. For a complete list of changes done since 1.1.0, see the `Language changes since jBallerina 1.1.0` section.
 
 ### New XML design
 
@@ -292,21 +292,21 @@ public type Obj object {
 Lang Library modules provide a new set of built-in types. Each such built-in type that is a sub type of a basic type `B` is provided by the `lang.B` module. The following are the built-in types provided by the lang library modules.
 
 - Module `ballerina/lang.int`
-  - `Unsigned8`
-  - `Signed8`
-  - `Unsigned16`
-  - `Signed16`
-  - `Unsigned32`
-  - `Signed32`
+    - `Unsigned8`
+    - `Signed8`
+    - `Unsigned16`
+    - `Signed16`
+    - `Unsigned32`
+    - `Signed32`
 
 - Module `ballerina/lang.string`
-  - `Char`
+    - `Char`
 
 - Module `ballerina/lang.xml`
-  - `Element`
-  - `ProcessingInstruction`
-  - `Comment`
-  - `Text`
+    - `Element`
+    - `ProcessingInstruction`
+    - `Comment`
+    - `Text`
 
 ```ballerina
 import ballerina/lang.'int;
@@ -320,9 +320,7 @@ public function main() {
 
 #### Redesigned `lang.xml` module
 
-The XML lang module has been revamped to work with the `Element`, `Comment`, `ProcessingInstructions` and `Text` XML built-in types. 
-
-Previously, functions such as `getChildren()` and `getElementName()`, which are specific to an XML element type were allowed to be called on the `xml` type and if they were called on non-element items, it used to result in runtime errors. With `xml` built-in sub type improvements, these functions are statically type checked and only allowed on the built-in sub type `Element`. The same applies to other built-in sub types and functions.
+The XML lang module has been revamped to work with the `Element`, `Comment`, `ProcessingInstructions` and `Text` XML built-in types.  Previously, functions such as `getChildren()` and `getElementName()`, which are specific to an XML element type were allowed to be called on the `xml` type and if they were called on non-element items, it used to result in runtime errors. With `xml` built-in sub type improvements, these functions are statically type checked and only allowed on the built-in sub type `Element`. The same applies to other built-in sub types and functions.
 
 ```ballerina
 import ballerina/lang.'xml as xmllib;
@@ -330,7 +328,7 @@ import ballerina/lang.'xml as xmllib;
 public function main() {
      xmllib:Element element = <xmllib:Element> xml `<elem> hello </elem>`;
      xml children = element.getChildren();
-   }
+}
 ```
 
 The functions `isElement()`, `isProcessingInstruction()`, `isComment()` and `isText()` have been removed. The same functionality can be achieved using type testing as follows.
@@ -514,6 +512,7 @@ Ballerina Kafka is redesigned and version 2.0.0 is released. This has breaking c
 #### Custom Serializer/Deserializer support
 
 The Kafka module now supports a set of serializers and deserializers in contrast to the existing `byte[]` data. The introduced serializers / deserializers are:
+
 - `byte[]`
 - `string`
 - `int`
@@ -589,6 +588,7 @@ Java Arrays|ballerinax/java.arrays|ballerina/java.arrays
 ### Added new connectors
 
 The following connectors are newly added in this release. 
+
 - Slack client connector
 - Azure time-series client connector
 - Email client connector
@@ -598,6 +598,7 @@ The following connectors are newly added in this release.
 
 ### Revamped connectors
 The following connectors are revamped in this release.
+
 - Google sheets connector
 - Salesforce connector
 
@@ -605,7 +606,7 @@ The following connectors are revamped in this release.
 
 ### Docker Annotations
 
-Support for setting an Environment Variable to the Docker image.
+Support for setting environment variables to the Docker image.
 
 ```ballerina
 @docker:Config {
@@ -644,7 +645,7 @@ service helloWorld on helloWorldEP {
 
 ### Kubernetes Annotations
 
-1. Support for setting a port for Kubernetes NodePort Service types is provided.
+- Support for setting a port for Kubernetes NodePort Service types is provided.
 
 ```ballerina
 @kubernetes:Service {
@@ -653,7 +654,7 @@ service helloWorld on helloWorldEP {
 }
 ```
 
-2. Support for mounting the `ballerina.conf` file as a Kubernetes Secret is provided.
+- Support for mounting the `ballerina.conf` file as a Kubernetes Secret is provided.
 
 ```ballerina
 @kubernetes:Secret {
@@ -661,7 +662,7 @@ service helloWorld on helloWorldEP {
 }
 ```
 
-3. Support for enabling Rolling Updates for Kubernetes Deployments is provided.
+- Support for enabling Rolling Updates for Kubernetes Deployments is provided.
 
 ```ballerina
 @kubernetes:Deployment {
@@ -673,7 +674,7 @@ service helloWorld on helloWorldEP {
 }
 ```
 
-4. Ability to generate Kubernetes artifacts by only adding the import as `import ballerina/docker as _` is provided. This will generate the Kubernetes artifacts with minimum configurations for services, listeners, and main functions.
+- Ability to generate Kubernetes artifacts by only adding the import as `import ballerina/docker as _` is provided. This will generate the Kubernetes artifacts with minimum configurations for services, listeners, and main functions.
 
 ```ballerina
 import ballerina/http;
@@ -765,6 +766,6 @@ You can go to [The Standard library](https://ballerina.io/v1-2/learn/api-docs/ba
 
 Now, you do not need to restart the IDE make the user configurations effective.
 
-# List of issues fixed for 1.2.0
+## List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
