@@ -36,10 +36,25 @@ XML step expressions allow to query the children of an XML element or children o
 
 ```ballerina
 xml x = xml `<root>
-                <person><name><fname>John</fname><lname>Doe</lname></name></person>
-                <person><name><fname>Jane</fname><lname>Doe</lname></name></person>
-                <person><name><fname>Bob</fname><lname>Bernard</lname></name></person>
-            </root>`;
+                 <person>
+                     <name>
+                         <fname>William</fname>
+                         <lname>Martin</lname>
+                     </name>
+                 </person>
+                 <person>
+                     <name>
+                         <fname>David</fname>
+                         <lname>Taylor</lname>
+                     </name>
+                 </person>
+                 <person>
+                     <name>
+                         <fname>Daniel</fname>
+                         <lname>Wilson</lname>
+                     </name>
+                 </person>
+             </root>`;
 
 // Select all children items of `x`.
 xml allChildren = x/*;
