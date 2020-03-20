@@ -416,7 +416,7 @@ string trailerHeader = response.getHeader("foo", position = "trailing");
 ```
 #### Other changes
 
-- Disable HTTP Caching by default.
+- In previous versions HTTP caching was enabled by default in the HTTP client. With 1.2.0, HTTP caching is now disabled by default.
 
 ### Revamped Cache module
 
