@@ -335,6 +335,16 @@ public function main() {
    }
 ```
 
+The functions `isElement()`, `isProcessingInstruction()`, `isComment()` and `isText()` have been removed. The same functionality can be achieved using type testing as follows.
+
+```ballerina
+import ballerina/lang.'xml;
+public function main() {
+    xml cmnt = xml `<!-- hello from comment -->`;
+    boolean isComment = cmnt is 'xml:Comment;
+}
+```
+
 The functions `appendChildren()` and `removeChildren()` have been removed.
 
 #### The `lang.boolean` module
