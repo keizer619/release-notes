@@ -115,12 +115,15 @@ As of now, query expressions are supported by lists and streams.
 The clauses in the query pipeline of a query action are executed in the same way as the clauses in the query pipeline of a query expression. The query action is executed as follows. For each input frame `f` emitted by the query pipeline, execute the block-statement with `f` in the scope.
 
 ```ballerina
-error? result = from var student in studentList
- 	where student.score > 1.0
-do {
-        FullName fullName = {firstName: student.firstName, lastName: student.lastName};
-        nameList[nameList.length()] = fullName;
-}
+    error? result = from var student in studentList
+                    where student.score > 1.0
+                    do {
+                        FullName fullName = {
+                            firstName: student.firstName, 
+                            lastName: student.lastName
+                        };
+                        nameList.push(fullName);
+                    };
 ```
 
 ### New streams design
@@ -740,7 +743,6 @@ Now, you do not need to restart the IDE make the user configurations effective.
 # List of issues fixed for 1.2.0
 
 A complete list of issues fixed for 1.2.0 can be found [here](https://github.com/ballerina-platform/ballerina-lang/issues?q=is%3Aissue+milestone%3A%22Ballerina+1.2.0%22+is%3Aclosed).
-
 
 
 
