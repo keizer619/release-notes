@@ -15,6 +15,9 @@ JBallerina 1.2.0 is the first major Q1 release of 2020 and it includes a new set
 - Deprecated previous JDBC connector and introduced new Database connectors which are now in a preview state.
 - Introduced new client connectors (email, slack and azure time-series).
 - Changed organization names of all supported connectors.
+- Support to mock functions when writing tests
+- Test and code coverage report
+- Java binding generator tool
 
 # What's new in JBallerina 1.2.0?
 
