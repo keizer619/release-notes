@@ -20,19 +20,19 @@ However, you need to use the following commands instead of the above if you have
 If you have not installed jBallerina, then download the [installers](https://ballerina.io/downloads/) to install.
 
 ## Language
-- Deprecation support for annotations, function parameters and object fields
-- Runtime validations added to XML attributes map.
+- Deprecation support for annotations, function parameters, and object fields
+- Runtime validations added to the XML attributes map.
 - Support for map to record assignment
 
 ## Standard Library
-- Support for Avro key serialization/deserialization in `ballerina/kafka` module
+- Support for Avro key serialization/deserialization in the `ballerina/kafka` module
 - Automatic failover support for WebSocket
-- Provide the base64 encoded end user certificate along with the mutual SSL status.
+- Provide the base64-encoded end user certificate along with the mutual SSL status
 	
 ## Dev tools
 - Support for mocking object methods in Testerina
 - Support for subtypes in Java for the bindgen tool
-- Support for formatting for streams
+- Support for formatting of streams
 - Code coverage report
 
 ## Deployment
