@@ -26,7 +26,7 @@ If you have not installed jBallerina, then download the [installers](https://bal
 
 ## Standard Library
 - Support for Avro key serialization/deserialization in the `ballerina/kafka` module
-- Automatic failover support for WebSocket
+- Automatic failover support for the WebSocket client
 - Provide the base64-encoded end user certificate along with the mutual SSL status
 	
 ## Dev tools
