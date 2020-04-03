@@ -34,3 +34,7 @@ If you have not installed jBallerina, then download the [installers](https://bal
 - Support for subtypes in Java for the bindgen tool
 - Support for formatting for streams
 - Code coverage report
+
+## Deployment
+- Default permissions mode support for Kubernetes configmap and secret annotations
+- Node selector support for Kubernetes deployments and job annotations
